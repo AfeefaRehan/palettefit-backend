@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Terms & Conditions – Palette and Fit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg-light: #f2f2f2;
+      --bg-mid: #e0e0e0;
+      --bg-dark: #c2c2c2;
+      --accent: #ad00e2;
+      --accent2: #c2a1ff;
+      --heading: #ad00e2;
+      --nav-bg: #e0e0e0;
+      --text: #000;
+      --button-bg: #ad00e2;
+      --button-text: #fff;
+      --hero-radius: 3.8rem;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-light);
+      color: var(--text);
+      /* font-family: 'Poppins', sans-serif; */
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode {
+      --bg-light: #1b1c1f;
+      --bg-mid: #23242a;
+      --bg-dark: #121214;
+      --nav-bg: #23242a;
+      --text: #fff;
+      --heading: #ad00e2;
+      --accent: #ad00e2;
+      --accent2: #c2a1ff;
+      --button-bg: #5f5cff;
+      --button-text: #fff;
+      background: var(--bg-light);
+      color: var(--text);
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: var(--nav-bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      font-weight: 600;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--heading);
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 3px #ad00e250;
+      transition: text-shadow 0.3s;
+      user-select: none;
+    }
+    header .logo:hover {
+      text-shadow: 2px 2px 6px #ad00e299;
+    }
+    .nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      font-weight: 400;
+    }
+    .nav a {
+      color: #2a024d;
+      background: none;
+      border: none;
+      text-decoration: none;
+      font: inherit;
+      font-weight: 400;
+      padding: 0.5rem 0;
+      cursor: pointer;
+      transition: color 0.18s, font-weight 0.2s;
+      position: relative;
+    }
+    .nav a:hover,
+    .nav a.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .wishlist {
+      cursor: pointer;
+      color: #2a024d;
+      font-size: 1.15rem;
+      font-weight: 400;
+      transition: color 0.2s, font-weight 0.18s;
+    }
+    .nav .wishlist:hover,
+    .nav .wishlist:focus {
+      color: #e60023 !important;
+    }
+    body.dark-mode .nav .wishlist:hover,
+    body.dark-mode .nav .wishlist:focus {
+      color: #e60023 !important;
+    }
+    .profile-icon {
+      width: 38px !important;
+      height: 38px !important;
+      border-radius: 50% !important;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      margin-left: 0.8rem;
+      background: linear-gradient(135deg, #ad00e2 60%, #c2a1ff 100%) !important;
+      border: 2.2px solid #fff !important;
+      box-shadow: none !important;
+      overflow: hidden;
+      padding: 0 !important;
+    }
+    .profile-icon svg {
+      width: 23px;
+      height: 23px;
+      display: block;
+    }
+    .darkmode-btn {
+      background: #7a2df6;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-left: 1.2rem;
+      box-shadow: 0 2px 12px #a673fa29;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+    .darkmode-btn:hover {
+      background: #ad00e2;
+      color: #fff;
+    }
+    .darkmode-btn:focus,
+    .darkmode-btn:active {
+      outline: none !important;
+      background: #ad00e2 !important;
+      color: #fff !important;
+      box-shadow: 0 6px 24px #a673fa49;
+      font-weight: 700;
+    }
+    body.dark-mode .darkmode-btn {
+      background: #2a024d;
+      color: #fff;
+    }
+    body.dark-mode .darkmode-btn:hover,
+    body.dark-mode .darkmode-btn:focus,
+    body.dark-mode .darkmode-btn:active {
+      background: #7a2df6 !important;
+      color: #fff !important;
+      outline: none !important;
+      box-shadow: 0 6px 24px #a673fa49;
+      font-weight: 700;
+    }
+    body.dark-mode .nav a,
+    body.dark-mode .wishlist {
+      color: #fff;
+    }
+    body.dark-mode .nav a.active,
+    body.dark-mode .nav a:hover {
+      color: var(--accent) !important;
+    }
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text);
+      margin-left: 1.2rem;
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.8rem 0.9rem;
+        position: relative;
+      }
+      .nav {
+        display: none;
+        flex-direction: column;
+        gap: 1.1rem;
+        margin-top: 0.2rem;
+        background: var(--nav-bg, var(--bg-mid));
+        width: 100vw;
+        left: 0;
+        right: 0;
+        top: 65px;
+        position: absolute;
+        z-index: 200;
+        box-shadow: 0 8px 24px #0002;
+        padding-bottom: 1.3rem;
+        border-radius: 0 0 1.2rem 1.2rem;
+      }
+      .nav.open {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+        margin-left: auto;
+        margin-right: 0;
+        order: 2;
+      }
+      .logo {
+        font-size: 1.22rem;
+        order: 1;
+      }
+    }
+    @media (min-width: 769px) {
+      .hamburger {
+        display: none;
+      }
+      .nav {
+        display: flex !important;
+        flex-direction: row;
+        position: static;
+        background: none;
+        box-shadow: none;
+      }
+    }
+
+    /* Terms container styling */
+    .terms-container {
+      max-width: 780px;
+      margin: 3rem auto 4rem auto;
+      background: var(--bg-mid);
+      padding: 2rem 2.5rem;
+      border-radius: 1.2rem;
+      box-shadow: 0 8px 30px #ad00e233;
+      color: var(--text);
+    }
+    .terms-container h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+      text-align: center;
+    }
+    .terms-container h2 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+    .terms-container p,
+    .terms-container ul {
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .terms-container ul {
+      padding-left: 1.2rem;
+      list-style-type: disc;
+    }
+    .terms-container a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    footer {
+      background: #444b4b;
+      color: #eee;
+      padding: 2.5rem 0 1.2rem 0;
+    }
+    footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+    footer strong {
+      color: #fff;
+    }
+    .footer-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-col {
+      flex: 1 1 200px;
+      min-width: 180px;
+    }
+    body.dark-mode footer {
+      background: #18181b;
+      color: #ccc;
+    }
+    body.dark-mode footer a {
+      color: #aaa;
+    }
+    @media (max-width: 800px) {
+      .footer-main {
+        flex-direction: column !important;
+        gap: 0.7rem !important;
+        align-items: flex-start !important;
+      }
+      .footer-col {
+        min-width: 0;
+        width: 100%;
+      }
+    }
+    @media (max-width: 500px) {
+      .footer-main,
+      .callout-block {
+        padding-left: 6vw !important;
+        padding-right: 6vw !important;
+      }
+      footer {
+        font-size: 0.96rem;
+      }
+    }
+:root {
+  --bg-light: #f7f4ee;
+  --bg-mid: #ece5db;
+  --bg-dark: #23242a;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --heading: #ad00e2;
+  --nav-bg: #ece5db;
+  --text: #23242a;
+  --button-bg: #ad00e2;
+  --button-text: #fff;
+}
+
+/* === BODY COLOUR + TRANSITION === */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-light);
+  color: var(--text);
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark-mode {
+  --bg-light: #18181b;
+  --bg-mid: #23242a;
+  --bg-dark: #121214;
+  --nav-bg: #23242a;
+  --text: #fff;
+  --heading: #ad00e2;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --button-bg: #5f5cff;
+  --button-text: #fff;
+  background: var(--bg-light);
+  color: var(--text);
+}
+
+/* === HEADER & NAV BAR === */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2.4rem;
+  background: var(--nav-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-weight: 600;
+  box-shadow: 0 2px 14px #0001;
+}
+.logo {
+  font-family: 'Style Script', cursive !important;
+  font-size: 2.4rem !important;
+  color: #ad00e2 !important;
+  font-weight: 400 !important;
+  letter-spacing: 2px;
+  line-height: 1.08;
+  margin: 0;
+  padding: 0 0.2rem;
+  user-select: none;
+}
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-weight: 400;
+}
+.nav a {
+  color: #2a024d;
+  background: none;
+  border: none;
+  text-decoration: none;
+  font: inherit;
+  font-weight: 400;
+  padding: .5rem 0;
+  cursor: pointer;
+  transition: color .18s, font-weight .2s;
+  position: relative;
+}
+.nav a:hover, .nav a.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+.wishlist {
+  cursor: pointer;
+  color: #2a024d;
+  font-size: 1.15rem;
+  font-weight: 400;
+  transition: color .2s, font-weight .18s;
+}
+.nav .wishlist:hover, .nav .wishlist:focus {
+  color: #e60023 !important;
+}
+.profile-icon {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.8rem;
+  background: linear-gradient(135deg, #ad00e2 60%, #c2a1ff 100%) !important;
+  border: 2.2px solid #fff !important;
+  overflow: hidden;
+  padding: 0 !important;
+}
+.profile-icon svg {
+  width: 23px;
+  height: 23px;
+}
+.darkmode-btn {
+  background: #7a2df6;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1.2rem;
+  box-shadow: 0 2px 12px #a673fa29;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.darkmode-btn:hover { background: #ad00e2; color: #fff; }
+.darkmode-btn:focus, .darkmode-btn:active {
+  outline: none !important;
+  background: #ad00e2 !important;
+  color: #fff !important;
+  box-shadow: 0 6px 24px #a673fa49;
+  font-weight: 700;
+}
+/* Dark mode nav styling */
+body.dark-mode .darkmode-btn { background: #2a024d; color: #fff; }
+body.dark-mode .darkmode-btn:hover, body.dark-mode .darkmode-btn:focus, body.dark-mode .darkmode-btn:active {
+  background: #7a2df6 !important; color: #fff !important; outline: none !important;
+  box-shadow: 0 6px 24px #a673fa49;
+  font-weight: 700;
+}
+body.dark-mode .nav a, body.dark-mode .wishlist { color: #fff; }
+body.dark-mode .nav a.active, body.dark-mode .nav a:hover { color: var(--accent) !important; }
+body.dark-mode .nav { background: var(--nav-bg); }
+
+/* Hamburger menu */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  margin-left: 1.2rem;
+}
+@media (max-width: 768px) {
+  header { flex-direction: row; align-items: center; justify-content: space-between; padding: 0.8rem 0.9rem; position: relative; }
+  .nav { display: none; flex-direction: column; gap: 1.1rem; margin-top: 0.2rem; background: var(--nav-bg, var(--bg-mid)); width: 100vw; left: 0; right: 0; top: 65px; position: absolute; z-index: 200; box-shadow: 0 8px 24px #0002; padding-bottom: 1.3rem; border-radius: 0 0 1.2rem 1.2rem; }
+  .nav.open { display: flex; }
+  .hamburger { display: block; margin-left: auto; margin-right: 0; order: 2; }
+  .logo { font-size: 1.22rem; order: 1; }
+}
+@media (min-width: 769px) {
+  .hamburger { display: none; }
+  .nav { display: flex !important; flex-direction: row; position: static; background: none; box-shadow: none; }
+}
+.nav a {
+  font-size: 1.08rem; /* ya jitna chaho */
+}
+/* ========= HARD OVERRIDES (Terms page) — all critical rules use !important ========= */
+
+/* Hamburger button shell */
+#menu-toggle{
+  position: relative !important;
+  z-index: 230 !important;
+  width: 44px !important; height: 44px !important;
+  border-radius: 12px !important;
+  border: 2px solid rgba(173,0,226,.25) !important;
+  background: linear-gradient(135deg, rgba(173,0,226,.12), rgba(122,45,246,.12)) !important;
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  padding: 0 !important; cursor: pointer !important; line-height: 1 !important;
+}
+
+/* Thin lines (2px) */
+#menu-toggle .hamburger-box{ width: 26px !important; height: 18px !important; position: relative !important; display: block !important; }
+#menu-toggle .hamburger-inner,
+#menu-toggle .hamburger-inner::before,
+#menu-toggle .hamburger-inner::after{
+  content:"" !important; position: absolute !important; left: 0 !important; right: 0 !important;
+  height: 2px !important; border-radius: 2px !important;
+  background: linear-gradient(90deg,#7a2df6,#ad00e2) !important;
+  transition: transform .25s ease !important; 
+  transition: top .2s ease !important;
+  transition: opacity .2s ease !important;
+}
+#menu-toggle .hamburger-inner{ top: 50% !important; transform: translateY(-50%) !important; }
+#menu-toggle .hamburger-inner::before{ top: -7px !important; }
+#menu-toggle .hamburger-inner::after{  top:  7px !important; }
+
+/* Cross state */
+#menu-toggle.is-active .hamburger-inner{ transform: translateY(-50%) rotate(45deg) !important; }
+#menu-toggle.is-active .hamburger-inner::before{ top: 0 !important; transform: rotate(-90deg) !important; }
+#menu-toggle.is-active .hamburger-inner::after{ opacity: 0 !important; }
+
+/* Mobile ≤768px: dropdown panel */
+@media (max-width:768px){
+  header .nav{
+    display: none !important;
+    position: absolute !important; left: 0 !important; right: 0 !important; top: calc(100% - 1px) !important;
+    width: 100vw !important;
+    background: var(--nav-bg, var(--bg-mid)) !important;
+    border-radius: 0 0 12px 12px !important;
+    box-shadow: 0 8px 24px #0002 !important;
+    padding: .75rem 1rem 1rem !important;
+    gap: 1rem !important;
+    flex-direction: column !important;
+    z-index: 220 !important;
+  }
+  header .nav.open{ display: flex !important; }
+
+  /* show hamburger on mobile */
+  #menu-toggle{ display: inline-flex !important; }
+
+  /* compact Dark Mode button inside dropdown */
+  header .nav .darkmode-btn{
+    width: auto !important; min-width: 120px !important; max-width: 240px !important;
+    height: 38px !important; padding: .42rem .9rem !important; border-radius: 10px !important;
+    align-self: center !important; justify-content: center !important;
+  }
+}
+
+/* Desktop ≥769px: inline nav */
+@media (min-width:769px){
+  #menu-toggle{ display: none !important; }
+  header .nav{
+    display: flex !important; position: static !important;
+    background: transparent !important; box-shadow: none !important;
+    gap: 2rem !important; flex-direction: row !important;
+  }
+}
+/* ===== Terms: hamburger + nav hard overrides (match Contact page) ===== */
+#menu-toggle{
+  position:relative !important; z-index:230 !important;
+  width:44px !important; height:44px !important;
+  border-radius:12px !important;
+  border:2px solid rgba(173,0,226,.25) !important;
+  background:linear-gradient(135deg,rgba(173,0,226,.12),rgba(122,45,246,.12)) !important;
+  display:inline-flex !important; align-items:center !important; justify-content:center !important;
+  padding:0 !important; cursor:pointer !important; line-height:1 !important;
+  font-size:0 !important; /* agar kahin ☰ reh gaya ho to hide */
+}
+#menu-toggle .hamburger-box{ width:26px !important; height:18px !important; position:relative !important; display:block !important; }
+#menu-toggle .hamburger-inner,
+#menu-toggle .hamburger-inner::before,
+/* #menu-toggle .hamburger-inner::after{
+  content:"" !important; position:absolute !important; left:0 !important; right:0 !important;
+  height:2px !important; border-radius:2px !important;
+  background:linear-gradient(90deg,#7a2df6,#ad00e2) !important;
+  box-shadow:0 1px 6px rgba(122,45,246,.45) !important;
+  transition:transform .25s ease !important, top .2s ease !important, opacity .2s ease !important;
+} */
+#menu-toggle .hamburger-inner{ top:50% !important; transform:translateY(-50%) !important; }
+#menu-toggle .hamburger-inner::before{ top:-7px !important; }
+#menu-toggle .hamburger-inner::after{  top: 7px !important; }
+#menu-toggle.is-active .hamburger-inner{ transform:translateY(-50%) rotate(45deg) !important; }
+#menu-toggle.is-active .hamburger-inner::before{ top:0 !important; transform:rotate(-90deg) !important; }
+#menu-toggle.is-active .hamburger-inner::after{ opacity:0 !important; }
+
+/* ≤1200px: show hamburger, dropdown nav */
+@media (max-width:1200px){
+  #menu-toggle{ display:inline-flex !important; }
+  header .nav{
+    display:none !important;
+    position:absolute !important; left:0 !important; right:0 !important; top:calc(100% - 1px) !important;
+    background:var(--nav-bg, var(--bg-mid)) !important;
+    border-radius:0 0 12px 12px !important;
+    box-shadow:0 8px 24px #0002 !important;
+    padding:.75rem 1rem 1rem !important;
+    gap:1rem !important; flex-direction:column !important; width:100vw !important; z-index:220 !important;
+  }
+  header .nav.open{ display:flex !important; }
+  /* Dark mode button compact center */
+  header .nav .darkmode-btn{
+    width:auto !important; min-width:120px !important; max-width:240px !important;
+    height:38px !important; padding:.42rem .9rem !important; border-radius:10px !important;
+    align-self:center !important; justify-content:center !important;
+  }
+}
+
+/* ≥1201px: inline nav, hide hamburger */
+@media (min-width:1201px){
+  #menu-toggle{ display:none !important; }
+  header .nav{
+    display:flex !important; position:static !important;
+    background:transparent !important; box-shadow:none !important;
+    gap:2rem !important; flex-direction:row !important;
+  }
+}
+#menu-toggle .hamburger-box{ 
+  width:26px !important; height:18px !important; position:relative !important; display:block !important; 
+}
+#menu-toggle .hamburger-inner,
+#menu-toggle .hamburger-inner::before,
+#menu-toggle .hamburger-inner::after{
+  content:"" !important;
+  position:absolute !important; left:0 !important; right:0 !important;
+  height:2px !important; border-radius:2px !important;
+  background: linear-gradient(90deg, #7a2df6, #ad00e2) !important;
+  box-shadow:0 1px 6px rgba(122,45,246,.45) !important;
+  transition: transform .25s ease, top .2s ease, opacity .2s ease !important;
+}
+#menu-toggle .hamburger-inner{ top:50% !important; transform: translateY(-50%) !important; }
+#menu-toggle .hamburger-inner::before{ top:-7px !important; }
+#menu-toggle .hamburger-inner::after { top: 7px !important; }
+#menu-toggle.is-active .hamburger-inner{ transform: translateY(-50%) rotate(45deg) !important; }
+#menu-toggle.is-active .hamburger-inner::before{ top:0 !important; transform: rotate(-90deg) !important; }
+#menu-toggle.is-active .hamburger-inner::after { opacity:0 !important; }
+
+
+  </style>
+</head>
+<body>
+ <header>
+  <div class="logo">Palette and Fit</div>
+
+  <!-- SINGLE hamburger button (thin lines wali) -->
+  <button id="menu-toggle" class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav">
+    <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+  </button>
+
+  <!-- SINGLE nav with id=site-nav -->
+  <nav class="nav" id="site-nav">
+    <a href="homepage1.html">Home</a>
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="aboutus.html">About us</a>
+    <a href="contactus.html">Contact us</a>
+    <a href="wishlist.html" class="wishlist">♡ Wishlist</a>
+    <a href="profile.html" class="profile-icon" title="Profile">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="12" cy="8.5" r="4.2" fill="#fff" fill-opacity=".95"/>
+        <ellipse cx="12" cy="18" rx="7" ry="3.2" fill="#fff" fill-opacity=".38"/>
+      </svg>
+    </a>
+    <button class="btn darkmode-btn" id="darkModeToggle">
+      <span style="font-size:1.25em;">🌙</span> Dark Mode
+    </button>
+  </nav>
+</header>
+
+
+  <main>
+  <section class="terms-container" tabindex="0">
+    <h1>Terms & Conditions</h1>
+    <p>Last updated: July 2025</p>
+    <p>
+      Welcome to <strong>Palette and Fit</strong>. Please read these terms and conditions carefully before using our website.
+      By accessing or using our website, you agree to be bound by these terms. If you do not agree with any part, please do not use our website.
+    </p>
+
+    <h2>1. Use of Our Website</h2>
+    <p>
+      Palette and Fit provides personalized fashion suggestions based on your skin tone, body size, age, and style preferences. 
+      We do not manufacture or sell products directly; instead, we recommend outfits and styles for your consideration.
+    </p>
+    <p>
+      You may use our website for personal, non-commercial purposes only and agree not to misuse any features, content, or data available on the site.
+    </p>
+
+    <h2>2. Intellectual Property</h2>
+    <p>
+      All content, images, logos, and designs on Palette and Fit are either owned by the site or sourced from third-party providers for demonstration purposes. 
+      We do not claim ownership of all product images and recommend users verify details with original sellers.
+    </p>
+
+    <h2>3. User Accounts</h2>
+    <p>
+      If you create an account, you are responsible for maintaining the confidentiality of your credentials.
+      You agree to provide accurate information and notify us of any unauthorized use.
+    </p>
+
+    <h2>4. Recommendations & Accuracy</h2>
+    <p>
+      Our outfit and style recommendations are suggestions only, based on the data you provide. We do not guarantee fit, availability, or satisfaction with any third-party products.
+    </p>
+
+    <h2>5. Limitation of Liability</h2>
+    <p>
+      Palette and Fit shall not be liable for any damages, losses, or dissatisfaction resulting from use of our recommendations or third-party products.
+    </p>
+
+    <h2>6. Changes to Terms</h2>
+    <p>
+      We may update these Terms & Conditions periodically. The latest version will always be posted on this page with the effective date.
+    </p>
+
+    <h2>7. Contact Us</h2>
+    <p>
+      For any questions regarding these terms, please contact us at
+      <a href="mailto:support@paletteandfit.com">support@paletteandfit.com</a>.
+    </p>
+  </section>
+</main>
+
+  <footer>
+    <div class="footer-main">
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Need Help ?</div>
+        <div style="margin-bottom:0.4rem;">
+          <a href="contactus.html">Contact us</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">More Info</div>
+        <div style="margin-bottom:0.4rem;"><a href="aboutus.html">About us</a></div>
+        <div style="margin-bottom:0.4rem;"><a href="terms.html">Terms &amp; Conditions</a></div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Location</div>
+        <div style="margin-bottom:0.4rem;">
+          <a href="mailto:support@PaletteandFit.com">support@PaletteandFit.com</a>
+        </div>
+        <div style="margin-bottom:0.4rem;">
+          <a href="https://www.google.com/maps?q=4162+Wayback+Lane,+Farmingdale,+New+York,+11735,+USA" target="_blank" rel="noopener noreferrer">
+            4162 Wayback Lane, Farmingdale
+          </a>
+        </div>
+        <div style="margin-bottom:0.4rem;">New York, 11735, USA</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:2.5rem; font-size:1.15rem;">
+      <strong>Palette and Fit</strong><br />
+      <span style="font-size:0.93rem; color:#bbb;">© 2025 Palette and Fit. All rights reserved.</span>
+    </div>
+  </footer>
+
+<script>
+(() => {
+  const nav    = document.getElementById('site-nav') || document.querySelector('header .nav');
+  const toggle = document.getElementById('menu-toggle');
+  const dmBtn  = document.getElementById('darkModeToggle');
+
+  if (toggle && nav){
+    // a11y
+    toggle.setAttribute('aria-controls', nav.id || 'site-nav');
+    toggle.setAttribute('aria-expanded', 'false');
+
+    const open  = () => { nav.classList.add('open');  toggle.classList.add('is-active');  toggle.setAttribute('aria-expanded','true'); };
+    const close = () => { nav.classList.remove('open'); toggle.classList.remove('is-active'); toggle.setAttribute('aria-expanded','false'); };
+
+    toggle.addEventListener('click', () => nav.classList.contains('open') ? close() : open());
+    nav.addEventListener('click', e => { if (e.target.tagName === 'A' && nav.classList.contains('open')) close(); });
+
+    // click-outside only on mobile/tablet
+    document.addEventListener('click', e => {
+      if (!window.matchMedia('(max-width:1200px)').matches) return;
+      if (nav.classList.contains('open') && !nav.contains(e.target) && !toggle.contains(e.target)) close();
+    });
+    // Esc to close + reset on breakpoint change
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    const mqDesk = window.matchMedia('(min-width:1201px)');
+    (mqDesk.addEventListener ? mqDesk.addEventListener('change', close) : window.addEventListener('resize', () => mqDesk.matches && close()));
+  }
+
+  // Dark Mode
+  if (dmBtn){
+    const setUI = (dark) => {
+      document.body.classList.toggle('dark-mode', dark);
+      dmBtn.setAttribute('aria-pressed', String(dark));
+      dmBtn.innerHTML = dark ? '<span style="font-size:1.2em;">☀️</span> Light Mode'
+                             : '<span style="font-size:1.2em;">🌙</span> Dark Mode';
+    };
+    setUI(localStorage.getItem('darkMode') === 'true');
+    dmBtn.addEventListener('click', () => {
+      const next = !document.body.classList.contains('dark-mode');
+      localStorage.setItem('darkMode', next);
+      setUI(next);
+    });
+  }
+})();
+</script>
+
+
+</body>
+</html>

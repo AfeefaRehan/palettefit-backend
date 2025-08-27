@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Account – Palette and Fit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --bg-light: #f6f3fc;
+  --accent: #ad00e2;
+  --accent-glow: #e8d8fd;
+  --card-bg: #fff;
+  --text: #20144a;
+  --input-border: #d4c4ef;
+  --input-bg: #faf6fe;
+  --shadow: 0 8px 36px #ad00e222, 0 1.5px 8px #ad00e208;
+  --shadow-dark: 0 6px 32px #0003, 0 1.5px 8px #0002;
+  --btn-purple: #ad00e2;
+  --btn-purple-dark: #7a2df6;
+}
+
+body.dark-mode {
+  background: linear-gradient(120deg, #191325 45%, #3a2262 100%);
+  color: #fff;
+  --input-bg: #201830;
+  --card-bg: #2a203d;
+  --text: #e7d6fa;
+  --input-border: #8852c9;
+  --accent: #ad00e2;
+  --btn-purple: #ad00e2;
+  --btn-purple-dark: #7a2df6;
+}
+body {
+  background: linear-gradient(125deg, #ece9fc 10%, #d3c5ee 95%);
+  color: var(--text);
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, color 0.3s;
+}
+.container {
+  background: var(--card-bg);
+  border-radius: 2.2rem;
+  box-shadow: var(--shadow);
+  padding: 1rem 2.7rem 1rem 2.7rem;
+  max-width: 600px;
+  width: 98vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  min-height: 505px;
+  backdrop-filter: blur(2.5px);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+body.dark-mode .container {
+  background: #231e2f;
+  box-shadow: var(--shadow-dark);
+}
+
+/* Dark Mode Toggle Desktop */
+.dark-toggle {
+  position: absolute;
+  top: 1.1rem;
+  right: 2.2rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 1.2rem;
+  font-size: 1.01rem;
+  font-weight: 700;
+  padding: 0.46rem 1.15rem 0.46rem 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px #ad00e225;
+  transition: background 0.18s, color 0.18s;
+  z-index: 9;
+  outline: none;
+  display: block;
+}
+body.dark-mode .dark-toggle {
+  background: #fff;
+  color: var(--accent);
+}
+
+/* Hide desktop toggle on mobile */
+.dark-toggle-mobile {
+  display: none;
+  margin-bottom: 1rem;
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 1.2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.45rem 1.15rem;
+  box-shadow: 0 2px 12px #ad00e225;
+  transition: background 0.18s, color 0.18s;
+}
+body.dark-mode .dark-toggle-mobile {
+  background: #fff;
+  color: var(--accent);
+}
+
+.progress-bar {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 0.7rem;
+  gap: 2.2rem;
+  width: 100%;
+  margin-top: 0.2rem;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.04rem;
+  font-weight: 600;
+  color: #b3a5c7;
+  gap: 0.2rem;
+  transition: color 0.18s;
+}
+.step.active {
+  color: var(--accent);
+  font-weight: 900;
+}
+.step-circle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: #f5eaff;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 0.15rem;
+  border: 2.5px solid #e8d8fd;
+  box-shadow: 0 2px 10px #ad00e21c;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.step.active .step-circle {
+  background: var(--accent);
+  color: #fff;
+  border: 2.5px solid var(--accent);
+  box-shadow: 0 4px 16px #ad00e246;
+}
+body.dark-mode .step-circle {
+  background: #3b1853;
+  color: var(--accent);
+  border: 2.5px solid var(--accent);
+}
+body.dark-mode .step.active .step-circle {
+  background: var(--accent);
+  color: #fff;
+  border: 2.5px solid #fff;
+}
+h2 {
+  margin-bottom: 1rem;
+  margin-top: 0.3rem;
+  color: var(--accent);
+  text-align: center;
+  font-weight: 800;
+  font-size: 2.18rem;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 8px #e8d8fd;
+}
+body.dark-mode h2 { color: #fff; text-shadow: 0 1px 12px #7a2df6; }
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 0.0rem;
+}
+label {
+  font-size: 1.01rem;
+  font-weight: 600;
+  margin-bottom: 0.07rem;
+  color: #7054ad;
+  margin-left: 2px;
+}
+body.dark-mode label { color: #cbbcf3; }
+input {
+  width: 100%;
+  padding: 0.48rem 1.1rem 0.48rem 2.13rem;
+  border-radius: 1rem;
+  border: 1.5px solid var(--input-border);
+  background: var(--input-bg);
+  font-size: 1.06rem;
+  color: var(--text);
+  outline: none;
+  margin-top: 0.07rem;
+  transition: border-color 0.18s, box-shadow 0.19s;
+  box-shadow: 0 0.5px 3px #b292d11c;
+  height: 2.02rem;
+}
+input:focus {
+  border-color: var(--accent);
+  background: #f7f0fd;
+  box-shadow: 0 2px 12px #c6a1e817;
+}
+body.dark-mode input { color: #fff; background: #271a36; border-color: #845acb; }
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-icon {
+  position: absolute;
+  left: 0.86rem;
+  top: 54%;
+  transform: translateY(-50%);
+  font-size: 1.11rem;
+  color: #b6a2d5;
+  pointer-events: none;
+}
+body.dark-mode .input-icon { color: #a284de; }
+.btn {
+  margin-top: 0.17rem;
+  background: var(--btn-purple);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.11rem;
+  border: none;
+  padding: 0.71rem 0;
+  border-radius: 1rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.19s, box-shadow 0.18s, transform 0.13s;
+  letter-spacing: 0.12px;
+  box-shadow: 0 2.2px 14px #ad00e222;
+}
+.btn:hover {
+  background: var(--btn-purple-dark);
+  color: #fff;
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* ONLY RESPONSIVE FIXES BELOW */
+@media (max-width: 700px) {
+  .container {
+    padding: 1rem 0.6rem 1rem 0.6rem;
+    max-width: 99vw;
+    min-height: unset;
+    border-radius: 1.2rem;
+  }
+  .progress-bar { gap: 1rem; }
+  h2 { font-size: 1.25rem; }
+  .step-circle { width: 24px; height: 24px; font-size: 1rem;}
+  .dark-toggle {
+    display: none !important;
+  }
+  .dark-toggle-mobile {
+    display: block !important;
+  }
+  label, .step { font-size: 0.92rem; }
+  input { font-size: 0.95rem; height: 1.65rem; }
+  .btn { font-size: 1rem; padding: 0.62rem 0;}
+}
+@media (max-width: 400px) {
+  .container { padding: 0.5rem 0.15rem; }
+  h2 { font-size: 1.05rem;}
+  .step, label { font-size: 0.85rem;}
+  .step-circle { width: 18px; height: 18px; font-size: 0.83rem;}
+  .btn { font-size: 0.93rem;}
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- DESKTOP: Show here -->
+    <button class="dark-toggle" id="toggleDark">🌙 Dark Mode</button>
+    <!-- MOBILE: Show below progress bar -->
+    <div style="width:100%">
+      <button class="dark-toggle-mobile" id="toggleDarkMobile" style="display:none">🌙 Dark Mode</button>
+    </div>
+    <div class="progress-bar">
+      <div class="step active">
+        <div class="step-circle">1</div>
+        Account
+      </div>
+      <div class="step">
+        <div class="step-circle">2</div>
+        Profile
+      </div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        Welcome
+      </div>
+    </div>
+    <h2>Create Account</h2>
+<form id="signupForm" autocomplete="off">
+      <div>
+        <label for="email">Email</label>
+        <div class="input-group">
+          <span class="input-icon">&#9993;</span>
+          <input type="email" id="email" maxlength="50" placeholder="you@email.com" required>
+        </div>
+      </div>
+      <div>
+        <label for="phone">Phone Number</label>
+        <div class="input-group">
+          <span class="input-icon">&#128241;</span>
+          <input type="tel" id="phone" maxlength="15" placeholder="03XX-XXXXXXX" required>
+        </div>
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <div class="input-group">
+          <span class="input-icon">&#128274;</span>
+          <input type="password" id="password" maxlength="32" placeholder="Password" required>
+        </div>
+      </div>
+      <div>
+        <label for="confirm">Confirm Password</label>
+        <div class="input-group">
+          <span class="input-icon">&#128274;</span>
+          <input type="password" id="confirm" maxlength="32" placeholder="Confirm password" required>
+        </div>
+      </div>
+       <button class="btn" type="submit">Continue</button>
+</form>
+<div id="signupMessage" style="margin-top:10px; color: #ad00e2;"></div>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  /* ========== Dark Mode (desktop + mobile) ========== */
+  const darkBtn = document.getElementById('toggleDark');
+  const darkBtnMobile = document.getElementById('toggleDarkMobile');
+  const bodyEl  = document.body;
+
+  function updateBtnText(){
+    const mode = bodyEl.classList.contains('dark-mode');
+    if (darkBtn)        darkBtn.textContent        = mode ? '☀️ Light Mode' : '🌙 Dark Mode';
+    if (darkBtnMobile)  darkBtnMobile.textContent  = mode ? '☀️ Light Mode' : '🌙 Dark Mode';
+  }
+  function toggleDarkMode(){
+    const isDark = bodyEl.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+    updateBtnText();
+  }
+  if (localStorage.getItem('darkMode') === 'true') {
+    bodyEl.classList.add('dark-mode');
+  }
+  updateBtnText();
+  darkBtn?.addEventListener('click', toggleDarkMode);
+  darkBtnMobile?.addEventListener('click', toggleDarkMode);
+
+  /* ========== SIGNUP (Step 1) ========== */
+  const form = document.getElementById('signupForm');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email       = (document.getElementById('email')?.value || '').trim();
+    const phone       = (document.getElementById('phone')?.value || '').trim();
+    const password    = document.getElementById('password')?.value || '';
+    const confirmPwd  = document.getElementById('confirm')?.value || '';
+    const messageDiv  = document.getElementById('signupMessage');
+
+    // gender either dropdown #gender or radio name="gender"
+    let gender = '';
+    const genderSel = document.getElementById('gender');
+    if (genderSel && genderSel.value) {
+      gender = genderSel.value;
+    } else {
+      const gRadio = document.querySelector('input[name="gender"]:checked');
+      if (gRadio) gender = gRadio.value;
+    }
+
+    const showMsg = (t) => { if (messageDiv) messageDiv.textContent = t; };
+
+    // basic validations
+    if (!email) { showMsg('Please enter email.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showMsg('Please enter a valid email.'); return; }
+    if (password.length < 6) { showMsg('Password must be at least 6 characters.'); return; }
+    if (password !== confirmPwd) { showMsg('Passwords do not match.'); return; }
+    if (phone && !/^\+?\d[\d\s-]{6,}$/.test(phone)) { showMsg('Please enter a valid phone.'); return; }
+
+    // persist for next steps (very important!)
+    localStorage.setItem('signupEmail', email);
+    localStorage.setItem('user_email',  email);
+    if (phone)  localStorage.setItem('signupPhone',  phone);
+    if (gender) localStorage.setItem('signupGender', String(gender).toLowerCase());
+
+    showMsg('Signing you up...');
+
+    try {
+      const res = await fetch('http://127.0.0.1:5001/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: email,     // backend expects "username" = email
+          password: password,
+          phone: phone,
+          // send gender too if your backend accepts it; harmless if ignored
+          gender: gender || undefined
+        })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok) {
+        showMsg('Signup successful! Redirecting...');
+        setTimeout(() => window.location = 'SIGNUP2.html', 900);
+      } else {
+        showMsg('Error: ' + (data.error || 'Signup failed.'));
+      }
+    } catch {
+      showMsg('Network error. Please try again.');
+    }
+  });
+});
+</script>
+
+</body>
+</html>

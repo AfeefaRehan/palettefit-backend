@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile – Palette and Fit</title>
+     <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+:root {
+  --bg-light: #f2f2f2;
+  --bg-mid: #e0e0e0;
+  --bg-dark: #c2c2c2;
+  --accent: #ad00e2;
+  --text: #000;
+  --button-bg: #000;
+  --button-text: #fff;
+  --nav-bg: #e0e0e0;
+}
+body.dark-mode {
+  --bg-light: #1b1c1f;
+  --bg-mid: #23242a;
+  --bg-dark: #121214;
+  --nav-bg: #23242a;
+  --text: #eee;
+  --button-bg: #5f5cff;
+  --button-text: #fff;
+  background: var(--bg-light);
+  color: var(--text);
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-light);
+  color: var(--text);
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+/* ===== HEADER & NAV ===== */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  background: var(--nav-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background 0.3s;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 3px rgba(122,45,246,0.16);
+  transition: text-shadow 0.3s;
+}
+header .logo:hover {
+  text-shadow: 2px 2px 6px rgba(122,45,246,0.26);
+}
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-weight: 400;
+}
+.nav a, .dropbtn {
+  color: #2a024d;
+  background: none;
+  border: none;
+  text-decoration: none;
+  font: inherit;
+  font-weight: 400;
+  padding: .5rem 0;
+  cursor: pointer;
+  transition: color .18s, font-weight .2s;
+  position: relative;
+}
+.nav a:hover, .nav a.active, .dropbtn.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+.wishlist {
+  cursor: pointer;
+  color: #222;
+  font-size: 1.15rem;
+  font-weight: 400;
+  transition: color .2s, font-weight .18s;
+}
+.btn {
+  padding: .5rem 1rem;
+  border: none;
+  cursor: pointer;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: transform .18s, font-weight .18s, background .2s;
+}
+.btn:hover { transform: scale(1.05); font-weight: 700; }
+.darkmode-btn {
+  background: #7a2df6;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.5rem 1rem 0.5rem 0.9rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1.2rem;
+  box-shadow: 0 2px 12px #a673fa29;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+  outline: none;
+}
+.darkmode-btn:hover,
+.darkmode-btn:focus {
+  background: #ad00e2;
+  color: #fff;
+  box-shadow: 0 6px 24px #a673fa49;
+}
+body.dark-mode .darkmode-btn {
+  background: #2a024d;
+  color: #fff;
+}
+body.dark-mode .darkmode-btn:hover,
+body.dark-mode .darkmode-btn:focus {
+  background: #7a2df6;
+}
+    .profile-icon {
+      width: 38px !important;
+      height: 38px !important;
+      border-radius: 50% !important;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      margin-left: 0.8rem;
+      background: linear-gradient(135deg, #ad00e2 60%, #c2a1ff 100%) !important;
+      border: 2.2px solid #fff !important;
+      box-shadow: none !important;
+      overflow: hidden;
+      padding: 0 !important;
+    }
+    .profile-icon svg {
+      width: 23px;
+      height: 23px;
+      display: block;
+    }
+.profile-icon:hover, .profile-icon:focus {
+  box-shadow: 0 4px 18px #ad00e25a;
+  background: #b700e6; /* slightly deeper purple on hover */
+}
+
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  margin-left: 1.2rem;
+}
+@media (max-width: 768px) {
+  header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 0.9rem;
+    position: relative;
+  }
+  .nav {
+    display: none;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 0.3rem;
+    background: var(--bg-mid);
+    width: 100vw;
+    left: 0; right: 0; top: 62px;
+    position: absolute;
+    z-index: 999;
+    box-shadow: 0 8px 24px #0002;
+    padding-bottom: 1.2rem;
+    border-radius: 0 0 1.2rem 1.2rem;
+  }
+  .nav.open { display: flex; }
+  .hamburger {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    order: 2;
+  }
+  .logo {
+    font-size: 1.22rem;
+    order: 1;
+  }
+}
+@media (min-width: 769px) {
+  .hamburger { display: none; }
+  .nav { display: flex !important; flex-direction: row; position: static; background: none; box-shadow: none; }
+}
+body.dark-mode .nav { background: var(--bg-mid); }
+body.dark-mode .nav a,
+body.dark-mode .dropbtn,
+body.dark-mode .wishlist { color: #fff; }
+body.dark-mode .nav a.active,
+body.dark-mode .nav a:hover,
+body.dark-mode .dropbtn.active,
+body.dark-mode .dropbtn:hover { color: var(--accent) !important; }
+.wishlist:hover {
+  color: #e60023!important;
+}
+body.dark-mode .nav a,
+body.dark-mode .wishlist {
+  color: #fff !important;
+}
+body.dark-mode .nav a.active,
+body.dark-mode .nav a:hover {
+  color: var(--accent) !important;
+  font-weight: 700;
+}
+body.dark-mode .wishlist:hover {
+  color: #e60023 !important;
+}
+/* ===== PROFILE SECTION ===== */
+.profile-section {
+  display: flex;
+  flex-direction: row;
+  gap: 2.2rem;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 2rem 1rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px #ad00e219;
+}
+
+body.dark-mode .profile-section {
+  background: #191921;
+  box-shadow: 0 8px 26px #0006;
+}
+.profile-sidebar {
+  flex: 0 0 270px;
+  min-width: 220px;
+  max-width: 320px;
+  margin-bottom: 0;
+  background: #fff;
+  border-radius: 14px;
+  padding: 2rem 1rem 1.5rem 1.2rem;
+  text-align: left;
+  box-shadow: 0 2px 16px #ad00e222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body.dark-mode .profile-sidebar { background: #15131a; }
+.profile-sidebar h2, .profile-sidebar p, .profile-sidebar .sidebar-info-label {
+  color: #191921;
+}
+body.dark-mode .profile-sidebar h2,
+body.dark-mode .profile-sidebar p,
+body.dark-mode .profile-sidebar .sidebar-info-label {
+  color: #fff;
+}
+.profile-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  margin: 0 auto 0.7rem;
+  background: linear-gradient(135deg,#ad00e2 60%,#c2a1ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.profile-avatar img {
+  width: 82px; height: 82px;
+  border-radius: 50%;
+  background: #fff;
+  object-fit: cover;
+  display: block;
+}
+.upload-btn {
+  margin-top: 0.7rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.upload-btn label {
+  cursor: pointer;
+  font-size: 0.98rem;
+  color: var(--accent);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  gap: 5px;
+}
+.upload-btn input[type="file"] { display: none; }
+.upload-btn label::before {
+  content: "📷";
+  font-size: 1.19em;
+  margin-right: 2px;
+  vertical-align: middle;
+  opacity: 0.85;
+}
+body.dark-mode .upload-btn label { color: #ffadf8; }
+.sidebar-info-label {
+  font-weight: 700;
+  margin-bottom: 2px;
+  display: block;
+  color: #ad00e2;
+}
+.sidebar-info-item {
+  margin-bottom: 0.6em;
+  font-size: 1.02em;
+  color: #222;
+  word-break: break-word;
+  text-align: left;
+  width: 100%;
+}
+body.dark-mode .sidebar-info-item { color: #fff; }
+.profile-main {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.1rem;
+}
+
+.profile-info-card {
+  background: #fff;
+  color: #191921;
+  border-radius: 12px;
+  padding: 1.6rem 2.2rem 1.2rem 2rem;
+  box-shadow: 0 1px 6px #ad00e218;
+}
+body.dark-mode .profile-info-card {
+  background: #191921;
+  color: #eee;
+}
+.profile-info-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem 3.6rem;
+}
+.profile-info-label {
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 120px;
+  margin-bottom: 0.3rem;
+  font-size: 1.05em;
+}
+.profile-info-group {
+  margin-bottom: 0.6rem;
+  flex: 1 1 230px;
+}
+.profile-info-value {
+  font-weight: 400;
+  color: #191921;
+}
+body.dark-mode .profile-info-value {
+  color: #fff;
+}
+.edit-btn {
+  margin-top: 1.2rem;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 6px;
+  padding: 0.42rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.edit-btn:hover { background: var(--accent); }
+.profile-info-group select {
+  padding: 0.38em 1.7em 0.38em 0.7em;
+  border-radius: 10px;
+  border: 2px solid #ad00e2;
+  font-size: 1em;
+  font-family: inherit;
+  background: #fff !important;
+  color: #462a5e !important;
+  font-weight: 600;
+  box-shadow: 0 2px 14px #ad00e217;
+  margin-top: 0.2em;
+  margin-bottom: 0.1em;
+  cursor: pointer;
+  appearance: none;
+  min-width: 110px;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23462a5e' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.8em center;
+  background-size: 16px 12px;
+  transition: border 0.18s, box-shadow 0.18s, background 0.18s, color 0.18s;
+  outline: none;
+}
+.profile-info-group select:focus {
+  border: 2px solid #ad00e2 !important;
+  background: #f8f6f2 !important;
+  color: #2a024d !important;
+}
+body.dark-mode .profile-info-group select {
+  background-color: #fff !important;
+  color: #2a024d !important;
+  border: 2px solid #ad00e2 !important;
+  box-shadow: 0 2px 14px #ad00e217 !important;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='0,5 5,0 10,5 15,0 20,5' stroke='%23ad00e2' stroke-width='2' fill='none'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%232a024d' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-y, no-repeat;
+  background-position: right 2.2em center, right 0.8em center;
+  background-size: 20px 20px, 16px 12px;
+}
+body.dark-mode .profile-info-group select:focus {
+  background: #f8f6f2 !important;
+  border: 2.2px solid #ad00e2 !important;
+  color: #2a024d !important;
+}
+.profile-status-row {
+  display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 1.2rem;
+}
+.status-card {
+  flex: 1 1 370px; min-width:300px;
+  background: #22222a;
+  border-radius: 11px;
+  padding: 1.4rem 1.2rem;
+  box-shadow: 0 1px 8px #ad00e219;
+  margin-bottom: 1rem;
+}
+body.dark-mode .status-card {
+  background: #18181f;
+  color: #eee;
+}
+.status-title {
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.12rem;
+}
+.progress-row { margin-bottom: 0.88rem; }
+.progress-label {
+  font-size: 0.97rem;
+  font-weight: 500;
+  color: #aaa;
+  margin-bottom: 0.3rem;
+}
+body.dark-mode .progress-label { color: #bbb; }
+.progress-bar-bg {
+  width: 100%;
+  background: #e0e0e0;
+  border-radius: 7px;
+  height: 10px;
+  overflow: hidden;
+  margin-bottom: 0.4rem;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #ad00e2 50%, #c2a1ff 100%);
+  border-radius: 7px;
+  transition: width 0.4s;
+}
+.bar-label {
+  font-size: 0.98rem;
+  color: #888;
+  margin-left: 0.5em;
+}
+.color-swatch {
+  width:28px;height:28px;border-radius:8px;box-shadow:0 1px 5px #bbb6aa55; display:inline-block;
+}
+.color-key {
+  color: #a9947a;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: #f4ede6;
+}
+.color-key.mustard { color: #b39c4d; background: #f6f3e2; }
+body.dark-mode .color-key,
+body.dark-mode .color-key.mustard {
+  color: #ffe4ad !important;
+  background: #4e473b !important;
+}
+.worst-color {
+  color: #e23c3c;
+  font-weight: 600;
+  background: #fbeeee;
+  border-radius: 6px;
+  padding: 2px 8px;
+  box-shadow: 0 1px 3px #e23c3c11;
+  margin-left: 0.3em;
+}
+body.dark-mode .worst-color {
+  color: #fff0f0;
+  background: #522222;
+}
+@media (max-width: 980px) {
+  .profile-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+    padding: 1.5rem 0.5rem;
+  }
+  .profile-sidebar {
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 auto 1.2rem auto;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  }
+  .profile-main {
+    gap: 1.2rem;
+    min-width: 0;
+  }
+}
+@media (max-width: 600px) {
+  .profile-section {
+    padding: 0.8rem 0.1rem;
+    border-radius: 10px;
+  }
+  .profile-sidebar {
+    padding: 0.7rem 0.1rem 0.6rem 0.1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 8px #ad00e211;
+  }
+  .profile-main,
+  .profile-info-card,
+  .status-card {
+    padding: 0.8rem !important;
+    border-radius: 10px;
+  }
+}
+/* ===== FOOTER ===== */
+footer {
+  background: #444b4b;
+  color: #eee;
+  padding: 2.5rem 0;
+  margin-top: 2rem;
+  font-weight: 500;
+}
+footer a { color: #fff; text-decoration: none; }
+footer strong { color: #fff; }
+body.dark-mode footer { background: #18181b; color: #ccc; }
+body.dark-mode footer a { color: #aaa; }
+.footer-row {
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:1.5rem;
+}
+.footer-col { flex:1 1 200px; min-width:180px;}
+.footer-col div {margin-bottom:0.4rem;}
+.footer-col strong {font-weight:700;}
+.footer-copy {text-align:center; margin-top:2.5rem; font-size:1.15rem;}
+.footer-copy span {font-size:0.93rem; color:#bbb;}
+@media (max-width: 800px) {
+  .footer-row { flex-direction: column !important; gap: 0.7rem !important; }
+}
+
+/* ===== SKIN TONE SLIDER, PREVIEW, CAMERA BUTTON (EDIT FORM) ===== */
+.skin-tone-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 7px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.skin-preview {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2.2px solid #bbb;
+  box-shadow: 0 1px 8px #ad00e210;
+  background: #eac086;
+  vertical-align: middle;
+  margin-right: 5px;
+  transition: background 0.2s, border 0.2s;
+}
+.skin-slider {
+  accent-color: var(--accent);
+  width: 110px;
+  max-width: 42vw;
+  margin-right: 7px;
+  cursor: pointer;
+}
+.camera-btn {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: linear-gradient(90deg,#ad00e2 65%,#c2a1ff 100%);
+  color: #fff;
+  font-size: 0.97em;
+  border: none;
+  border-radius: 7px;
+  padding: 0.43em 1em 0.43em 0.8em;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 14px #ad00e233;
+  transition: background 0.18s;
+  margin-left: 3px;
+  outline: none;
+}
+.camera-btn:hover,
+.camera-btn:focus {
+  background: #7a2df6;
+  color: #fff;
+  box-shadow: 0 5px 16px #a673fa33;
+}
+body.dark-mode .camera-btn {
+  background: #2a024d;
+  color: #fff;
+}
+body.dark-mode .camera-btn:hover,
+body.dark-mode .camera-btn:focus {
+  background: #7a2df6;
+}
+.skin-tone-dot {
+  width: 26px; height: 26px; border-radius: 50%; border:2.5px solid #ccc; margin-right: 5px; display:inline-block; transition: border .22s;
+}
+.skin-tone-dot.active { border: 3px solid #ad00e2; box-shadow:0 1px 8px #ad00e222; }
+.edit-form input, .edit-form select { font-size:1.01em;padding:.38em .8em; border-radius:7px; border:1.5px solid #d4c4ef; margin-bottom:.5em; width:96%; }
+.edit-form label { font-weight:600; color:var(--accent); margin-bottom:2px; display:block;}
+.edit-actions { margin-top: 1.1em; display:flex; gap:1em;}
+.edit-btn-save { background: #ad00e2; color:#fff;}
+.edit-btn-cancel { background: #e6e6e6; color: #20144a;}
+
+#cameraModal {
+  display:none; position:fixed; top:0; left:0; width:100vw; height:100vh;
+  z-index:1111; background:rgba(20,15,27,0.97); justify-content:center; align-items:center;
+}
+#cameraModal .modal-row {
+  display: flex; flex-direction: row; width: 90vw; max-width: 990px; min-height: 65vh;
+  background: #fff; border-radius: 2.5rem; box-shadow: 0 8px 32px #0003; overflow: hidden;
+}
+#cameraModal .camera-col {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background: #130d20;
+  position: relative;
+  min-width: 320px;
+  min-height: 420px;
+  padding-top: 36px;
+}
+.camera-box-wrap {
+  width: 96%; max-width: 340px; aspect-ratio: 320/380;
+  position: relative; display: flex; align-items: center; justify-content: center;
+}
+#modalVideo, #cameraCanvas, #bigGuideCircle {
+  width: 100%; height: 100%;
+  position: absolute; left: 0; top: 0;
+  object-fit: cover; border-radius: 2rem;
+}
+#bigGuideCircle {
+  border: 6px solid #ad00e2;
+  border-radius: 50%;
+  z-index: 3; pointer-events: none;
+  box-shadow: 0 0 0 8px #ad00e233;
+}
+.camera-warning-under {
+  width: 96%; max-width: 340px; margin: 16px auto 0 auto;
+  background: #24123f;
+  color: #ffd400;
+  border-radius: 1.1rem;
+  box-shadow: 0 2px 18px #20144a27;
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 13px 18px 10px 18px;
+  z-index: 10;
+  border: 1.2px solid #ffd40038;
+  text-align: center;
+  letter-spacing: 0.01em;
+  transition: background 0.19s;
+}
+#sampleSkinToneBtn {
+  background: linear-gradient(90deg, #ad00e2 80%, #bd7ffe 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  border: none;
+  border-radius: 1.2rem;
+  padding: 1rem 2.2rem;
+  box-shadow: 0 2px 16px #ad00e236;
+  cursor: pointer;
+  margin: 18px 0 10px 0;
+  transition: background 0.23s;
+}
+#sampleSkinToneBtn:hover {
+  background: linear-gradient(90deg, #bd7ffe 10%, #ad00e2 90%);
+}
+#closeCameraBtn {
+  position:absolute;right:2vw;top:2vh;font-size:2.2rem;background:none;border:none;color:#fff;cursor:pointer;z-index:20;
+}
+/* Result Col */
+#cameraModal .result-col {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2.5rem 1.2rem 2.5rem 2.5rem; min-width: 290px;
+  background: linear-gradient(120deg, #f6f3fc 65%, #f2edff 100%);
+}
+#cameraModal .detected-msg {
+  color: #20144a; font-size: 1.18rem; font-weight: 700; margin-bottom: 0.7rem; margin-top: 1.2rem;
+}
+#cameraModal .tone-preview-big {
+  margin: 1.1rem 0 0.6rem 0; width: 60px; height: 60px; border-radius: 50%;
+  border: 4px solid #ad00e2;
+  box-shadow: 0 4px 18px #ad00e233;
+  display: inline-block;
+}
+#cameraModal .tone-name {
+  font-size: 1.13rem; font-weight: 700; color: #ad00e2; margin-bottom: 1.5rem;
+}
+#cameraModal .use-tone-btn {
+  padding: 0.85rem 2.3rem;
+  font-size: 1.1rem;
+  border-radius: 1.1rem;
+  background: #ad00e2;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 2px 12px #a084f760;
+  cursor: pointer;
+  margin-top: 0.7rem;
+}
+#cameraModal .use-tone-btn:disabled {
+  background: #d1a67d; color: #fff; cursor: not-allowed; opacity: 0.8;
+}
+/* Responsive (as per signup2) */
+@media (max-width: 800px) {
+  #cameraModal .modal-row { flex-direction: column; min-height: 60vh; }
+  #cameraModal .camera-col, #cameraModal .result-col { min-width: unset; width: 100%; min-height: 220px; padding: 1.1rem 1rem; }
+  #cameraModal .camera-col { min-height: 280px; }
+  .camera-box-wrap, .camera-warning-under { max-width: 96vw; }
+}
+@media (max-width: 700px) {
+  #cameraModal .result-col h2 { font-size: 1.21rem;}
+}
+/* (rest of your own CSS continues as normal) */
+
+.recommendation-box {
+  background: linear-gradient(110deg, #fff 80%, #eedeff 100%);
+  border: 1.5px solid #ad00e2;
+  border-radius: 12px;
+  padding: 1.3em 1.1em 1.2em 1.3em;
+  margin-top: 1em;
+  margin-bottom: 1.4em;
+  font-size: 1.12rem;
+  color: #31214c;
+  box-shadow: 0 4px 24px #ad00e223, 0 1.5px 10px #c2a1ff18;
+  line-height: 1.67;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  white-space: pre-line; /* For \n newlines from AI text */
+  transition: background 0.3s;
+}
+body.dark-mode .recommendation-box {
+  background: linear-gradient(105deg, #28223b 60%, #432d6e 100%);
+  color: #ffeafd;
+  border: 1.5px solid #a77bff;
+  box-shadow: 0 4px 24px #ad00e233, 0 1.5px 10px #2221;
+}
+
+:root {
+  --bg-light: #f7f4ee;
+  --bg-mid: #ece5db;
+  --bg-dark: #23242a;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --heading: #ad00e2;
+  --nav-bg: #ece5db;
+  --text: #23242a;
+  --button-bg: #ad00e2;
+  --button-text: #fff;
+}
+
+/* === BODY COLOUR + TRANSITION === */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-light);
+  color: var(--text);
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark-mode {
+  --bg-light: #18181b;
+  --bg-mid: #23242a;
+  --bg-dark: #121214;
+  --nav-bg: #23242a;
+  --text: #fff;
+  --heading: #ad00e2;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --button-bg: #5f5cff;
+  --button-text: #fff;
+  background: var(--bg-light);
+  color: var(--text);
+}
+
+/* === HEADER & NAV BAR === */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2.4rem;
+  background: var(--nav-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-weight: 600;
+  box-shadow: 0 2px 14px #0001;
+}
+.logo {
+  font-family: 'Style Script', cursive !important;
+  font-size: 2.4rem !important;
+  color: #ad00e2 !important;
+  font-weight: 400 !important;
+  letter-spacing: 2px;
+  line-height: 1.08;
+  margin: 0;
+  padding: 0 0.2rem;
+  user-select: none;
+}
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-weight: 400;
+}
+.nav a {
+  color: #2a024d;
+  background: none;
+  border: none;
+  text-decoration: none;
+  font: inherit;
+  font-weight: 400;
+  padding: .5rem 0;
+  cursor: pointer;
+  transition: color .18s, font-weight .2s;
+  position: relative;
+}
+.nav a:hover, .nav a.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+.wishlist {
+  cursor: pointer;
+  color: #2a024d;
+  font-size: 1.15rem;
+  font-weight: 400;
+  transition: color .2s, font-weight .18s;
+}
+.nav .wishlist:hover, .nav .wishlist:focus {
+  color: #e60023 !important;
+}
+.profile-icon {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.8rem;
+  background: linear-gradient(135deg, #ad00e2 60%, #c2a1ff 100%) !important;
+  border: 2.2px solid #fff !important;
+  overflow: hidden;
+  padding: 0 !important;
+}
+.profile-icon svg {
+  width: 23px;
+  height: 23px;
+}
+.darkmode-btn {
+  background: #7a2df6;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1.2rem;
+  box-shadow: 0 2px 12px #a673fa29;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.darkmode-btn:hover { background: #ad00e2; color: #fff; }
+.darkmode-btn:focus, .darkmode-btn:active {
+  outline: none !important;
+  background: #ad00e2 !important;
+  color: #fff !important;
+  box-shadow: 0 6px 24px #a673fa49;
+  font-weight: 700;
+}
+/* Dark mode nav styling */
+body.dark-mode .darkmode-btn { background: #2a024d; color: #fff; }
+body.dark-mode .darkmode-btn:hover, body.dark-mode .darkmode-btn:focus, body.dark-mode .darkmode-btn:active {
+  background: #7a2df6 !important; color: #fff !important; outline: none !important;
+  box-shadow: 0 6px 24px #a673fa49;
+  font-weight: 700;
+}
+body.dark-mode .nav a, body.dark-mode .wishlist { color: #fff; }
+body.dark-mode .nav a.active, body.dark-mode .nav a:hover { color: var(--accent) !important; }
+body.dark-mode .nav { background: var(--nav-bg); }
+
+/* Hamburger menu */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  margin-left: 1.2rem;
+}
+@media (max-width: 768px) {
+  header { flex-direction: row; align-items: center; justify-content: space-between; padding: 0.8rem 0.9rem; position: relative; }
+  .nav { display: none; flex-direction: column; gap: 1.1rem; margin-top: 0.2rem; background: var(--nav-bg, var(--bg-mid)); width: 100vw; left: 0; right: 0; top: 65px; position: absolute; z-index: 200; box-shadow: 0 8px 24px #0002; padding-bottom: 1.3rem; border-radius: 0 0 1.2rem 1.2rem; }
+  .nav.open { display: flex; }
+  .hamburger { display: block; margin-left: auto; margin-right: 0; order: 2; }
+  .logo { font-size: 1.22rem; order: 1; }
+}
+@media (min-width: 769px) {
+  .hamburger { display: none; }
+  .nav { display: flex !important; flex-direction: row; position: static; background: none; box-shadow: none; }
+}
+.nav a {
+  font-size: 1.08rem; /* ya jitna chaho */
+}
+.logout-btn-bully {
+  background: linear-gradient(90deg,#f80039 65%,#e22 100%);
+  color: #fff;
+  font-size: 0.95rem;      /* thoda chhota font */
+  font-weight: 800;
+  border: none;
+  border-radius: 8px;      /* thoda kam round corner */
+  padding: 0.35em 1em 0.35em 1em;  /* kam padding */
+  letter-spacing: .06em;
+  box-shadow: 0 2px 12px #e4002238, 0 1px 4px #ee285618;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+  transition: background .16s, box-shadow .18s, transform .12s;
+  position: relative;
+  z-index: 5;
+  border: 2px solid #fff1;
+  max-width: 140px;        /* chhota max width */
+  width: 100%;
+}
+.logout-btn-bully:hover,
+.logout-btn-bully:focus {
+  background: linear-gradient(90deg,#e60023 70%,#b80022 100%);
+  box-shadow: 0 5px 20px #e4002275, 0 1px 6px #ee2856aa;
+  transform: scale(1.06) translateY(-1px);
+  border: 2px solid #fff3;
+}
+.logout-btn-bully:active {
+  background: #b80022;
+  box-shadow: 0 1px 6px #e4002213;
+  transform: scale(0.98);
+}
+body.dark-mode .logout-btn-bully {
+  background: linear-gradient(90deg,#ff397a 80%,#c70039 100%);
+  border: 2px solid #fff1;
+}
+body.dark-mode .logout-btn-bully:hover,
+body.dark-mode .logout-btn-bully:focus {
+  background: linear-gradient(90deg,#e60023 85%,#7a143a 100%);
+  box-shadow: 0 6px 26px #c700398a, 0 2px 7px #ff397a99;
+  border: 2px solid #fff3;
+}
+/* Modal Overlay */
+#logoutConfirmModal .modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 9998;
+}
+
+/* Modal Box */
+#logoutConfirmModal .modal-content {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-light);
+  color: var(--text);
+  padding: 2rem 2.4rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(122,45,246,0.35);
+  max-width: 360px;
+  width: 90vw;
+  z-index: 9999;
+  text-align: center;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+}
+
+body.dark-mode #logoutConfirmModal .modal-content {
+  background: #23242a;
+  color: #eee;
+  box-shadow: 0 8px 32px rgba(173,0,226,0.6);
+}
+
+#logoutConfirmModal h2 {
+  margin-bottom: 0.8rem;
+  color: var(--accent);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+#logoutConfirmModal p {
+  font-size: 1.1rem;
+  margin-bottom: 1.6rem;
+  color: var(--text);
+}
+
+body.dark-mode #logoutConfirmModal p {
+  color: #ddd;
+}
+
+/* Modal Buttons */
+#logoutConfirmModal .modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.3rem;
+}
+
+#logoutConfirmModal .btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 1rem;
+}
+
+/* Confirm Button (Red) */
+#logoutConfirmModal .confirm-btn {
+  background: linear-gradient(90deg,#f80039 65%,#e22 100%);
+  color: white;
+  box-shadow: 0 3px 10px #e4002244;
+}
+
+#logoutConfirmModal .confirm-btn:hover {
+  background: linear-gradient(90deg,#e60023 80%,#b80022 100%);
+}
+
+/* Cancel Button (Grey) */
+#logoutConfirmModal .cancel-btn {
+  background: #ccc;
+  color: #222;
+  box-shadow: 0 2px 8px #9999;
+}
+
+#logoutConfirmModal .cancel-btn:hover {
+  background: #bbb;
+}
+
+/* Dark mode cancel button */
+body.dark-mode #logoutConfirmModal .cancel-btn {
+  background: #444;
+  color: #eee;
+  box-shadow: 0 2px 8px #555;
+}
+body.dark-mode #logoutConfirmModal .cancel-btn:hover {
+  background: #555;
+}
+/* ==== MOBILE/TABLET ≤1200px: dropdown nav + show hamburger ==== */
+@media (max-width: 1200px){
+  header{
+    position: sticky; top:0; z-index:100;
+  }
+  header .hamburger{
+    display: inline-flex !important;
+    align-items: center; justify-content: center;
+    width: 44px; height: 44px;
+    margin-left: .6rem;
+    border-radius: 12px;
+    border: 2px solid rgba(173,0,226,.25);
+    background: linear-gradient(135deg, rgba(173,0,226,.12), rgba(122,45,246,.12));
+    box-shadow: 0 6px 20px rgba(173,0,226,.18);
+    cursor: pointer;
+    font-size: 22px; line-height: 1;
+    color: var(--text);
+  }
+  header .nav{
+    display: none !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    position: absolute !important;
+    left: 0 !important; right: 0 !important;
+    top: calc(100% - 1px) !important;
+    padding: .75rem 1rem 1rem !important;
+    background: var(--nav-bg, var(--bg-mid)) !important;
+    box-shadow: 0 8px 24px #0002 !important;
+    border-radius: 0 0 12px 12px !important;
+    z-index: 99 !important;
+  }
+  header .nav.open{ display: flex !important; }
+}
+
+/* ==== DESKTOP ≥1201px: inline nav + hide hamburger ==== */
+@media (min-width: 1201px){
+  header .hamburger{ display: none !important; }
+  header .nav{
+    display:flex !important; position:static !important;
+    background:transparent !important; box-shadow:none !important;
+    border-radius:0 !important; gap:2rem !important; flex-direction:row !important;
+  }
+}
+
+/* Fancy hamburger lines */
+.hamburger-box{ position:relative; width:26px; height:3px; }
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after{
+  content:""; position:absolute; left:0; right:0; height:3px;
+  border-radius:3px;
+  background:linear-gradient(90deg,#7a2df6,#ad00e2);
+  box-shadow:0 1px 6px rgba(122,45,246,.45);
+  transition:transform .28s cubic-bezier(.55,.06,.68,.19), top .2s, opacity .2s;
+}
+.hamburger-inner{ top:0; }
+.hamburger-inner::before{ top:-8px; }
+.hamburger-inner::after{  top: 8px; }
+
+/* toggle state -> makes an 'X' */
+.hamburger.is-active .hamburger-inner{ transform: rotate(45deg); }
+.hamburger.is-active .hamburger-inner::before{ top:0; transform: rotate(-90deg); }
+.hamburger.is-active .hamburger-inner::after{ top:0; opacity:0; }
+
+@media (max-width:1200px){
+  header .hamburger{ display:inline-flex !important; }
+  header .nav{ display:none !important; }
+  header .nav.open{ display:flex !important; }
+}
+@media (min-width:1201px){
+  header .hamburger{ display:none !important; }
+  header .nav{ display:flex !important; }
+}
+
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+  <div class="logo">Palette and Fit</div>
+  <button id="menu-toggle" class="hamburger" aria-label="Toggle menu">☰</button>
+  <nav class="nav">
+    <a href="homepage1.html" >Home</a>
+    <a href="men.html">Men</a>
+    <a href="women.html">Women</a>
+    <a href="aboutus.html">About us</a>
+    <a href="contactus.html">Contact us</a>
+    <a href="wishlist.html" class="wishlist">♡ Wishlist</a>
+    <a href="profile.html" class="profile-icon" title="Profile">
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="8.5" r="4.2" fill="#fff" fill-opacity=".95"/>
+        <ellipse cx="12" cy="18" rx="7" ry="3.2" fill="#fff" fill-opacity=".38"/>
+      </svg>
+    </a>
+    <button class="btn darkmode-btn" id="darkModeToggle">
+      <span style="font-size:1.25em;">🌙</span> Dark Mode
+    </button>
+  </nav>
+</header>
+  <!-- PROFILE SECTION -->
+  <section class="section">
+    <div class="profile-section">
+      <!-- Sidebar -->
+      <aside class="profile-sidebar">
+        <div class="profile-avatar" id="avatarBox">
+          <img id="profilePic"
+            src="https://cdn.vectorstock.com/i/1000v/54/41/young-and-elegant-woman-avatar-profile-vector-9685441.jpg"
+            alt="Avatar"
+          >
+        </div>
+        <div class="upload-btn">
+          <label for="fileInput">Upload Profile Picture</label>
+          <input type="file" id="fileInput" accept="image/*">
+        </div>
+        <h2 id="profileName" style="text-align: center;">Ayesha Khan</h2>
+        <p style="text-align: center;">Member<br>Palette and Fit Community</p>
+        <div style="text-align: left; margin-top: 1.5rem; width: 100%;">
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Email:</span>
+            <span id="profileEmail">ayesha@email.com</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Phone:</span>
+            <span id="profilePhone">0301-1234567</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Age:</span>
+            <span id="profileAge">24</span>
+          </div>
+        </div>
+      </aside>
+      <!-- Main Profile Info -->
+      <main class="profile-main">
+        <!-- View Profile -->
+        <div class="profile-info-card" id="profileView">
+          <div class="profile-info-row">
+            <div class="profile-info-group">
+              <div class="profile-info-label">Full Name</div>
+              <div class="profile-info-value" id="infoName">Ayesha Khan</div>
+            </div>
+            <div class="profile-info-group">
+              <div class="profile-info-label">Email</div>
+              <div class="profile-info-value" id="infoEmail">ayesha@email.com</div>
+            </div>
+            <div class="profile-info-group">
+              <div class="profile-info-label">Phone</div>
+              <div class="profile-info-value" id="infoPhone">0301-1234567</div>
+            </div>
+            <div class="profile-info-group">
+              <div class="profile-info-label">Gender</div>
+              <div class="profile-info-value" id="infoGender">Female</div>
+            </div>
+            <div class="profile-info-group">
+              <div class="profile-info-label">Skin Tone</div>
+              <div class="profile-info-value" id="infoTone">
+                <span id="skinToneDot" class="skin-tone-dot" style="background:#eac086;"></span>
+                <span id="skinToneName">Wheatish</span>
+              </div>
+            </div>
+            <div class="profile-info-group">
+              <div class="profile-info-label">Age</div>
+              <div class="profile-info-value" id="infoAge">24</div>
+            </div>
+            <div class="profile-info-group">
+              <div class="profile-info-label">Weight (kg)</div>
+              <div class="profile-info-value" id="infoWeight">58</div>
+            </div>
+            <div class="profile-info-group">
+              <div class="profile-info-label">Body Length (in)</div>
+              <div class="profile-info-value" id="infoLength">60</div>
+            </div>
+            <div class="profile-info-group">
+              <div class="profile-info-label">Upper Body Width (in)</div>
+              <div class="profile-info-value" id="infoUpper">16</div>
+            </div>
+            <div class="profile-info-group">
+              <div class="profile-info-label">Lower Body Width (in)</div>
+              <div class="profile-info-value" id="infoLower">18</div>
+            </div>
+          </div>
+          <button class="edit-btn btn" id="editBtn">Edit</button>
+        </div>
+        <!-- Edit Form (Hidden by Default) -->
+        <form class="profile-info-card edit-form" id="profileEdit" style="display:none;">
+          <div class="profile-info-row">
+            <div class="profile-info-group">
+              <label>Full Name</label>
+              <input type="text" id="editName" required>
+            </div>
+            <div class="profile-info-group">
+              <label>Email</label>
+              <input type="email" id="editEmail" required>
+            </div>
+            <div class="profile-info-group">
+              <label>Phone</label>
+              <input type="text" id="editPhone" required>
+            </div>
+            <div class="profile-info-group">
+              <label>Gender</label>
+              <select id="editGender">
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
+            </div>
+            <!-- Skin Tone Picker -->
+            <div class="profile-info-group">
+              <label>Skin Tone <span style="font-size:0.99rem;font-weight:400;color:#888;">(or use Detect with Camera)</span></label>
+              <div class="skin-tone-row">
+                <span class="skin-preview" id="editSkinPreview"></span>
+                <input type="range" min="0" max="100" value="30" class="skin-slider" id="editSkinSlider" required>
+                <button type="button" class="camera-btn" id="editOpenCameraBtn">
+                  <svg width="18" height="18" style="vertical-align:-3px;margin-right:3px" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="5" width="14" height="10" rx="2.5" stroke="#fff" stroke-width="2" fill="none"/>
+                    <circle cx="9" cy="10" r="2.5" stroke="#fff" stroke-width="2" fill="none"/>
+                    <rect x="7" y="3" width="4" height="2" rx="1" fill="#fff"/>
+                  </svg>
+                  Detect with Camera
+                </button>
+              </div>
+              <input type="hidden" id="editSkinToneColor" required>
+            </div>
+            <div class="profile-info-group">
+              <label>Age</label>
+              <input type="number" id="editAge" min="1" max="100">
+            </div>
+            <div class="profile-info-group">
+              <label>Weight (kg)</label>
+              <input type="number" id="editWeight" min="1" max="200">
+            </div>
+            <div class="profile-info-group">
+              <label>Body Length (in)</label>
+              <input type="number" id="editLength" min="1" max="100">
+            </div>
+            <div class="profile-info-group">
+              <label>Upper Body Width (in)</label>
+              <input type="number" id="editUpper" min="1" max="100">
+            </div>
+            <div class="profile-info-group">
+              <label>Lower Body Width (in)</label>
+              <input type="number" id="editLower" min="1" max="100">
+            </div>
+          </div>
+          <div class="edit-actions">
+            <button type="submit" class="edit-btn-save btn">Save</button>
+            <button type="button" class="edit-btn-cancel btn" id="cancelEdit">Cancel</button>
+          </div>
+        </form>
+        <!-- Analysis/Bar Chart -->
+        <div class="profile-status-row">
+          <div class="status-card">
+            <div class="status-title">Style &amp; Color Suitability</div>
+            <div style="display: flex; gap: 1.7rem; flex-wrap: wrap;">
+              <div style="flex:1 1 170px; min-width:150px;">
+                <div class="progress-row">
+                  <div class="progress-label">Lighter Tones</div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar" style="width: 65%"></div>
+                  </div>
+                  <span class="bar-label">65%</span>
+                </div>
+                <div class="progress-row">
+                  <div class="progress-label">Darker Tones</div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar" style="width: 82%"></div>
+                  </div>
+                  <span class="bar-label">82%</span>
+                </div>
+              </div>
+              <div style="flex:1 1 170px; min-width:150px;">
+                <div class="progress-row">
+                  <div class="progress-label">Western Wear</div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar" style="width: 77%"></div>
+                  </div>
+                  <span class="bar-label">77%</span>
+                </div>
+                <div class="progress-row">
+                  <div class="progress-label">Eastern Wear</div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar" style="width: 60%"></div>
+                  </div>
+                  <span class="bar-label">60%</span>
+                </div>
+              </div>
+            </div>
+            <div style="margin:1.2rem 0 .7rem 0;">
+              <div style="font-weight:600; color:var(--accent); margin-bottom:0.4rem;">Your Color Palette</div>
+              <div style="display:flex;gap:8px;">
+                <span class="color-swatch" style="background:#edc988;" title="Mustard"></span>
+                <span class="color-swatch" style="background:#d9c4b0;" title="Latte"></span>
+                <span class="color-swatch" style="background:#c7b199;" title="Nude"></span>
+                <span class="color-swatch" style="background:#9e866c;" title="Taupe"></span>
+                <span class="color-swatch" style="background:#f7d9c4;" title="Peach Nude"></span>
+              </div>
+            </div>
+            <div style="display:flex;gap:1.3rem;align-items:center;margin-bottom:0.8rem;">
+              <div><b style="color:#24b327;">Best:</b>
+                <span class="color-key">Nude Latte</span>
+              </div>
+              <div>
+                <b style="color:#ea2222;">Worst:</b>
+                <span class="worst-color">Neon Yellow</span>
+              </div>
+            </div>
+          </div>
+  <div class="status-card" id="personalized-analysis" style="background:linear-gradient(120deg,#f8f5f2 80%,#f3efe7 100%);">
+
+  <div class="status-title" style="color:var(--accent);">Personalized Analysis</div>
+  <div id="personalized-analysis-text">
+            <ul style="margin:0 0 0 1em; padding:0;list-style:disc;line-height:1.68; font-size:1.08rem; color:#6a584a;">
+              <li><b style="color:#ad00e2;">Lighter shades</b> (white, beige, pastel peach, latte) look <b>elegant</b>, but too much white can sometimes wash out your complexion.</li>
+              <li><b class="color-key">Nude &amp; earthy tones</b> (taupe, mocha, latte, sand) enhance your natural warmth — these should be your daily go-to shades.</li>
+              <li><b style="color:#7d7058;">Western styles</b> suit you <b>more (77%)</b>, especially in nude or neutral hues.</li>
+              <li><b class="color-key">Eastern wear</b> also looks good <b>(60%)</b>, try statement dupatta, embroidery or contrast with medium tones.</li>
+              <li><span style="color:#ea2222;"><b>Avoid neon or extremely bright colors</b></span> (e.g. neon yellow, bright pink), as these can clash with your undertone.</li>
+            </ul>
+             <!-- <div style="background:linear-gradient(90deg,#c7b199 60%,#fff 150%);color:#634d3b;border-radius:9px;padding:1.1em 1em 1.1em 1.4em;margin-top:1.2em;font-size:1.07rem;box-shadow:0 2px 12px #c7b19933;">
+              <b>Tip:</b> For premium events, go for <span class="color-key">nude latte</span>, <span class="color-key">taupe</span>, or <span class="color-key mustard">muted mustard</span>.  
+              For daily wear, choose light brown, sand, or neutral beige for a soft, graceful look.
+            </div> -->
+            </div>
+            <div id="latest-recommendation"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+        <!-- Add this before the <footer> -->
+  <div style="max-width:1100px; margin: 2rem auto 1rem auto; padding: 0 1rem; text-align: right;">
+    <button class="logout-btn-bully" id="logoutBullyBtn" style="max-width: 160px; width: 100%;">
+      Logout
+    </button>
+  </div>
+  </section>
+  <!-- Custom Logout Confirmation Modal -->
+<div id="logoutConfirmModal" style="display:none;">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <h2>Confirm Logout</h2>
+    <p>Are you sure you want to logout?</p>
+    <div class="modal-actions">
+      <button id="confirmLogoutBtn" class="btn confirm-btn">Yes, Logout</button>
+      <button id="cancelLogoutBtn" class="btn cancel-btn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-row">
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Need Help ?</div>
+        <div style="margin-bottom:0.4rem;"><a href="contactus.html">Contact us</a></div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">More Info</div>
+        <div style="margin-bottom:0.4rem;"><a href="aboutus.html">About us</a></div>
+        <div style="margin-bottom:0.4rem;"><a href="terms.html">Terms &amp; Conditions</a></div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Location</div>
+        <div style="margin-bottom:0.4rem;">support@PaletteandFit.com</div>
+        <div style="margin-bottom:0.4rem;">4162 Wayback Lane, Farmingdale</div>
+        <div style="margin-bottom:0.4rem;">New York, 11735, USA</div>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <strong>Palette and Fit</strong><br>
+      <span>© 2025 Palette and Fit. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- Camera Modal (Hidden by default, style in CSS) -->
+  <div id="cameraModal" style="display:none;">
+    <button id="closeCameraBtn">✖</button>
+    <div class="modal-row">
+      <!-- Left: Camera -->
+      <div class="camera-col">
+        <div class="camera-box-wrap">
+          <video id="modalVideo" autoplay playsinline></video>
+          <canvas id="cameraCanvas" width="320" height="380"></canvas>
+          <div id="bigGuideCircle"></div>
+        </div>
+        <div class="camera-warning-under" id="cameraWarning">
+          ⚠️ For best results, use in natural daylight.<br>
+          Avoid colored light and heavy shadows.
+        </div>
+        <button id="sampleSkinToneBtn">Sample Skin Tone</button>
+      </div>
+      <!-- Right: Results -->
+      <div class="result-col">
+        <h2 style="color:#a380ff;font-weight:800;font-size:2.1rem;letter-spacing:0.5px;">Skin Tone Detection</h2>
+        <div class="detected-msg" id="detectedMsg" style="display:none;font-weight:700;font-size:1.18rem;">Yeah, I detected your skin! 🎉</div>
+        <div class="tone-preview-big" id="tonePreviewBig" style="display:none;"></div>
+        <div class="tone-name" id="toneName" style="display:none;"></div>
+        <button class="use-tone-btn" id="useSkinToneBtn" style="display:none;">Use This Skin Tone</button>
+        <button class="use-tone-btn" id="tryAgainBtn" style="display:none;margin-left:10px;">Try Again</button>
+      </div>
+    </div>
+  </div>
+
+
+<!-- SCRIPT -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* ========== LOGOUT MODAL ========== */
+  const logoutModal = document.getElementById('logoutConfirmModal');
+  const confirmLogoutBtn = document.getElementById('confirmLogoutBtn');
+  const cancelLogoutBtn = document.getElementById('cancelLogoutBtn');
+  const logoutBtn = document.getElementById('logoutBullyBtn');
+
+  if (logoutBtn && logoutModal && confirmLogoutBtn && cancelLogoutBtn) {
+    logoutBtn.addEventListener('click', () => (logoutModal.style.display = 'block'));
+    cancelLogoutBtn.addEventListener('click', () => (logoutModal.style.display = 'none'));
+    const modalOverlay = logoutModal.querySelector('.modal-overlay');
+    modalOverlay && modalOverlay.addEventListener('click', () => (logoutModal.style.display = 'none'));
+
+    confirmLogoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('user_email');
+      localStorage.removeItem('profileData');
+      localStorage.removeItem('darkMode');
+      logoutModal.style.display = 'none';
+      window.location.href = 'login.html';
+    });
+  }
+
+  /* ========== SKIN TONES ========== */
+  const SKIN_TONES = [
+    { name: "Porcelain",     hex: "#fff0dc" },
+    { name: "Ivory",         hex: "#ffe7c7" },
+    { name: "Fair",          hex: "#fde1c8" },
+    { name: "Light Beige",   hex: "#ffe2b0" },
+    { name: "Rosy Beige",    hex: "#ffe3dd" },
+    { name: "Vanilla",       hex: "#f8e4c2" },
+    { name: "Peach",         hex: "#ffe0b3" },
+    { name: "Almond",        hex: "#f7d9c4" },
+    { name: "Light",         hex: "#fbd2a7" },
+    { name: "Sand",          hex: "#fae0bb" },
+    { name: "Honey",         hex: "#f1c27d" },
+    { name: "Wheatish",      hex: "#eac086" },
+    { name: "Golden",        hex: "#e6a86c" },
+    { name: "Olive",         hex: "#c49e7b" },
+    { name: "Warm Beige",    hex: "#f5c185" },
+    { name: "Tan",           hex: "#b98c6b" },
+    { name: "Caramel",       hex: "#de9e53" },
+    { name: "Medium Brown",  hex: "#a97856" },
+    { name: "Chestnut",      hex: "#ad7d4c" },
+    { name: "Dusky",         hex: "#704214" },
+    { name: "Copper",        hex: "#b47838" },
+    { name: "Deep",          hex: "#8d5524" },
+    { name: "Rich",          hex: "#6d4217" },
+    { name: "Mocha",         hex: "#56351e" }
+  ];
+
+  /* ========== ANALYSIS MAP (short default; keep yours full) ========== */
+  const ANALYSIS_MAP = {
+    porcelain: {
+      palette: ["#fff0dc", "#ffe3dd", "#fde1c8", "#f8e4c2", "#eac086"],
+      bars: { light: 95, dark: 52, west: 87, east: 60 },
+      best: "Light Peach", worst: "Bright Red",
+      tips: "Pastels, soft peach, and subtle pinks flatter. Avoid harsh reds."
+    },
+    ivory: {
+      palette: ["#ffe7c7", "#fde1c8", "#ffe2b0", "#f8e4c2", "#fff0dc"],
+      bars: { light: 91, dark: 59, west: 82, east: 64 },
+      best: "Rose Pink", worst: "Neon Orange",
+      tips: "Rose pinks and blushes suit you. Neons can overpower."
+    },
+    default: {
+      palette: ["#edc988", "#d9c4b0", "#c7b199", "#9e866c", "#f7d9c4"],
+      bars: { light: 75, dark: 70, west: 70, east: 70 },
+      best: "Nude", worst: "Neon Yellow",
+      tips: "Nude, latte, taupe are universally good. Avoid neon."
+    }
+  };
+
+  /* ========== DEFAULTS ========== */
+  const profileDefaults = {
+    name: "Ayesha Khan", email: "ayesha@email.com", phone: "0301-1234567",
+    gender: "Female", skin_tone: "Wheatish", age: 24, weight: 58,
+    body_length: 60, upper_width: 16, lower_width: 18,
+    pic: "https://cdn.vectorstock.com/i/1000v/54/41/young-and-elegant-woman-avatar-profile-vector-9685441.jpg"
+  };
+
+  /* ========== UTILS ========== */
+  const getSkinColor = (v) => {
+    const idx = Math.round(v * (SKIN_TONES.length - 1) / 100);
+    return SKIN_TONES[Math.max(0, Math.min(idx, SKIN_TONES.length - 1))].hex;
+  };
+  const getToneName = (v) => {
+    const idx = Math.round(v * (SKIN_TONES.length - 1) / 100);
+    return SKIN_TONES[Math.max(0, Math.min(idx, SKIN_TONES.length - 1))].name;
+  };
+  const normGender = (g) => {
+    const x = String(g||'').trim().toLowerCase();
+    if (x.startsWith('m')) return 'Male';
+    if (x.startsWith('f')) return 'Female';
+    if (['male','female','other'].includes(x)) return x[0].toUpperCase() + x.slice(1);
+    return 'Other';
+  };
+
+  /* ========== LOAD PROFILE ========== */
+  async function loadProfile() {
+    const email = localStorage.getItem('user_email');
+    if (!email) { alert("Please log in first!"); window.location.href = "login.html"; return; }
+
+    const signupPhone  = localStorage.getItem('signupPhone')  || '';
+    const signupGender = localStorage.getItem('signupGender') || '';
+
+    try {
+      const resp = await fetch('http://127.0.0.1:5001/api/get_profile', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+
+      if (resp.ok) {
+        const data = await resp.json();
+
+        // Fallbacks for new accounts (server might not have phone/gender yet)
+        data.phone  = data.phone  || signupPhone;
+        data.gender = normGender(data.gender || signupGender || profileDefaults.gender);
+
+        setProfileUI(data);
+        setDynamicAnalysis(data);
+
+        localStorage.setItem('profileData', JSON.stringify(data));
+
+        // AI tip (if any)
+        if (data.last_recommendation && document.getElementById('latest-recommendation')) {
+          const md2html = (md) => md.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>').replace(/\*(.*?)\*/g,'<i>$1</i>').replace(/\n/g,'<br>');
+          document.getElementById('latest-recommendation').innerHTML =
+            `<h3>Latest AI Fashion Tip:</h3><div class="recommendation-box">${md2html(data.last_recommendation)}</div>`;
+        }
+      } else {
+        // fallback to localStorage on API error
+        const cached = JSON.parse(localStorage.getItem('profileData') || '{}');
+        if (Object.keys(cached).length) {
+          setProfileUI(cached);
+          setDynamicAnalysis(cached);
+        } else {
+          const error = await resp.json();
+          alert(error.error || "Could not fetch profile");
+        }
+      }
+    } catch {
+      // network fallback
+      const cached = JSON.parse(localStorage.getItem('profileData') || '{}');
+      if (Object.keys(cached).length) {
+        setProfileUI(cached);
+        setDynamicAnalysis(cached);
+      } else {
+        alert("Failed to load profile.");
+      }
+    }
+  }
+
+  /* ========== APPLY TO UI ========== */
+  function setProfileUI(d) {
+    const data = { ...profileDefaults, ...d };
+
+    // Ensure normalized & fallback values
+    data.gender = normGender(data.gender || profileDefaults.gender);
+    data.phone  = data.phone || localStorage.getItem('signupPhone') || profileDefaults.phone;
+
+    document.getElementById("profileName").textContent  = data.name;
+    document.getElementById("profileEmail").textContent = data.email;
+    document.getElementById("profilePhone").textContent = data.phone;
+    document.getElementById("profileAge").textContent   = data.age;
+    document.getElementById("profilePic").src           = data.pic || profileDefaults.pic;
+
+    document.getElementById("infoName").textContent   = data.name;
+    document.getElementById("infoEmail").textContent  = data.email;
+    document.getElementById("infoPhone").textContent  = data.phone;
+    document.getElementById("infoGender").textContent = data.gender;
+
+    const toneObj = SKIN_TONES.find(t => t.name.toLowerCase() === String(data.skin_tone||'').toLowerCase());
+    document.getElementById("skinToneDot").style.background = toneObj ? toneObj.hex : "#eac086";
+    document.getElementById("skinToneName").textContent     = toneObj ? toneObj.name : (data.skin_tone || "Unknown");
+
+    document.getElementById("infoAge").textContent    = data.age;
+    document.getElementById("infoWeight").textContent = data.weight;
+    document.getElementById("infoLength").textContent = data.body_length;
+    document.getElementById("infoUpper").textContent  = data.upper_width;
+    document.getElementById("infoLower").textContent  = data.lower_width;
+
+    if (!data.pic || data.pic === profileDefaults.pic) {
+      document.getElementById("profilePic").src =
+        data.gender === "Male"
+          ? "https://cdn-icons-png.flaticon.com/512/2922/2922510.png"
+          : profileDefaults.pic;
+    }
+  }
+
+  /* ========== ANALYSIS WIDGET ========== */
+  function setDynamicAnalysis(data) {
+    let bars = {
+      light: data.light_tones_percent ?? null,
+      dark:  data.dark_tones_percent  ?? null,
+      west:  data.western_percent     ?? null,
+      east:  data.eastern_percent     ?? null
+    };
+    let palette = data.palette;
+    let best    = data.best_color;
+    let worst   = data.worst_color;
+    let tips    = data.personalized_analysis;
+
+    // Palette string->hex if needed (best-effort)
+    if (palette && palette.length && typeof palette[0] === "string" && !palette[0].startsWith("#")) {
+      palette = palette.map(name => {
+        const found = SKIN_TONES.find(t => t.name.toLowerCase() === String(name).toLowerCase());
+        return found ? found.hex : "#ccc";
+      });
+    }
+
+    if (!bars.light || !bars.dark || !bars.west || !bars.east || !palette || !best || !worst || !tips) {
+      const key = String(data.skin_tone||'').toLowerCase();
+      const hit = Object.keys(ANALYSIS_MAP).find(k => key.includes(k)) || "default";
+      ({ bars, palette, best, worst, tips } = ANALYSIS_MAP[hit]);
+    }
+
+    const rows = document.querySelectorAll(".status-card .progress-row");
+    if (rows.length >= 4) {
+      rows[0].querySelector(".progress-bar").style.width = bars.light + "%";
+      rows[0].querySelector(".bar-label").textContent    = bars.light + "%";
+      rows[1].querySelector(".progress-bar").style.width = bars.dark + "%";
+      rows[1].querySelector(".bar-label").textContent    = bars.dark + "%";
+      rows[2].querySelector(".progress-bar").style.width = bars.west + "%";
+      rows[2].querySelector(".bar-label").textContent    = bars.west + "%";
+      rows[3].querySelector(".progress-bar").style.width = bars.east + "%";
+      rows[3].querySelector(".bar-label").textContent    = bars.east + "%";
+    }
+
+    const paletteContainer = document.querySelector(".status-card .color-swatch")?.parentElement;
+    if (paletteContainer) {
+      paletteContainer.innerHTML = (palette || [])
+        .map(c => `<span class="color-swatch" style="background:${c};"></span>`)
+        .join("");
+    }
+
+    const bestElem  = document.querySelector(".status-card .color-key");
+    const worstElem = document.querySelector(".status-card .worst-color");
+    if (bestElem)  bestElem.textContent  = best  || "-";
+    if (worstElem) worstElem.textContent = worst || "-";
+
+    const ul = document.querySelectorAll(".status-card ul");
+    if (ul.length > 0) {
+      ul[0].innerHTML = `<li style="font-size:1.12rem;"><b style="color:#ad00e2;">${tips || ""}</b></li>`;
+    }
+  }
+
+  /* ========== EDIT FORM ========== */
+  // anti-jitter label CSS (fixed width)
+  (function ensureToneLabelCSS(){
+    if (document.getElementById('tone-label-css')) return;
+    const st = document.createElement('style');
+    st.id = 'tone-label-css';
+    st.textContent = `
+      .tone-name-fixed{display:inline-block;width:140px;min-width:140px;margin-left:12px;
+        font-weight:600;color:#ad00e2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      @media (max-width:700px){.tone-name-fixed{width:110px;min-width:110px}}
+    `;
+    document.head.appendChild(st);
+  })();
+
+  const skinSlider = document.getElementById("editSkinSlider");
+  const setEditSliderGradient = () => {
+    if (!skinSlider) return;
+    const stops = SKIN_TONES.map((t, i) => `${t.hex} ${Math.round((i*100)/(SKIN_TONES.length-1))}%`).join(', ');
+    skinSlider.style.background = `linear-gradient(90deg, ${stops})`;
+  };
+  setEditSliderGradient();
+
+  function updateToneSlider(val) {
+    const v = parseInt(val || '0', 10);
+    const idx = Math.round(v * (SKIN_TONES.length - 1) / 100);
+    const tone = SKIN_TONES[Math.max(0, Math.min(idx, SKIN_TONES.length - 1))];
+
+    const preview = document.getElementById("editSkinPreview");
+    if (preview) {
+      preview.style.background = tone.hex;
+      preview.setAttribute('title', tone.name);
+      // live name (fixed width)
+      let live = document.getElementById('editToneLiveName');
+      if (!live) {
+        live = document.createElement('span');
+        live.id = 'editToneLiveName';
+        live.className = 'tone-name-fixed';
+        preview.after(live);
+      }
+      live.textContent = tone.name;
+    }
+    const hidden = document.getElementById("editSkinToneColor");
+    if (hidden) hidden.value = tone.name;
+  }
+
+  if (skinSlider) {
+    skinSlider.addEventListener('input', function () { updateToneSlider(this.value); });
+  }
+
+  document.getElementById("editBtn").onclick = function () {
+    const d = JSON.parse(localStorage.getItem('profileData')) || profileDefaults;
+
+    document.getElementById("editName").value   = d.name;
+    document.getElementById("editEmail").value  = d.email;
+    document.getElementById("editPhone").value  = d.phone || localStorage.getItem('signupPhone') || '';
+    document.getElementById("editGender").value = normGender(d.gender);
+    document.getElementById("editAge").value    = d.age;
+    document.getElementById("editWeight").value = d.weight;
+    document.getElementById("editLength").value = d.body_length;
+    document.getElementById("editUpper").value  = d.upper_width;
+    document.getElementById("editLower").value  = d.lower_width;
+
+    let idx = SKIN_TONES.findIndex(t => t.name.toLowerCase() === String(d.skin_tone||'').toLowerCase());
+    if (idx < 0) idx = 5;
+    skinSlider.value = Math.round(idx * 100 / (SKIN_TONES.length - 1));
+    updateToneSlider(skinSlider.value);
+
+    document.getElementById("profileView").style.display = "none";
+    document.getElementById("profileEdit").style.display = "block";
+  };
+
+  document.getElementById("cancelEdit").onclick = function () {
+    document.getElementById("profileEdit").style.display = "none";
+    document.getElementById("profileView").style.display = "block";
+  };
+
+  document.getElementById("profileEdit").onsubmit = async function (e) {
+    e.preventDefault();
+    const email = localStorage.getItem('user_email');
+    if (!email) { alert("No user!"); return; }
+
+    const newData = {
+      email,
+      name: document.getElementById("editName").value,
+      phone: document.getElementById("editPhone").value,
+      gender: normGender(document.getElementById("editGender").value),
+      skin_tone: document.getElementById("editSkinToneColor").value,
+      age: +document.getElementById("editAge").value,
+      weight: +document.getElementById("editWeight").value,
+      body_length: +document.getElementById("editLength").value,
+      upper_width: +document.getElementById("editUpper").value,
+      lower_width: +document.getElementById("editLower").value
+    };
+
+    try {
+      await fetch('http://127.0.0.1:5001/api/profile', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newData)
+      });
+
+      const merged = { ...newData, pic: document.getElementById("profilePic").src };
+      localStorage.setItem('profileData', JSON.stringify(merged));
+      await loadProfile();
+
+      document.getElementById("profileEdit").style.display = "none";
+      document.getElementById("profileView").style.display = "block";
+    } catch {
+      alert("Failed to save profile");
+    }
+  };
+
+  /* ========== DP UPLOAD ========== */
+  const fileInput = document.getElementById('fileInput');
+  if (fileInput) {
+    fileInput.addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        document.getElementById("profilePic").src = e.target.result;
+        const d = JSON.parse(localStorage.getItem('profileData')) || profileDefaults;
+        d.pic = e.target.result;
+        localStorage.setItem('profileData', JSON.stringify(d));
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  /* ========== AUTO DP BY GENDER ========== */
+  const genderInput = document.getElementById('editGender');
+  genderInput && genderInput.addEventListener('change', function () {
+    if (normGender(this.value) === "Male") {
+      document.getElementById("profilePic").src = "https://cdn-icons-png.flaticon.com/512/2922/2922510.png";
+    } else {
+      document.getElementById("profilePic").src = profileDefaults.pic;
+    }
+  });
+
+  /* ========== DARK MODE HEADER BUTTON ========== */
+  const darkBtn = document.getElementById('darkModeToggle');
+  const bodyEl  = document.body;
+  if (localStorage.getItem('darkMode') === 'true') {
+    bodyEl.classList.add('dark-mode');
+    darkBtn && (darkBtn.innerHTML = '<span style="font-size:1.25em;">☀️</span> Light Mode');
+  }
+  darkBtn && darkBtn.addEventListener('click', () => {
+    const isDark = bodyEl.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+    darkBtn.innerHTML = isDark
+      ? '<span style="font-size:1.25em;">☀️</span> Light Mode'
+      : '<span style="font-size:1.25em;">🌙</span> Dark Mode';
+  });
+
+  /* ========== INIT ========== */
+  loadProfile();
+
+  /* ========== CAMERA (Detect Tone) ========== */
+  const editOpenCameraBtn = document.getElementById('editOpenCameraBtn');
+  const cameraModal = document.getElementById('cameraModal');
+  const closeCameraBtn = document.getElementById('closeCameraBtn');
+  const modalVideo = document.getElementById('modalVideo');
+  const cameraCanvas = document.getElementById('cameraCanvas');
+  const sampleBtn = document.getElementById('sampleSkinToneBtn');
+  const useSkinBtn = document.getElementById('useSkinToneBtn');
+  const detectedMsg = document.getElementById('detectedMsg');
+  const tonePreviewBig = document.getElementById('tonePreviewBig');
+  const toneName = document.getElementById('toneName');
+  const tryAgainBtn = document.getElementById('tryAgainBtn');
+  let stream = null, sampledSliderValue = null;
+
+  function drawVideoFrame() {
+    if (!cameraModal || cameraModal.style.display !== 'flex') return;
+    const ctx = cameraCanvas.getContext('2d');
+    ctx.drawImage(modalVideo, 0, 0, cameraCanvas.width, cameraCanvas.height);
+    requestAnimationFrame(drawVideoFrame);
+  }
+  function closeModal() {
+    cameraModal.style.display = 'none';
+    if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+    modalVideo.srcObject = null;
+  }
+
+  if (editOpenCameraBtn && cameraModal && closeCameraBtn && modalVideo && cameraCanvas && sampleBtn && useSkinBtn && detectedMsg && tonePreviewBig && toneName && tryAgainBtn) {
+    editOpenCameraBtn.addEventListener('click', async () => {
+      cameraModal.style.display = 'flex';
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        modalVideo.srcObject = stream;
+        await modalVideo.play();
+      } catch {
+        alert('Camera permission required');
+        cameraModal.style.display = 'none';
+        return;
+      }
+      [detectedMsg, tonePreviewBig, toneName, useSkinBtn, tryAgainBtn].forEach(el => el && (el.style.display = 'none'));
+      sampledSliderValue = null;
+      drawVideoFrame();
+    });
+
+    closeCameraBtn.addEventListener('click', closeModal);
+    cameraModal.addEventListener('click', (e) => { if (e.target === cameraModal) closeModal(); });
+
+    sampleBtn.addEventListener('click', () => {
+      const ctx = cameraCanvas.getContext('2d');
+      const W = cameraCanvas.width, H = cameraCanvas.height;
+      const box = 50, cx = Math.floor(W / 2), cy = Math.floor(H / 2);
+      const sx = Math.max(0, cx - box / 2), sy = Math.max(0, cy - box / 2);
+      const imgData = ctx.getImageData(sx, sy, box, box);
+
+      let total = [0, 0, 0], count = 0;
+      for (let i = 0; i < imgData.data.length; i += 4) {
+        total[0] += imgData.data[i];
+        total[1] += imgData.data[i + 1];
+        total[2] += imgData.data[i + 2];
+        count++;
+      }
+      if (!count) return;
+
+      const avg = total.map(x => Math.round(x / count));
+      let bestVal = 0, bestDiff = Infinity;
+      for (let v = 0; v <= 100; v++) {
+        const c = getSkinColor(v);
+        const rgb = [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)];
+        const diff = Math.hypot(rgb[0] - avg[0], rgb[1] - avg[1], rgb[2] - avg[2]);
+        if (diff < bestDiff) { bestDiff = diff; bestVal = v; }
+      }
+
+      sampledSliderValue = bestVal;
+      detectedMsg.style.display = '';
+      tonePreviewBig.style.display = '';
+      tonePreviewBig.style.background = getSkinColor(bestVal);
+      toneName.style.display = '';
+      toneName.textContent = `This is your skin tone: ${getToneName(bestVal)}`;
+      useSkinBtn.style.display = '';
+      tryAgainBtn.style.display = '';
+      useSkinBtn.disabled = false;
+    });
+
+    useSkinBtn.addEventListener('click', () => {
+      document.getElementById("editSkinPreview").style.background = getSkinColor(sampledSliderValue);
+      document.getElementById("editSkinToneColor").value = getToneName(sampledSliderValue);
+      document.getElementById("editSkinPreview").setAttribute('title', getToneName(sampledSliderValue));
+      document.getElementById("editSkinSlider").value = sampledSliderValue;
+      updateToneSlider(sampledSliderValue);
+      closeModal();
+    });
+
+    tryAgainBtn.addEventListener('click', () => {
+      [detectedMsg, tonePreviewBig, toneName, useSkinBtn, tryAgainBtn].forEach(el => el && (el.style.display = 'none'));
+      sampledSliderValue = null;
+    });
+  }
+
+});
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us – Palette and Fit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+   :root {
+  --bg-light: #f7f4ee;
+  --bg-mid: #ece5db;
+  --bg-dark: #23242a;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --heading: #ad00e2;
+  --nav-bg: #ece5db;
+  --text: #23242a;
+  --button-bg: #ad00e2;
+  --button-text: #fff;
+}
+
+/* ==== GLOBAL ==== */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-light);
+  color: var(--text);
+  /* font-family: 'Poppins', Arial, sans-serif; */
+  font-weight: 500;
+  font-size: 1.07rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ==== DARK MODE ==== */
+body.dark-mode {
+  --bg-light: #18181b;
+  --bg-mid: #23242a;
+  --bg-dark: #121214;
+  --nav-bg: #23242a;
+  --text: #fff;
+  --heading: #ad00e2;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --button-bg: #5f5cff;
+  --button-text: #fff;
+  background: var(--bg-light);
+  color: var(--text);
+}
+
+/* ==== HEADER & NAV ==== */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2.4rem;
+  background: var(--nav-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-weight: 600;
+  box-shadow: 0 2px 14px #0001;
+}
+
+.logo {
+  font-family: 'Style Script', cursive !important;
+  font-size: 2.4rem !important;
+  color: #ad00e2 !important;
+  font-weight: 400 !important;
+  letter-spacing: 2px;
+  line-height: 1.08;
+  margin: 0;
+  padding: 0 0.2rem;
+  user-select: none;
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-weight: 400;
+}
+
+.nav a {
+  color: #2a024d;
+  background: none;
+  border: none;
+  text-decoration: none;
+  font: inherit;
+  font-weight: 400;
+  padding: .5rem 0;
+  cursor: pointer;
+  transition: color .18s, font-weight .2s;
+  position: relative;
+}
+.nav a:hover, .nav a.active { color: var(--accent); font-weight: 700; }
+.wishlist {
+  cursor: pointer;
+  color: #2a024d;
+  font-size: 1.15rem;
+  font-weight: 400;
+  transition: color .2s, font-weight .18s;
+  display: flex;
+  align-items: center;
+}
+.nav .wishlist:hover, .nav .wishlist:focus { color: #e60023 !important; }
+
+.profile-icon {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.8rem;
+  background: linear-gradient(135deg, #ad00e2 60%, #c2a1ff 100%) !important;
+  border: 2.2px solid #fff !important;
+  overflow: hidden;
+  padding: 0 !important;
+}
+.profile-icon svg {
+  width: 23px;
+  height: 23px;
+}
+
+.darkmode-btn {
+  background: #7a2df6;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1.2rem;
+  box-shadow: 0 2px 12px #a673fa29;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.darkmode-btn:hover,
+.darkmode-btn:focus {
+  background: #ad00e2;
+  color: #fff;
+  box-shadow: 0 6px 24px #a673fa49;
+  font-weight: 700;
+}
+body.dark-mode .darkmode-btn { background: #2a024d; color: #fff; }
+body.dark-mode .darkmode-btn:hover,
+body.dark-mode .darkmode-btn:focus {
+  background: #7a2df6 !important;
+  color: #fff !important;
+}
+
+body.dark-mode .nav { background: var(--nav-bg); }
+body.dark-mode .nav a,
+body.dark-mode .wishlist { color: #fff; }
+body.dark-mode .nav a.active,
+body.dark-mode .nav a:hover { color: var(--accent) !important; }
+
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  margin-left: 1.2rem;
+}
+@media (max-width: 768px) {
+  header { flex-direction: row; align-items: center; justify-content: space-between; padding: 0.8rem 0.9rem; position: relative; }
+  .nav { display: none; flex-direction: column; gap: 1.1rem; margin-top: 0.2rem; background: var(--nav-bg, var(--bg-mid)); width: 100vw; left: 0; right: 0; top: 65px; position: absolute; z-index: 200; box-shadow: 0 8px 24px #0002; padding-bottom: 1.3rem; border-radius: 0 0 1.2rem 1.2rem; }
+  .nav.open { display: flex; }
+  .hamburger { display: block; margin-left: auto; margin-right: 0; order: 2; }
+  .logo { font-size: 1.22rem; order: 1; }
+}
+@media (min-width: 769px) {
+  .hamburger { display: none; }
+  .nav { display: flex !important; flex-direction: row; position: static; background: none; box-shadow: none; }
+}
+
+/* ==== HERO (CARD/BLOB SECTIONS) ==== */
+.hero-section {
+  display: flex;
+  max-width: 1180px;
+  min-height: 350px;
+  margin: 3rem auto 2.2rem auto;
+  border-radius: 32px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 20px #bbb3;
+  align-items: center;
+}
+.hero-section.reverse { flex-direction: row-reverse; }
+
+.vector-img-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+  flex: 1 1 0%;
+  min-width: 0;
+}
+.vector-img-box img {
+  width: 95%;
+  max-width: 370px;
+  height: auto;
+  clip-path: path('M46.7,-62.8C61.4,-57.5,73.9,-46.3,79.2,-32.3C84.5,-18.4,82.6,-1.7,78.5,13.7C74.5,29.1,68.3,43.2,57.5,50.5C46.6,57.9,31.1,58.4,16.9,62.2C2.7,66,-10.2,73.1,-25.1,72.6C-40,72.1,-56.8,63.9,-65.9,51.1C-75,38.2,-76.4,20.7,-74.3,5.2C-72.1,-10.2,-66.3,-23.8,-59,-36.1C-51.7,-48.5,-42.9,-59.6,-31.2,-64.9C-19.4,-70.3,-9.7,-69.8,4.3,-75.5C18.3,-81.2,36.6,-93.1,46.7,-62.8Z');
+  /* Fallback shape */
+  clip-path: ellipse(68% 48% at 50% 50%);
+  box-shadow: 0 4px 24px #0002;
+  background: #fff;
+  transition: box-shadow 0.23s, background 0.23s;
+}
+.vector-img-box img:hover {
+  box-shadow: 0 8px 36px #ad00e222;
+}
+
+.hero-text-side {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3.1rem 2.5rem;
+  background: none !important;
+  color: var(--text);
+  max-width: 600px;
+}
+.hero-text-side h1 {
+  font-size: 2.12rem;
+  color: var(--accent);
+  font-family: inherit; /* REMOVE cursive, use same as body font */
+  margin-bottom: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.hero-text-side p {
+  font-size: 1.13rem;
+  color: #3a2949;
+  line-height: 1.7;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ==== DARK MODE FOR HERO SECTIONS ==== */
+body.dark-mode .hero-section {
+  background: #23242a;    /* Elegant deep grey */
+  box-shadow: 0 2px 24px #111a;
+}
+body.dark-mode .vector-img-box img {
+  background: #23242a;
+  border: 2.5px solid #30313a;
+}
+body.dark-mode .hero-text-side h1 {
+  color: var(--accent) !important; /* purple heading */
+  font-family: inherit !important;
+}
+body.dark-mode .hero-text-side p {
+  color: #fff !important;   /* white paragraph */
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 900px) {
+  .hero-section,
+  .hero-section.reverse { flex-direction: column; min-height: unset; max-width: 97vw; border-radius: 20px;}
+  .vector-img-box img { max-width: 94vw; }
+  .hero-text-side { padding: 2rem 1.2rem; max-width: 100vw;}
+}
+
+/* ==== FOOTER ==== */
+footer {
+  background: #444b4b;
+  color: #eee;
+  padding: 2.5rem 0;
+  margin-top: 2rem;
+  font-weight: 500;
+}
+footer a { color: #fff; text-decoration: none; }
+footer strong { color: #fff; }
+body.dark-mode footer { background: #18181b; color: #ccc; }
+body.dark-mode footer a { color: #aaa; }
+.footer-row {
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:1.5rem;
+}
+.footer-col { flex:1 1 200px; min-width:180px;}
+.footer-col div {margin-bottom:0.4rem;}
+.footer-col strong {font-weight:700;}
+.footer-copy {text-align:center; margin-top:2.5rem; font-size:1.15rem;}
+.footer-copy span {font-size:0.93rem; color:#bbb;}
+@media (max-width: 700px) {
+  .footer-row { flex-direction: column !important; gap: 0.7rem !important; }
+}
+
+/* === Purple glossy hamburger + clean mobile dropdown (OVERRIDES) === */
+
+/* pretty purple hamburger, morphs to X */
+.hamburger{
+  --hb-size:26px; --hb-thickness:3px; --hb-radius:3px;
+  --hb-a:#7a2df6; --hb-b:#ad00e2;
+  width:44px;height:38px;border-radius:12px;border:2px solid rgba(173,0,226,.25);
+  background:linear-gradient(135deg,rgba(173,0,226,.12),rgba(122,45,246,.12));
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 6px 20px rgba(173,0,226,.18);
+  transition:transform .2s,box-shadow .2s,background .2s;
+}
+.hamburger:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(173,0,226,.28);
+  background:linear-gradient(135deg,rgba(173,0,226,.16),rgba(122,45,246,.20));}
+.hamburger:focus-visible{outline:2px solid var(--hb-b);outline-offset:2px}
+.hamburger-box{position:relative;width:var(--hb-size);height:var(--hb-thickness)}
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after{
+  content:"";position:absolute;left:0;right:0;height:var(--hb-thickness);
+  border-radius:var(--hb-radius);
+  background:linear-gradient(90deg,var(--hb-a),var(--hb-b));
+  box-shadow:0 1px 6px rgba(122,45,246,.45);
+  transition:transform .28s cubic-bezier(.55,.06,.68,.19),top .2s,opacity .2s;
+}
+.hamburger-inner{top:0}
+.hamburger-inner::before{top:calc(-8px - var(--hb-thickness)/2)}
+.hamburger-inner::after{top:calc(8px + var(--hb-thickness)/2)}
+.hamburger.is-active .hamburger-inner{transform:rotate(45deg)}
+.hamburger.is-active .hamburger-inner::before{top:0;transform:rotate(-90deg)}
+.hamburger.is-active .hamburger-inner::after{top:0;opacity:0}
+body.dark-mode .hamburger{border-color:rgba(194,161,255,.35);box-shadow:0 6px 20px rgba(194,161,255,.18)}
+
+/* desktop ≥1201px: show inline nav, hide hamburger */
+@media (min-width: 1201px){
+  .hamburger{ display:none !important; }
+  .nav{
+    display:flex !important; position:static !important; background:transparent !important;
+    box-shadow:none !important; border-radius:0 !important; gap:2rem;
+  }
+}
+
+/* mobile/tablet ≤1200px: show hamburger, dropdown sticks under header */
+@media (max-width: 1200px){
+  header{ position: sticky !important; top:0; z-index:100 !important; }
+  .hamburger{
+    display:flex !important;
+    position:absolute !important; right:1rem !important; top:50% !important;
+    transform:translateY(-50%) !important; z-index:5 !important;
+  }
+  .hamburger.is-active{ transform:translateY(-50%) !important; } /* don’t shift on toggle */
+
+  .nav{
+    display:none !important; flex-direction:column !important; gap:1rem !important;
+    position:absolute !important; left:0 !important; right:0 !important;
+    top:calc(100% - 1px) !important;       /* flush to header (no gap) */
+    margin:0 !important; padding:.75rem 1rem 1rem !important;
+    background:var(--nav-bg) !important; box-shadow:0 8px 24px #0002 !important;
+    border-radius:0 0 12px 12px !important; z-index:4 !important;
+  }
+  .nav::before{
+    content:""; position:absolute; left:0; right:0; top:-1px; height:1px;
+    background:var(--nav-bg);               /* kills 1px seam */
+  }
+  .nav.open{ display:flex !important; }
+}
+
+/* optional: ensure first section doesn't push header down on some pages */
+header + * { margin-top:0 !important; padding-top: clamp(8px,1.2vw,16px) !important; }
+/* === Scroll Reveal base === */
+:root{
+  --reveal-dur:.8s;
+  --reveal-ease:cubic-bezier(.2,.65,.2,1);
+}
+.reveal{
+  opacity:0;
+  transform: translateY(24px) translateZ(0);
+  filter: blur(6px);
+  transition:
+    opacity var(--reveal-dur) var(--reveal-ease),
+    transform var(--reveal-dur) var(--reveal-ease),
+    filter var(--reveal-dur) var(--reveal-ease);
+  will-change: transform, opacity, filter;
+}
+.reveal.is-visible{ opacity:1; transform:none; filter:blur(0); }
+
+/* optional direction variants */
+.reveal.from-left   { transform: translateX(-32px); }
+.reveal.from-right  { transform: translateX( 32px); }
+.reveal.zoom        { transform: scale(.96); }
+
+/* tiny lift for buttons */
+.reveal.btn-pop      { transform: translateY(20px) scale(.98); }
+
+/* respect user's reduced-motion preference */
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1 !important; transform:none !important; filter:none !important; transition:none !important; }
+}
+/* ========= Proper gap under sticky header (override) ========= */
+:root { --header-gap: clamp(24px, 4vw, 56px); }
+
+/* remove the tiny padding we added earlier */
+header + * { padding-top: 0 !important; }
+
+/* give comfortable space to the first content block */
+header + .hero-section,
+header + main,
+header + section,
+body > .hero-section:first-of-type {
+  margin-top: var(--header-gap) !important;
+}
+
+/* mobile dropdown stays flush to header; no extra gap there */
+@media (max-width:1200px){
+  .nav.open { margin-top: 0 !important; }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Palette and Fit</div>
+<button class="hamburger" id="navToggle" aria-label="Toggle menu" aria-controls="site-nav" aria-expanded="false">
+  <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+</button>
+
+ <nav class="nav" id="site-nav">
+
+      <a href="homepage1.html">Home</a>
+      <a href="men.html">Men</a>
+      <a href="women.html">Women</a>
+      <a href="aboutus.html" class="active">About us</a>
+      <a href="contactus.html">Contact us</a>
+      <a href="wishlist.html" class="wishlist">♡ Wishlist</a>
+      <a href="profile.html" class="profile-icon" title="Profile">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="8.5" r="4.2" fill="#fff" fill-opacity=".95"/>
+          <ellipse cx="12" cy="18" rx="7" ry="3.2" fill="#fff" fill-opacity=".38"/>
+        </svg>
+      </a>
+      <button class="btn darkmode-btn" id="darkModeToggle">
+        <span style="font-size:1.25em;">🌙</span> Dark Mode
+      </button>
+    </nav>
+  </header>
+<!-- === HERO SECTION 1: Our Philosophy === -->
+<section class="hero-section">
+  <div class="hero-img-side vector-img-box">
+    <img src="https://media.istockphoto.com/id/1475067154/photo/shades-of-brown.jpg?s=612x612&w=0&k=20&c=BYsmIvg1bYQsBNKulncgfDwEzl8fRb6-5A6lCjEmIX8=" alt="Shades of Brown" />
+  </div>
+  <div class="hero-text-side">
+    <h1>Personalized Fashion for All</h1>
+    <p>
+      At Palette and Fit, we believe that <b>fashion is for everyone</b>. Our intelligent platform analyzes your skin tone, body size, and age to recommend clothing that brings out your natural beauty and fits you perfectly.
+    </p>
+  </div>
+</section>
+
+<!-- === HERO SECTION 2: How It Works === -->
+<section class="hero-section reverse">
+  <div class="hero-img-side vector-img-box">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmqnwOJ-VjKpwyaP9iR4sPkPYd3PVLzgooIQ&s" alt="Petite Dress Guide" />
+  </div>
+  <div class="hero-text-side">
+    <h1>How Our AI Recommends</h1>
+    <p>
+      Our advanced AI considers your <b>complexion, weight, and age</b> to curate looks that complement your unique features. From color palettes that flatter your skin tone to fits designed for your shape, every recommendation is made just for you.
+    </p>
+  </div>
+</section>
+
+<!-- === HERO SECTION 3: Diversity & Inclusion === -->
+<section class="hero-section">
+  <div class="hero-img-side vector-img-box">
+    <img src="https://media.istockphoto.com/id/1484796213/photo/three-men-with-diverse-skin-tones-standing-together-in-a-studio-showing-the-results-of-a.jpg?s=612x612&w=0&k=20&c=UmuNQe49VTmA51EVG36elj9-NGrbc9fZ8BY4tyFn4Jo=" alt="Diverse Men Studio" />
+  </div>
+  <div class="hero-text-side">
+    <h1>Every Tone. Every Body.</h1>
+    <p>
+      Whether you have fair, medium, or deep skin, and no matter your body type or age, <b>Palette and Fit</b> celebrates individuality. Our recommendations adapt to your unique identity—ensuring style is always inclusive and empowering.
+    </p>
+  </div>
+</section>
+
+<!-- === HERO SECTION 4: Empowerment Through Fashion === -->
+<section class="hero-section reverse">
+  <div class="hero-img-side vector-img-box">
+    <img src="https://www.shutterstock.com/image-photo/collage-made-cropped-closeup-portraits-260nw-2425406757.jpg"
+      alt="Collage Diverse Women Faces" />
+  </div>
+  <div class="hero-text-side">
+    <h1>Confident. Comfortable. You.</h1>
+    <p>
+      We empower you to look and feel your best by suggesting styles that truly fit—not just by size, but by your personality and lifestyle. <b>Discover confidence with every outfit</b>, tailored for your skin, shape, and spirit.
+    </p>
+  </div>
+</section>
+
+  <!-- FOOTER (as before) -->
+  <footer>
+    <div class="footer-row">
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Need Help ?</div>
+        <div style="margin-bottom:0.4rem;"><a href="contactus.html">Contact us</a></div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">More Info</div>
+        <div style="margin-bottom:0.4rem;"><a href="aboutus.html">About us</a></div>
+        <div style="margin-bottom:0.4rem;"><a href="#">Terms &amp; Conditions</a></div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Location</div>
+        <div style="margin-bottom:0.4rem;">support@PaletteandFit.com</div>
+        <div style="margin-bottom:0.4rem;">4162 Wayback Lane, Farmingdale</div>
+        <div style="margin-bottom:0.4rem;">New York, 11735, USA</div>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <strong>Palette and Fit</strong><br>
+      <span>© 2025 Palette and Fit. All rights reserved.</span>
+    </div>
+  </footer>
+<script>
+  (function(){
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('site-nav') || document.querySelector('header .nav');
+
+    if (navToggle && nav){
+      // toggle
+      navToggle.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        navToggle.classList.toggle('is-active', open);
+        navToggle.setAttribute('aria-expanded', String(open));
+      });
+
+      // close after clicking a link
+      nav.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A' && nav.classList.contains('open')){
+          nav.classList.remove('open');
+          navToggle.classList.remove('is-active');
+          navToggle.setAttribute('aria-expanded','false');
+        }
+      });
+
+      // reset when back to desktop
+      const mq = window.matchMedia('(min-width: 1201px)');
+      const sync = () => {
+        if (mq.matches){
+          nav.classList.remove('open');
+          navToggle.classList.remove('is-active');
+          navToggle.setAttribute('aria-expanded','false');
+        }
+      };
+      mq.addEventListener ? mq.addEventListener('change', sync) : window.addEventListener('resize', sync);
+      sync();
+    }
+  })();
+</script>
+<script>
+/* ============ Scroll Reveal (IntersectionObserver) ============ */
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      const el = entry.target;
+      if (entry.isIntersecting){
+        el.classList.add('is-visible');
+        // reveal once by default (set data-reveal-repeat="true" to animate again on re-enter)
+        if (el.dataset.revealRepeat !== 'true') observer.unobserve(el);
+      }else if (el.dataset.revealRepeat === 'true'){
+        el.classList.remove('is-visible');
+      }
+    });
+  }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+
+  // helper: observe element(s)
+  const watch = (els)=> els && els.forEach(el=> observer.observe(el));
+
+  // ---------- Auto-apply to your layout ----------
+  // 1) About page hero sections (image/text opposite on .reverse)
+  document.querySelectorAll('.hero-section').forEach(sec=>{
+    const img  = sec.querySelector('.vector-img-box img');
+    const text = sec.querySelector('.hero-text-side');
+    if (!img || !text) return;
+
+    // add base class
+    img.classList.add('reveal'); text.classList.add('reveal');
+
+    // left/right depending on .reverse
+    const rev = sec.classList.contains('reverse');
+    img.classList.add(rev ? 'from-right' : 'from-left');
+    text.classList.add(rev ? 'from-left'  : 'from-right');
+
+    // slight stagger on the text
+    text.style.transitionDelay = '120ms';
+  });
+
+  // 2) Men/Women cards (staggered reveal)
+  document.querySelectorAll('.cards-row').forEach(row=>{
+    const cards = row.querySelectorAll('.season-card');
+    cards.forEach((c,i)=>{
+      c.classList.add('reveal');
+      c.style.transitionDelay = (i*90)+'ms';  // stagger
+    });
+  });
+
+  // 3) Home hero (if present on the page)
+  const heroImg   = document.querySelector('.hero-left .overlay-img');
+  const heroHead  = document.querySelector('.hero-right .hero-heading');
+  const heroDesc  = document.querySelector('.hero-right .hero-desc');
+  const heroBtn   = document.querySelector('.hero-right .hero-btn');
+
+  if (heroImg){  heroImg.classList.add('reveal','from-left'); }
+  if (heroHead){ heroHead.classList.add('reveal','from-right'); heroHead.style.transitionDelay='80ms'; }
+  if (heroDesc){ heroDesc.classList.add('reveal','from-right'); heroDesc.style.transitionDelay='160ms'; }
+  if (heroBtn){  heroBtn.classList.add('reveal','btn-pop');   heroBtn.style.transitionDelay='240ms'; }
+
+  // 4) Generic: section headers & common blocks (safe catch-all)
+  ['.section-header','section h2','.page-title','.section-main .section-left','.section-main .section-right']
+    .forEach(sel=>{
+      document.querySelectorAll(sel).forEach((el)=> el.classList.add('reveal'));
+    });
+
+  // start observing everything with .reveal
+  watch(document.querySelectorAll('.reveal'));
+})();
+</script>
+
+  <script>
+
+
+    // Dark Mode Toggle
+    const darkBtn = document.getElementById('darkModeToggle'),
+          bodyEl  = document.body;
+    if (localStorage.getItem('darkMode')==='true') {
+      bodyEl.classList.add('dark-mode');
+      darkBtn.textContent = '☀️ Light Mode';
+    }
+    darkBtn.addEventListener('click', () => {
+      const isDark = bodyEl.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', isDark);
+      darkBtn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+    });
+  </script>
+</body>
+</html>

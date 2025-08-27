@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Palette and Fit – Login</title>
+   <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+ :root {
+      --accent: #ad00e2;
+      --btn-gradient: linear-gradient(90deg,#b77ffb 0%, #ad00e2 100%);
+      --btn-gradient-hover: linear-gradient(90deg, #ad00e2 15%, #47238f 100%);
+      --glass-bg-dark: rgba(34,18,41,0.82);
+      --glass-bg-light: rgba(255,255,255,0.93);
+      --glass-border: rgba(255,255,255,0.19);
+      --input-bg-dark: rgba(255,255,255,0.11);
+      --input-bg-light: rgba(180,158,214,0.11);
+      --input-border: #b39ddb;
+      --text-dark: #fff;
+      --text-light: #170826;
+      --label-dark: #e1c7fa;
+      --label-light: #6d3886;
+      --box-shadow: 0 8px 38px 0 rgba(31,38,135,0.19);
+      --custom-bg: url('data:image/jpeg;base64,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');
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      /* font-family: 'Poppins', Arial, sans-serif; */
+      color: var(--text-dark);
+      background: none !important;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: var(--custom-bg) center center/cover no-repeat fixed;
+      z-index: -2;
+      opacity: 1;
+      transition: filter 0.3s, background 0.3s;
+    }
+    body:not(.light-mode)::before {
+      filter: brightness(0.63) contrast(1.05) saturate(1.12);
+    }
+    body.light-mode::before {
+      filter: brightness(1) contrast(1);
+    }
+
+    .mode-toggle {
+      position: fixed;
+      top: 24px;
+      right: 28px;
+      z-index: 10;
+      background: var(--glass-bg-dark);
+      border-radius: 22px;
+      border: 1.5px solid var(--glass-border);
+      box-shadow: 0 1px 8px rgba(122,45,246,0.11);
+      padding: 7px 19px 7px 14px;
+      color: #fff;
+      font-size: 1.05rem;
+      cursor: pointer;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.3s;
+    }
+    body.light-mode .mode-toggle {
+      background: var(--glass-bg-light);
+      color: #ad00e2;
+    }
+    .mode-toggle input { display: none }
+    .mode-toggle span { font-size: 1.22rem; margin-left: 2px; }
+    .login-box {
+      z-index: 2;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 220px;
+      width: 400px;
+      max-width: 96vw;
+      background: var(--glass-bg-dark);
+      border-radius: 28px;
+      border: 1.5px solid var(--glass-border);
+      box-shadow: var(--box-shadow);
+      padding: 2rem 2.2rem 1.3rem 2.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      backdrop-filter: blur(12px);
+      transition: background 0.35s, color 0.3s, width 0.3s, padding 0.3s;
+    }
+    body.light-mode .login-box {
+      background: var(--glass-bg-light);
+      color: var(--text-light);
+    }
+    .login-box h1 {
+      text-align: center;
+      color: var(--accent);
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 0.18rem;
+      letter-spacing: 1.3px;
+    }
+    .login-box p {
+      text-align: center;
+      color: #e0d2fa;
+      margin-bottom: 1.1rem;
+      font-size: 1.07rem;
+      letter-spacing: 0.12px;
+    }
+    body.light-mode .login-box p {
+      color: #6b3fa0;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.1rem;
+      width: 100%;
+    }
+    .login-box label {
+      color: var(--label-dark);
+      font-weight: 600;
+      font-size: 1.03rem;
+      margin-bottom: .08rem;
+      transition: color 0.3s;
+    }
+    body.light-mode .login-box label {
+      color: var(--label-light);
+    }
+    .login-box input[type="email"],
+    .login-box input[type="password"] {
+      padding: 0.98rem 1.06rem;
+      background: var(--input-bg-dark);
+      border: 1.5px solid var(--input-border);
+      color: #fff;
+      border-radius: 13px;
+      font-size: 1.02rem;
+      outline: none;
+      margin-bottom: 0.18rem;
+      transition: border .17s, background .16s, color .23s;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    body.light-mode .login-box input[type="email"],
+    body.light-mode .login-box input[type="password"] {
+      background: var(--input-bg-light);
+      color: #222;
+    }
+    .login-box input:focus {
+      border: 1.7px solid var(--accent);
+      background: rgba(255,255,255,0.19);
+    }
+    .login-box form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 0.3rem;
+    }
+    .login-box button[type="submit"] {
+      background: var(--btn-gradient);
+      color: #fff;
+      font-size: 1.09rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 14px;
+      padding: 0.89rem 0;
+      margin: 0.38rem 0 0.9rem 0;
+      cursor: pointer;
+      box-shadow: 0 4px 20px 0 rgba(173,0,226,0.13);
+      transition: background .15s, transform .13s, box-shadow .17s;
+      letter-spacing: 0.14px;
+      outline: none;
+      border-bottom: 2px solid #ae83e6;
+      width: 90%;
+      align-self: center;
+      display: block;
+    }
+    .login-box button[type="submit"]:hover {
+      background: var(--btn-gradient-hover);
+      transform: translateY(-2.5px) scale(1.033);
+      box-shadow: 0 10px 40px 0 rgba(173,0,226,0.17);
+    }
+    .social-login {
+      display: flex;
+      gap: 0.7rem;
+      margin-bottom: .2rem;
+      margin-top: .1rem;
+    }
+    .social-login button {
+      flex: 1;
+      padding: 0.62rem 0.3rem;
+      font-size: 1.01rem;
+      border: none;
+      border-radius: 11px;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      background: #db4437;
+      transition: opacity .17s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 7px rgba(0,0,0,0.09);
+    }
+    .social-login button.facebook { background: #4267B2; }
+    .social-login button:hover { opacity: 0.93; }
+    .extra-links {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: .1rem;
+      font-size: 0.97rem;
+    }
+    .extra-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color .15s;
+    }
+    .extra-links a:hover {
+      color: #47238f;
+      text-decoration: underline;
+    }
+    @media (max-width: 540px) {
+      .login-box {
+        min-width: 170px;
+        width: 95vw;
+        padding: 0.8rem 0.7rem 0.6rem 0.7rem;
+        border-radius: 16px;
+      }
+      .login-box h1 { font-size: 1.37rem; }
+      .login-box p { font-size: 0.87rem; }
+      .login-box input, .login-box button, .social-login button, .extra-links { font-size: 0.97rem !important;}
+      .mode-toggle { right: 6px; top: 7px; padding: 5px 12px 5px 8px; font-size: 0.95rem; }
+      .social-login button, .login-box button[type="submit"] { padding: 0.61rem 0; }
+    }
+    @media (max-width: 380px) {
+      .login-box {
+        min-width: 120px;
+        width: 99vw;
+        padding: 0.5rem 0.2rem 0.5rem 0.2rem;
+      }
+      .login-box h1 { font-size: 1.07rem; }
+      .mode-toggle { font-size: 0.81rem; }
+    }
+    #social-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 999;
+      background: rgba(0,0,0,0.18);
+      align-items: center;
+      justify-content: center;
+    }
+    #social-modal .google-popup {
+      background: #fff;
+      color: #111;
+      border-radius: 18px;
+      min-width: 340px;
+      max-width: 97vw;
+      box-shadow: 0 8px 34px #3335;
+      padding: 36px 0 28px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Roboto, Arial, sans-serif;
+      animation: fadeIn .22s;
+    }
+    #social-modal .google-popup img {
+      margin-bottom: 7px;
+    }
+    #social-modal .google-popup .google-title {
+      font-size: 1.45rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    #social-modal .google-popup .google-sub {
+      color: #555;
+      font-size: .99rem;
+      margin-bottom: 22px;
+    }
+    #social-modal .google-popup .google-account {
+      width: 82%;
+      background: #fff;
+      border: 1.5px solid #d6d6d6;
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.12rem;
+      cursor: pointer;
+      transition: .14s;
+      margin-bottom: 10px;
+    }
+    #social-modal .google-popup .google-account:hover {
+      background: #f8f8f8;
+      border-color: #ad00e2;
+    }
+    #social-modal .google-popup .google-account img {
+      width: 32px;
+      border-radius: 50%;
+      margin: 0;
+    }
+    #social-modal .google-popup .google-other {
+      margin: 24px 0 12px 0;
+      font-size: .96rem;
+      color: #555;
+    }
+    #social-modal .google-popup .google-cancel {
+      color: #ad00e2;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 4px;
+      padding: 3px 15px;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(.96);} to { opacity: 1; transform: scale(1);} }
+    @media (max-width: 420px) {
+      #social-modal .google-popup { min-width: 97vw; padding: 22px 0 20px 0;}
+      #social-modal .google-popup .google-title { font-size: 1.06rem; }
+    }
+
+    .error-msg {
+      color: #e0184d;
+      background: #fbe7f1;
+      border: 1px solid #f2aac6;
+      border-radius: 9px;
+      margin: 10px auto 0 auto;
+      padding: 10px 18px;
+      font-size: 1.04rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      box-shadow: 0 2px 10px #f2aac62c;
+      width: 93%;
+      display: none;
+      text-align: center;
+      transition: all .25s;
+    }
+    body.light-mode .error-msg {
+      background: #fff1f7;
+      color: #c00039;
+      border-color: #f6c5de;
+    }
+     html, body { height: 100%; margin: 0; padding: 0; color: var(--text-dark); background: none !important; overflow-x: hidden; }
+    body::before { content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--custom-bg) center center/cover no-repeat fixed; z-index: -2; opacity: 1; transition: filter 0.3s, background 0.3s; }
+    body:not(.light-mode)::before { filter: brightness(0.63) contrast(1.05) saturate(1.12);}
+    body.light-mode::before { filter: brightness(1) contrast(1);}
+    
+
+  </style>
+</head>
+<body>
+<div class="mode-toggle" onclick="toggleMode()" title="Toggle dark/light mode">
+  <input type="checkbox" id="modeSwitch">
+  <span id="modeIcon">🌙</span>
+  <span id="modeText">Dark Mode</span>
+</div>
+
+<div class="login-box">
+  <h1>Palette and Fit</h1>
+  <p>Welcome!<br>Create your admin account.</p>
+  <form autocomplete="off">
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Your Name" required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="03xxxxxxxxx" required pattern="[0-9]{10,15}">
+    </div>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="you@example.com" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="••••••••" required>
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" placeholder="Re-enter password" required>
+    </div>
+    <button type="submit">Sign Up</button>
+    <div id="signup-error" class="error-msg"></div>
+  </form>
+  <div class="social-login">
+    <button type="button" id="signupGoogle">Sign up with Google</button>
+    <button class="facebook" type="button" id="signupFacebook">Sign up with Facebook</button>
+  </div>
+  <div class="extra-links">
+    <a href="login.html">Already have an account? Log in</a>
+  </div>
+</div>
+
+<!-- Google Style Modal -->
+<div id="social-modal">
+  <div class="google-popup">
+    <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" width="64" alt="">
+    <div class="google-title">Sign up with Google</div>
+    <div class="google-sub">to continue to <b>Palette and Fit</b></div>
+    <button class="google-account">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""> saqibshafique@gmail.com
+    </button>
+    <button class="google-account">
+      <img src="https://randomuser.me/api/portraits/women/45.jpg" alt=""> anotheruser@gmail.com
+    </button>
+    <div class="google-other">Use another account</div>
+    <button class="google-cancel" onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+  <script>
+// ---- Dark/Light Mode ----
+function toggleMode() {
+  document.body.classList.toggle('light-mode');
+  let icon = document.getElementById('modeIcon');
+  let txt = document.getElementById('modeText');
+  if(document.body.classList.contains('light-mode')) {
+    icon.textContent = '☀️';
+    txt.textContent = 'Light Mode';
+  } else {
+    icon.textContent = '🌙';
+    txt.textContent = 'Dark Mode';
+  }
+}
+
+window.onload = () => {
+  let icon = document.getElementById('modeIcon');
+  let txt = document.getElementById('modeText');
+  if(document.body.classList.contains('light-mode')) {
+    icon.textContent = '☀️';
+    txt.textContent = 'Light Mode';
+  } else {
+    icon.textContent = '🌙';
+    txt.textContent = 'Dark Mode';
+  }
+  document.getElementById('loginGoogle').onclick = function() {
+    document.getElementById('social-modal').style.display = 'flex';
+  }
+  document.getElementById('loginFacebook').onclick = function() {
+    document.getElementById('social-modal').style.display = 'flex';
+  }
+};
+
+function closeModal() {
+  document.getElementById('social-modal').style.display = 'none';
+}
+window.addEventListener('keydown', function(e){
+  if(e.key === "Escape") closeModal();
+});
+
+// ---- Login Form Submission Logic ----
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelector('form').onsubmit = function(e){ e.preventDefault(); };
+  document.querySelector('form').onsubmit = async function(e) {
+    e.preventDefault();
+    const errorDiv = document.getElementById('login-error');
+    if(errorDiv) { errorDiv.style.display = 'none'; errorDiv.textContent = ""; }
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    try {
+      const res = await fetch('http://127.0.0.1:5001/api/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        localStorage.setItem("user_email", email);  // <-- Yahan pe email store ho raha hai!
+        window.location.href = "welcome.html";
+      } else {
+        showError(data.error || "Login failed. Please check your credentials.");
+      }
+    } catch (err) {
+      showError("Server error. Please try again.");
+    }
+  };
+});
+
+function showError(msg) {
+  let errorDiv = document.getElementById('login-error');
+  if(!errorDiv) {
+    errorDiv = document.createElement('div');
+    errorDiv.id = 'login-error';
+    errorDiv.className = 'login-error';
+    document.querySelector('.login-box form').prepend(errorDiv);
+  }
+  errorDiv.textContent = msg;
+  errorDiv.style.display = 'block';
+}
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+:root {
+  --accent: #ad00e2;
+  --btn-gradient: linear-gradient(90deg,#b77ffb 0%, #ad00e2 100%);
+  --btn-gradient-hover: linear-gradient(90deg, #ad00e2 15%, #47238f 100%);
+  --glass-bg-dark: rgba(34,18,41,0.82);
+  --glass-bg-light: rgba(255,255,255,0.93);
+  --glass-border: rgba(255,255,255,0.19);
+  --input-bg-dark: rgba(255,255,255,0.11);
+  --input-bg-light: #faf6fe;
+  --input-border: #b39ddb;
+  --text-dark: #fff;
+  --text-light: #170826;
+  --label-dark: #e1c7fa;
+  --label-light: #6d3886;
+  --box-shadow: 0 8px 38px 0 rgba(31,38,135,0.19);
+}
+
+html, body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+  background: linear-gradient(120deg, #ece9fc 10%, #d3c5ee 95%);
+  color: var(--text-dark);
+}
+
+/* Container (glass morphic card) */
+.login-box {
+  z-index: 2;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 220px;
+  width: 400px;
+  max-width: 96vw;
+  background: var(--glass-bg-dark);
+  border-radius: 28px;
+  border: 1.5px solid var(--glass-border);
+  box-shadow: var(--box-shadow);
+  padding: 2rem 2.2rem 1.3rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  backdrop-filter: blur(12px);
+  transition: background 0.35s, color 0.3s, width 0.3s, padding 0.3s;
+}
+body.light-mode .login-box {
+  background: var(--glass-bg-light);
+  color: var(--text-light);
+}
+
+/* Headings & text */
+.login-box h1 {
+  text-align: center;
+  color: var(--accent);
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 0.18rem;
+  letter-spacing: 1.3px;
+}
+.login-box p {
+  text-align: center;
+  color: #e0d2fa;
+  margin-bottom: 1.1rem;
+  font-size: 1.07rem;
+  letter-spacing: 0.12px;
+}
+body.light-mode .login-box p {
+  color: #6b3fa0;
+}
+
+/* Form groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+  width: 100%;
+}
+label {
+  font-size: 1.01rem;
+  font-weight: 600;
+  color: var(--label-dark);
+}
+body.light-mode label {
+  color: var(--label-light);
+}
+input {
+  width: 100%;
+  padding: 0.48rem 1.1rem;
+  border-radius: 1rem;
+  border: 1.5px solid var(--input-border);
+  background: var(--input-bg-light);
+  font-size: 1.06rem;
+  color: var(--text-dark);
+  outline: none;
+  margin-top: 0.07rem;
+  transition: border-color 0.18s, box-shadow 0.19s;
+  box-shadow: 0 0.5px 3px #b292d11c;
+  height: 2.02rem;
+}
+input:focus {
+  border-color: var(--accent);
+  background: #f7f0fd;
+  box-shadow: 0 2px 12px #c6a1e817;
+}
+body.light-mode input {
+  color: #170826;
+  background: #faf6fe;
+  border-color: #b39ddb;
+}
+
+/* Button */
+.btn {
+  margin-top: 0.17rem;
+  background: var(--btn-gradient);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.11rem;
+  border: none;
+  padding: 0.71rem 0;
+  border-radius: 1rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.19s, box-shadow 0.18s, transform 0.13s;
+  letter-spacing: 0.12px;
+  box-shadow: 0 2.2px 14px #ad00e222;
+}
+.btn:hover {
+  background: var(--btn-gradient-hover);
+  color: #fff;
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .login-box {
+    padding: 1.3rem 0.5rem;
+    min-width: unset;
+    width: 98vw;
+    border-radius: 1.1rem;
+  }
+  h1 { font-size: 1.35rem; }
+  label { font-size: 0.92rem; }
+  input { font-size: 0.95rem; height: 1.65rem; }
+  .btn { font-size: 1rem; padding: 0.62rem 0;}
+}

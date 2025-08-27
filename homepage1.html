@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Palette and Fit – Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --bg-light: #f7f4ee;
+  --nav-bg: #ece5db;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --heading: #ad00e2;
+  --text: #23242a;
+  --button-bg: #ad00e2;
+  --button-text: #fff;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-light);
+  color: var(--text);
+  /* font-family: 'Poppins', Arial, sans-serif; */
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark-mode {
+  --bg-light: #18181b;
+  --nav-bg: #23242a;
+  --text: #eee;
+  --heading: #ad00e2;
+  background: var(--bg-light) !important;
+  color: var(--text) !important;
+}
+body.dark-mode .hero-heading { color: var(--accent); }
+body.dark-mode .hero-desc { color: #f0f0f0; }
+body.dark-mode .hero-btn { background: linear-gradient(90deg,#c2a1ff 60%,#ad00e2 100%); color:#fff;}
+body.dark-mode .nav a,
+body.dark-mode .wishlist { color: #fff; }
+
+body.dark-mode .nav a.active,
+body.dark-mode .nav a:hover { color: var(--accent) !important; }
+body.dark-mode header { background: #23242a; }
+body.dark-mode .profile-icon {
+  background: #23242a;
+  border: 2px solid #ad00e2;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2.4rem;
+  background: var(--nav-bg);
+  font-weight: 600;
+  box-shadow: 0 2px 14px #0001;
+  transition: background .3s;
+  
+}
+.logo {
+  font-family: 'Style Script', cursive !important;
+  font-size: 2.4rem !important;
+  color: var(--heading);
+  font-weight: 400 !important;
+  letter-spacing: 2px;
+  line-height: 1.08;
+  user-select: none;
+}
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-weight: 400;
+}
+.nav a {
+  color: #2a024d;
+  text-decoration: none;
+  font-weight: 400;
+  padding: .5rem 0;
+  transition: color .18s, font-weight .2s;
+}
+.nav a:hover, .nav a.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+.wishlist {
+  cursor: pointer;
+  color: #2a024d;
+  font-size: 1.15rem;
+  font-weight: 400;
+  transition: color .2s, font-weight .18s;
+}
+.profile-icon {
+  width: 38px !important;
+  height: 38px !important;
+  margin-left: 0.8rem;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  border-radius: 50%;
+  border: 2px solid var(--accent2);
+  overflow: hidden;
+  padding: 0 !important;
+  transition: background 0.3s, border 0.3s;
+}
+.profile-icon svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+/* DARKMODE BUTTON */
+.darkmode-btn {
+  background: #ad00e2;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1.2rem;
+  box-shadow: 0 2px 12px #a673fa29;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.darkmode-btn:hover { background: #7a2df6; color: #fff; }
+body.dark-mode .darkmode-btn { background: #363262; color: #fff; }
+body.dark-mode .darkmode-btn:hover { background: #ad00e2; color: #fff; }
+
+@media (max-width: 768px) {
+  header { flex-direction: row; align-items: center; justify-content: space-between; padding: 0.8rem 0.9rem; position: relative; }
+  .nav { gap: 1.2rem;}
+  .logo { font-size: 1.22rem; }
+}
+
+/* HERO SPLIT LAYOUT */
+.hero-main {
+  display: flex;
+  align-items: stretch;
+  min-height: 92vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  background: none;
+}
+.hero-left {
+  flex: 1 1 50%;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: none;
+}
+.hero-left .overlay-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  object-position: left center;
+  z-index: 2;
+  pointer-events: none;
+  /* Mirror effect */
+  transform: scaleX(-1);
+}
+@media (max-width: 950px) {
+  .hero-main { flex-direction: column; min-height: unset; }
+  .hero-left { min-height: 260px; justify-content: center; }
+  .hero-left .overlay-img { position: static; width: 100%; height: 340px; object-fit: contain; transform: scaleX(-1);}
+}
+@media (max-width: 600px) {
+  .hero-left .overlay-img { height: 180px; }
+}
+
+/* TRANSPARENT RIGHT HALF */
+.hero-right {
+  flex: 1 1 50%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 6vw 5vw 4vw 5vw;
+  background: transparent;   /* No color, fully see-through */
+  transition: background .3s, color .3s;
+}
+.hero-heading {
+  font-size: 2.9rem;
+  color: var(--heading);
+  font-weight: 800;
+  margin-bottom: 1.1rem;
+  letter-spacing: 0.03em;
+  font-family: 'Style Script', cursive;
+}
+.hero-desc {
+  font-size: 1.3rem;
+  color: #23242a;
+  font-weight: 500;
+  margin-bottom: 2.2rem;
+  max-width: 34rem;
+  line-height: 1.36;
+}
+.hero-btn {
+  background: linear-gradient(90deg, #ad00e2 60%, #c2a1ff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 2.5em;
+  font-size: 1.22rem;
+  font-weight: 700;
+  padding: 0.8em 2.5em;
+  box-shadow: 0 8px 28px #ad00e22a;
+  cursor: pointer;
+  transition: background .19s, transform .15s;
+  margin-bottom: 0.3rem;
+}
+.hero-btn:hover {
+  background: linear-gradient(92deg, #c2a1ff 20%, #ad00e2 100%);
+  transform: scale(1.06) translateY(-3px);
+}
+@media (max-width: 950px) {
+  .hero-right { padding: 5vw 4vw 3vw 4vw; align-items: center; }
+  .hero-heading { font-size: 2.15rem; text-align: center; }
+  .hero-desc { font-size: 1.07rem; text-align: center; }
+}
+@media (max-width: 600px) {
+  .hero-right { padding: 4vw 4vw 2vw 4vw; }
+  .hero-heading { font-size: 1.4rem; }
+  .hero-desc { font-size: 0.99rem; }
+}
+.section-main {
+  display: flex;
+  align-items: stretch;
+  min-height: 440px;
+  width: 100vw;
+  background: none;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+
+.section-main .section-left {
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  min-width: 0;
+  padding: 0;
+}
+.section-main .section-img {
+  width: 100%;
+  height: 100%;
+  max-width: 420px;
+  max-height: 360px;
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  display: block;
+}
+.section-main .section-right {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 6vw 5vw 4vw 5vw;
+  background: none;
+}
+.section-main .section-title {
+  font-size: 2.2rem;
+  color: var(--heading);
+  font-weight: 700;
+  margin-bottom: 1.1rem;
+  letter-spacing: 0.01em;
+  font-family: 'Style Script', cursive;
+}
+.section-main .section-desc {
+  font-size: 1.1rem;
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 2.2rem;
+  max-width: 33rem;
+  line-height: 1.5;
+}
+@media (max-width: 900px) {
+  .section-main { flex-direction: column; min-height: unset;}
+  .section-main .section-left { justify-content: center; min-height: 200px; }
+  .section-main .section-img { max-width: 99vw; max-height: 220px; }
+  .section-main .section-right { padding: 5vw 3vw 3vw 3vw; align-items: center;}
+  .section-main .section-title { font-size: 1.4rem; text-align: center;}
+  .section-main .section-desc { font-size: 0.98rem; text-align: center;}
+}
+
+:root {
+  --bg-light: #f7f4ee;
+  --bg-mid: #ece5db;
+  --bg-dark: #23242a;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --heading: #ad00e2;
+  --nav-bg: #ece5db;
+  --text: #23242a;
+  --button-bg: #ad00e2;
+  --button-text: #fff;
+}
+
+/* === BODY COLOUR + TRANSITION === */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-light);
+  color: var(--text);
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark-mode {
+  --bg-light: #18181b;
+  --bg-mid: #23242a;
+  --bg-dark: #121214;
+  --nav-bg: #23242a;
+  --text: #fff;
+  --heading: #ad00e2;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --button-bg: #5f5cff;
+  --button-text: #fff;
+  background: var(--bg-light);
+  color: var(--text);
+}
+
+/* === HEADER & NAV BAR === */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2.4rem;
+  background: var(--nav-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-weight: 600;
+  box-shadow: 0 2px 14px #0001;
+}
+.logo {
+  font-family: 'Style Script', cursive !important;
+  font-size: 2.4rem !important;
+  color: #ad00e2 !important;
+  font-weight: 400 !important;
+  letter-spacing: 2px;
+  line-height: 1.08;
+  margin: 0;
+  padding: 0 0.2rem;
+  user-select: none;
+}
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-weight: 400;
+}
+.nav a {
+  color: #2a024d;
+  background: none;
+  border: none;
+  text-decoration: none;
+  font: inherit;
+  font-weight: 400;
+  padding: .5rem 0;
+  cursor: pointer;
+  transition: color .18s, font-weight .2s;
+  position: relative;
+}
+.nav a:hover, .nav a.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+.wishlist {
+  cursor: pointer;
+  color: #2a024d;
+  font-size: 1.15rem;
+  font-weight: 400;
+  transition: color .2s, font-weight .18s;
+}
+.nav .wishlist:hover, .nav .wishlist:focus {
+  color: #e60023 !important;
+}
+.profile-icon {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.8rem;
+  background: linear-gradient(135deg, #ad00e2 60%, #c2a1ff 100%) !important;
+  border: 2.2px solid #fff !important;
+  overflow: hidden;
+  padding: 0 !important;
+}
+.profile-icon svg {
+  width: 23px;
+  height: 23px;
+}
+.darkmode-btn {
+  background: #7a2df6;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1.2rem;
+  box-shadow: 0 2px 12px #a673fa29;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.darkmode-btn:hover { background: #ad00e2; color: #fff; }
+.darkmode-btn:focus, .darkmode-btn:active {
+  outline: none !important;
+  background: #ad00e2 !important;
+  color: #fff !important;
+  box-shadow: 0 6px 24px #a673fa49;
+  font-weight: 700;
+}
+/* Dark mode nav styling */
+body.dark-mode .darkmode-btn { background: #2a024d; color: #fff; }
+body.dark-mode .darkmode-btn:hover, body.dark-mode .darkmode-btn:focus, body.dark-mode .darkmode-btn:active {
+  background: #7a2df6 !important; color: #fff !important; outline: none !important;
+  box-shadow: 0 6px 24px #a673fa49;
+  font-weight: 700;
+}
+body.dark-mode .nav a, body.dark-mode .wishlist { color: #fff; }
+body.dark-mode .nav a.active, body.dark-mode .nav a:hover { color: var(--accent) !important; }
+body.dark-mode .nav { background: var(--nav-bg); }
+
+/* Hamburger menu */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  margin-left: 1.2rem;
+}
+@media (max-width: 768px) {
+  header { flex-direction: row; align-items: center; justify-content: space-between; padding: 0.8rem 0.9rem; position: relative; }
+  .nav { display: none; flex-direction: column; gap: 1.1rem; margin-top: 0.2rem; background: var(--nav-bg, var(--bg-mid)); width: 100vw; left: 0; right: 0; top: 65px; position: absolute; z-index: 200; box-shadow: 0 8px 24px #0002; padding-bottom: 1.3rem; border-radius: 0 0 1.2rem 1.2rem; }
+  .nav.open { display: flex; }
+  .hamburger { display: block; margin-left: auto; margin-right: 0; order: 2; }
+  .logo { font-size: 1.22rem; order: 1; }
+}
+@media (min-width: 769px) {
+  .hamburger { display: none; }
+  .nav { display: flex !important; flex-direction: row; position: static; background: none; box-shadow: none; }
+}
+.nav a {
+  font-size: 1.08rem; /* ya jitna chaho */
+}
+
+body.dark-mode .wishlist { color:#fff !important; }
+
+/* --- Mobile hero image fix (OVERRIDES) --- */
+
+/* stop horizontal scroll caused by 100vw */
+.hero-main, .section-main { width: 100% !important; }
+
+/* keep the image anchored and filling its box */
+@media (max-width: 950px){
+  .hero-left{
+    position: relative !important;
+    min-height: 300px !important;      /* tweak height as you like */
+    overflow: hidden !important;
+    display: block !important;
+  }
+  .hero-left .overlay-img{
+    position: absolute !important;      /* don't let it go 'static' */
+    inset: 0 !important;                /* top/right/bottom/left:0 */
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;       /* no empty bands */
+    object-position: 15% center !important; /* keep faces visible; adjust 0–100% */
+    transform: none !important;         /* remove mirror on small screens */
+    display: block !important;
+  }
+  .hero-right{
+    padding: 18px 16px 24px !important; /* tighter spacing under image */
+    text-align: center !important;
+    align-items: center !important;
+  }
+}
+
+/* even smaller phones */
+@media (max-width: 600px){
+  .hero-left{ min-height: 240px !important; }
+  .hero-right .hero-heading{ font-size: 1.35rem !important; }
+  .hero-right .hero-desc{ font-size: 0.98rem !important; }
+}
+
+/* keep the mirror effect only on desktop (optional) */
+@media (min-width: 951px){
+  .hero-left .overlay-img{ transform: scaleX(-1) !important; }
+}
+/* === HERO IMAGE: MIRROR LEFT + CONSISTENT COMPOSITION === */
+
+/* Avoid horizontal scroll from 100vw */
+.hero-main, .section-main { width: 100% !important; }
+
+/* Tweakable knobs: face focus & zoom
+   - --hero-face-pos: kis side pe focus ho (0% = left, 100% = right)
+     (image mirrored hai, isliye 80–88% par usually left-wali faces sahi aati hain)
+   - --hero-zoom: thoda zoom-in/out to get exactly ~3 faces
+*/
+:root {
+  --hero-face-pos-desktop: 84%;
+  --hero-face-pos-mobile: 84%;
+  --hero-zoom-desktop: 1.02;  /* 1.00–1.08 try karein */
+  --hero-zoom-mobile: 1.02;
+}
+
+/* Anchor the image and keep it full-bleed */
+.hero-left{
+  position: relative !important;
+  overflow: hidden !important;
+  /* same ratio on both viewports => composition stable */
+  aspect-ratio: 16 / 9;             /* Change to 18/9 if you want a taller crop */
+}
+
+/* Base image rules (apply on all sizes) */
+.hero-left .overlay-img{
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  /* MIRROR to left */
+  transform: scaleX(-1) scale(var(--hero-zoom-desktop)) !important;
+  /* After mirroring, push focus towards the left part of original */
+  object-position: var(--hero-face-pos-desktop) center !important;
+  display: block !important;
+}
+
+/* Desktop fine-tune (>=951px) */
+@media (min-width: 951px){
+  .hero-left .overlay-img{
+    transform: scaleX(-1) scale(var(--hero-zoom-desktop)) !important;
+    object-position: var(--hero-face-pos-desktop) center !important;
+  }
+}
+
+/* Mobile fine-tune (<=950px) */
+@media (max-width: 950px){
+  .hero-left{
+    /* ensure enough height on phones; you can reduce if needed */
+    min-height: 260px !important;
+  }
+  .hero-left .overlay-img{
+    transform: scaleX(-1) scale(var(--hero-zoom-mobile)) !important;
+    object-position: var(--hero-face-pos-mobile) center !important;
+  }
+  .hero-right{
+    padding: 18px 16px 24px !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+}
+
+/* Optional: dark mode subtle lift so tones don’t look dull */
+body.dark-mode .hero-left .overlay-img{
+  filter: brightness(1.06) contrast(1.05) saturate(1.08) !important;
+}
+/* ---- HERO DESKTOP: stop right-edge face cut ---- */
+@media (min-width: 951px){
+  /* image waali column ko thoda zyada space do */
+  .hero { 
+    grid-template-columns: 1.15fr 0.85fr !important;  /* 1.15–1.20 try kar sakte ho */
+  }
+
+  /* mirror + slight zoom-out + left shift so face puri aaye */
+  .hero-left .overlay-img{
+    transform: scaleX(-1) scale(1.00) !important;     /* 0.98–1.02 adjust karo */
+    object-fit: cover !important;
+    object-position: 78% center !important;           /* 76%–82% try karo; lower = zyada left */
+  }
+
+  /* OPTIONAL: soft fade on the cut so line harsh na lage */
+  .hero-left{ position: relative !important; overflow: hidden !important; }
+  .hero-left::after{
+    content: "";
+    position: absolute; inset: 0 0 0 auto; width: 72px;  /* edge fade width */
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(0,0,0,0), var(--bg, var(--bg-light, #f7f4ee)));
+  }
+  body.dark-mode .hero-left::after{
+    background: linear-gradient(90deg, rgba(0,0,0,0), #18181b);
+  }
+}
+
+/* mobile/desktop dono me same composition chahiye to ye rakh lo */
+@media (max-width: 950px){
+  .hero-left { min-height: 260px !important; }
+  .hero-left .overlay-img{
+    transform: scaleX(-1) scale(1.00) !important;   /* desktop jaisa zoom */
+    object-position: 78% center !important;         /* desktop jaisi position */
+  }
+}
+
+/* safety: horizontal scroll ko band rakho */
+.hero-main, .section-main { width: 100% !important; }
+/* ======== ANTI-CROP + NO-GAP OVERRIDES (DESKTOP) ======== */
+@media (min-width: 951px){
+  /* 1) zero gap between columns + give image a bit more room */
+  .hero, .hero-main {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.20fr) minmax(0, 0.80fr) !important; /* try 1.22/0.78 if needed */
+    align-items: stretch !important;
+    gap: 0 !important;
+  }
+
+  /* 2) make the image fill and shift a touch LEFT so the last face isn't cut */
+  body .hero-left { position: relative !important; overflow: hidden !important; }
+  body .hero-left .overlay-img{
+    position: absolute !important; inset: 0 !important;
+    width: 100% !important; height: 100% !important; max-width: none !important;
+    object-fit: cover !important;
+    /* mirror + tiny zoom-out so the edge face stays inside */
+    transform: scaleX(-1) scale(0.99) !important;   /* 0.98–1.00: lower = more zoom-out */
+    /* push framing slightly LEFT (because we mirrored) */
+    object-position: 76% center !important;         /* 74–80%: lower = more left */
+  }
+}
+
+/* ======== KEEP MOBILE COMPOSITION MATCHED ======== */
+@media (max-width: 950px){
+  .hero-left { min-height: 260px !important; position: relative !important; overflow: hidden !important; }
+  .hero-left .overlay-img{
+    position: absolute !important; inset: 0 !important;
+    width: 100% !important; height: 100% !important; max-width: none !important;
+    object-fit: cover !important;
+    transform: scaleX(-1) scale(0.99) !important;
+    object-position: 76% center !important;
+  }
+}
+
+/* safety: never use 100vw (causes tiny side scroll) */
+.hero-main, .section-main { width: 100% !important; }
+/* ==== KILL THE WHITE LINE (seam) ==== */
+
+/* 0) never leave a gap between columns */
+.hero, .hero-main { gap: 0 !important; }
+
+/* 1) remove any fade/glaze we added earlier */
+.hero-left::after { content: none !important; background: none !important; }
+body.dark-mode .hero-left { background: none !important; }
+
+/* 2) bleed the image a bit into the text column to cover subpixel seams */
+.hero-left { position: relative !important; overflow: hidden !important; }
+.hero-left .overlay-img{
+  position: absolute !important;
+  inset: 0 -2px 0 0 !important;          /* extend 2px to the RIGHT */
+  width: calc(100% + 2px) !important;    /* make image slightly wider */
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: 76% center !important;/* adjust left/right framing if needed */
+  transform: scaleX(-1) scale(0.99) translateZ(0) !important; /* mirror + tiny zoom-out */
+  backface-visibility: hidden;           /* hairline fix on some GPUs */
+}
+
+/* 3) make sure the text side isn't drawing a different background */
+.hero-right { background: transparent !important; }
+
+/* mobile: keep the same composition + seam fix */
+@media (max-width: 950px){
+  .hero-left { min-height: 260px !important; }
+  .hero-left .overlay-img{
+    inset: 0 -2px 0 0 !important;
+    width: calc(100% + 2px) !important;
+    transform: scaleX(-1) scale(0.99) translateZ(0) !important;
+    object-position: 76% center !important;
+  }
+}
+/* Purple, glossy hamburger with smooth X animation */
+.hamburger{
+  --hb-size:26px; --hb-thickness:3px; --hb-radius:3px;
+  --hb-a:#7a2df6; --hb-b:#ad00e2;
+  width:44px;height:38px;border-radius:12px;border:2px solid rgba(173,0,226,.25);
+  background:linear-gradient(135deg,rgba(173,0,226,.12),rgba(122,45,246,.12));
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 6px 20px rgba(173,0,226,.18);transition:transform .2s,box-shadow .2s,background .2s;
+}
+.hamburger:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(173,0,226,.28);
+  background:linear-gradient(135deg,rgba(173,0,226,.16),rgba(122,45,246,.20));}
+.hamburger:focus-visible{outline:2px solid var(--hb-b);outline-offset:2px}
+.hamburger-box{position:relative;width:var(--hb-size);height:var(--hb-thickness)}
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after{
+  content:"";position:absolute;left:0;right:0;height:var(--hb-thickness);
+  border-radius:var(--hb-radius);
+  background:linear-gradient(90deg,var(--hb-a),var(--hb-b));
+  box-shadow:0 1px 6px rgba(122,45,246,.45);
+  transition:transform .28s cubic-bezier(.55,.06,.68,.19),top .2s,opacity .2s;
+}
+.hamburger-inner{top:0}
+.hamburger-inner::before{top:calc(-8px - var(--hb-thickness)/2)}
+.hamburger-inner::after{top:calc(8px + var(--hb-thickness)/2)}
+
+/* Active state -> morph to X */
+.hamburger.is-active .hamburger-inner{transform:rotate(45deg)}
+.hamburger.is-active .hamburger-inner::before{top:0;transform:rotate(-90deg)}
+.hamburger.is-active .hamburger-inner::after{top:0;opacity:0}
+
+/* dark mode keeps the same purple vibe */
+body.dark-mode .hamburger{border-color:rgba(194,161,255,.35);box-shadow:0 6px 20px rgba(194,161,255,.18)}
+/* === HAMBURGER VISIBILITY & NAV LAYOUT FIX === */
+
+/* default: hide the hamburger */
+.hamburger{ display:none !important; }
+
+/* desktop nav always visible, hamburger hidden */
+@media (min-width: 769px){
+  .nav{
+    display:flex !important;
+    position: static !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+}
+
+/* mobile: show hamburger, collapse nav by default */
+@media (max-width: 768px){
+  header{ position: relative; }
+  .hamburger{
+    display:flex !important;                 /* show on mobile */
+    position:absolute; right: 1rem; top:50%;
+    transform: translateY(-50%);
+    z-index: 5;
+  }
+  .nav{
+    display:none !important;                 /* collapsed by default */
+    flex-direction: column;
+    gap: 1rem;
+    position: absolute; left:0; right:0; top: 100%;
+    background: var(--nav-bg);
+    padding: .75rem 1rem 1rem;
+    box-shadow: 0 8px 24px #0002;
+    border-radius: 0 0 12px 12px;
+    z-index: 4;
+  }
+  .nav.open{ display:flex !important; }      /* open when toggled */
+}
+/* ====== MOBILE NAV: NO GAP + FIXED BUTTON POSITION ====== */
+@media (max-width: 768px){
+  header{ position: relative !important; }
+
+  /* button stays put */
+  .hamburger{
+    position: absolute !important;
+    right: 1rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;   /* same transform in both states */
+    z-index: 5 !important;
+  }
+  /* when active, don't let animation shift position */
+  .hamburger.is-active{ transform: translateY(-50%) !important; }
+
+  /* dropdown panel flush to header bottom */
+  .nav{
+    position: absolute !important;
+    left: 0 !important; right: 0 !important;
+    top: calc(100% - 1px) !important;         /* pull up 1px to kill seam */
+    margin: 0 !important;                     /* remove any stray margin */
+    width: auto !important;
+    display: none !important;                 /* closed by default */
+    flex-direction: column !important;
+    gap: 1rem !important;
+    background: var(--nav-bg) !important;
+    padding: .75rem 1rem 1rem !important;
+    box-shadow: 0 8px 24px #0002 !important;
+    border-radius: 0 0 12px 12px !important;
+    z-index: 4 !important;
+  }
+  .nav.open{ display: flex !important; }
+
+  /* 1px safety strip to guarantee zero visible gap on all DPRs */
+  .nav::before{
+    content: "" !important;
+    position: absolute !important;
+    left: 0; right: 0; top: -1px; height: 1px;
+    background: var(--nav-bg) !important;
+  }
+}
+
+/* desktop: hamburger hidden, nav inline */
+@media (min-width: 769px){
+  .hamburger{ display: none !important; }
+  .nav{
+    display: flex !important;
+    position: static !important;
+    margin: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+}
+/* make sure hero text side receives clicks */
+.hero-right{ position: relative; z-index: 2 !important; }
+.hero-left{ position: relative; z-index: 1 !important; }
+
+/* image should NOT capture clicks */
+.hero-left .overlay-img{
+  pointer-events: none !important;
+}
+
+/* safety: sometimes pseudo-elements cause seams/overlays—kill them */
+.hero-left::before, .hero-left::after{ pointer-events: none !important; }
+/* ===== mid-desktop fix (approx 1024–1350px) ===== */
+@media (min-width: 1024px) and (max-width: 1350px){
+  /* give text more space, remove any gap */
+  .hero, .hero-main{
+    display: grid !important;
+    grid-template-columns: 1.05fr 0.95fr !important; /* was 1.20/0.80 */
+    align-items: stretch !important;
+    gap: 0 !important;
+    width: 100% !important;
+  }
+
+  /* text panel sits above image and has a solid bg */
+  .hero-right{
+    position: relative !important;
+    z-index: 3 !important;
+    background: var(--bg) !important;          /* stops image showing behind text */
+    padding: clamp(16px, 3vw, 40px) clamp(16px, 4vw, 56px) !important;
+    text-align: left !important;
+  }
+
+  /* readable, slightly smaller sizes at this width */
+  .hero-right .hero-heading{
+    font-size: clamp(1.6rem, 2.3vw, 2.35rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .hero-right .hero-desc{
+    font-size: clamp(0.98rem, 1.1vw, 1.1rem) !important;
+    max-width: 48ch !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.4rem !important;
+  }
+
+  /* image: tiny zoom-out & left shift so faces stay inside */
+  .hero-left{ position: relative !important; overflow: hidden !important; }
+  .hero-left .overlay-img{
+    position: absolute !important; inset: 0 -2px 0 0 !important;  /* no seam */
+    width: calc(100% + 2px) !important; height: 100% !important;
+    object-fit: cover !important;
+    transform: scaleX(-1) scale(0.985) translateZ(0) !important;  /* tiny zoom-out */
+    object-position: 74% center !important;                        /* nudge left if needed */
+    pointer-events: none !important;                               /* never block clicks */
+  }
+}
+
+/* ===== keep stacking on tablets/phones and prevent any overlay ===== */
+@media (max-width: 1023px){
+  .hero{ grid-template-columns: 1fr !important; }
+  .hero-right{
+    background: var(--bg) !important;
+    z-index: 3 !important;
+  }
+  .hero-left{ min-height: 260px !important; }
+  .hero-left .overlay-img{
+    inset: 0 -2px 0 0 !important;
+    width: calc(100% + 2px) !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transform: scaleX(-1) scale(0.99) translateZ(0) !important;
+    object-position: 76% center !important;
+  }
+}
+
+/* safety: hero should never cause side-scroll */
+.hero-main, .section-main { width: 100% !important; }
+.hero-right{
+  background: linear-gradient(90deg, rgba(247,244,238,.98) 0%, rgba(247,244,238,.94) 55%, rgba(247,244,238,0) 100%) !important;
+}
+body.dark-mode .hero-right{
+  background: linear-gradient(90deg, rgba(24,24,27,.98) 0%, rgba(24,24,27,.94) 55%, rgba(24,24,27,0) 100%) !important;
+}
+/* === HERO LAYOUT: stop compression & overlap === */
+
+/* wide desktops */
+.hero, .hero-main{
+  display: grid !important;
+  grid-template-columns: 1.15fr 0.85fr !important; /* image | text */
+  align-items: stretch !important;
+  gap: 0 !important;
+  width: 100% !important;
+}
+
+/* mid-desktop (fits nicely without squish) */
+@media (min-width: 1101px) and (max-width: 1350px){
+  .hero, .hero-main{
+    /* keep text panel at least ~28rem wide, cap near 44vw */
+    grid-template-columns: 1fr minmax(28rem, 44vw) !important;
+  }
+  .hero-right{
+    background: var(--bg) !important;   /* ensure image never shows under text */
+    padding: clamp(18px, 3vw, 44px) clamp(18px, 4vw, 56px) !important;
+    text-align: left !important;
+  }
+  .hero-heading{
+    font-size: clamp(1.7rem, 2.4vw, 2.35rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: .75rem !important;
+  }
+  .hero-desc{
+    font-size: clamp(1rem, 1.1vw, 1.125rem) !important;
+    line-height: 1.5 !important;
+    max-width: 52ch !important;
+    margin-bottom: 1.3rem !important;
+  }
+  .hero-left{ position: relative !important; overflow: hidden !important; }
+  .hero-left .overlay-img{
+    position: absolute !important; inset: 0 -2px 0 0 !important;
+    width: calc(100% + 2px) !important; height: 100% !important;
+    object-fit: cover !important;
+    transform: scaleX(-1) scale(0.985) translateZ(0) !important; /* tiny zoom-out */
+    object-position: 74% center !important;                       /* nudge left if needed */
+    pointer-events: none !important;
+  }
+}
+
+/* tablet & below — stack to avoid any compression */
+@media (max-width: 1100px){
+  .hero, .hero-main{ grid-template-columns: 1fr !important; }
+  .hero-left{
+    position: relative !important; overflow: hidden !important;
+    min-height: 280px !important;
+  }
+  .hero-left .overlay-img{
+    position: absolute !important; inset: 0 -2px 0 0 !important;
+    width: calc(100% + 2px) !important; height: 100% !important;
+    object-fit: cover !important;
+    transform: scaleX(-1) scale(0.99) translateZ(0) !important;
+    object-position: 76% center !important;
+    pointer-events: none !important;
+  }
+  .hero-right{
+    background: var(--bg) !important;
+    padding: 20px 16px 28px !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+}
+
+/* safety: never cause side scroll */
+.hero-main, .section-main { width: 100% !important; }
+/* ===== NAV / HAMBURGER — UNIFIED (≤1200px mobile) ===== */
+
+/* Purple glossy hamburger with X animation */
+.hamburger{
+  --hb-size:26px; --hb-thickness:3px; --hb-radius:3px;
+  --hb-a:#7a2df6; --hb-b:#ad00e2;
+  width:44px;height:38px;border-radius:12px;border:2px solid rgba(173,0,226,.25);
+  background:linear-gradient(135deg,rgba(173,0,226,.12),rgba(122,45,246,.12));
+  display:none;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 6px 20px rgba(173,0,226,.18);transition:transform .2s,box-shadow .2s,background .2s;
+}
+.hamburger:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(173,0,226,.28);
+  background:linear-gradient(135deg,rgba(173,0,226,.16),rgba(122,45,246,.20));}
+.hamburger:focus-visible{outline:2px solid var(--hb-b);outline-offset:2px}
+.hamburger-box{position:relative;width:var(--hb-size);height:var(--hb-thickness)}
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after{
+  content:"";position:absolute;left:0;right:0;height:var(--hb-thickness);
+  border-radius:var(--hb-radius);
+  background:linear-gradient(90deg,var(--hb-a),var(--hb-b));
+  box-shadow:0 1px 6px rgba(122,45,246,.45);
+  transition:transform .28s cubic-bezier(.55,.06,.68,.19),top .2s,opacity .2s;
+}
+.hamburger-inner{top:0}
+.hamburger-inner::before{top:calc(-8px - var(--hb-thickness)/2)}
+.hamburger-inner::after{top:calc(8px + var(--hb-thickness)/2)}
+.hamburger.is-active .hamburger-inner{transform:rotate(45deg)}
+.hamburger.is-active .hamburger-inner::before{top:0;transform:rotate(-90deg)}
+.hamburger.is-active .hamburger-inner::after{top:0;opacity:0}
+
+/* DESKTOP (≥1201px): inline nav, hamburger hidden */
+@media (min-width:1201px){
+  header .hamburger{ display:none !important; }
+  header .nav{
+    display:flex !important; position:static !important;
+    background:transparent !important; box-shadow:none !important;
+    border-radius:0 !important; gap:2rem !important; flex-direction:row !important;
+  }
+}
+
+/* MOBILE/TABLET (≤1200px): dropdown nav */
+@media (max-width:1200px){
+  header{ position:sticky !important; top:0 !important; z-index:100 !important; }
+
+  header .hamburger{
+    display:inline-flex !important;
+    position:absolute !important; right:1rem !important; top:50% !important;
+    transform:translateY(-50%) !important; z-index:5 !important;
+  }
+  header .hamburger.is-active{ transform:translateY(-50%) !important; }
+
+  header .nav{
+    display:none !important; flex-direction:column !important; gap:1rem !important;
+    position:absolute !important; left:0 !important; right:0 !important;
+    top:calc(100% - 1px) !important;
+    padding:.75rem 1rem 1rem !important;
+    background:var(--nav-bg, #ece5db) !important;
+    box-shadow:0 8px 24px #0002 !important;
+    border-radius:0 0 12px 12px !important;
+    z-index:4 !important;
+  }
+  header .nav.open{ display:flex !important; }
+
+  /* 1px safety strip so header & panel me gap na dikhe */
+  header .nav::before{
+    content:"" !important; position:absolute !important; left:0; right:0; top:-1px; height:1px;
+    background:var(--nav-bg, #ece5db) !important;
+  }
+
+  /* Dark Mode button compact pill — NO full width */
+  header .nav .darkmode-btn{
+    width:auto !important; min-width:120px !important; max-width:240px !important;
+    height:38px !important; min-height:38px !important;
+    padding:.42rem .9rem !important; font-size:.95rem !important; line-height:1 !important;
+    border-radius:10px !important; margin:.6rem auto .8rem !important;
+    display:inline-flex !important; align-self:center !important; justify-content:center !important;
+  }
+  header .nav .darkmode-btn span{ font-size:1.05em !important; line-height:1 !important; }
+}
+
+/* Dark mode link colors (safety) */
+body.dark-mode .nav a, body.dark-mode .wishlist{ color:#fff !important; }
+body.dark-mode .nav a:hover, body.dark-mode .nav a.active{ color:var(--accent) !important; }
+
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">Palette and Fit</div>
+ <button class="hamburger" id="navToggle" aria-label="Toggle menu" aria-controls="site-nav" aria-expanded="false">
+  <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+</button>
+
+
+
+    <nav class="nav">
+<a href="index.html" class="active" aria-current="page">Home</a>
+
+      <a href="men.html">Men</a>
+      <a href="women.html">Women</a>
+      <a href="aboutus.html">About us</a>
+      <a href="contactus.html">Contact us</a>
+      <a href="wishlist.html" class="wishlist">♡ Wishlist</a>
+      <a href="profile.html" class="profile-icon" title="Profile">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="8.5" r="4.2" fill="#fff" fill-opacity=".95"/>
+          <ellipse cx="12" cy="18" rx="7" ry="3.2" fill="#fff" fill-opacity=".38"/>
+        </svg>
+      </a>
+      <button class="btn darkmode-btn" id="darkModeToggle">
+        <span style="font-size:1.25em;">🌙</span> Dark Mode
+      </button>
+    </nav>
+  </header>
+
+  <!-- HERO SPLIT SECTION -->
+  <main class="hero-main">
+    <div class="hero-left">
+      <img src="https://t3.ftcdn.net/jpg/12/77/69/32/360_F_1277693258_bLxjxml6vNY6Qkl1Uw4G3VXLizQtlFEk.png" alt="Fashion silhouette" class="overlay-img">
+    </div>
+    <div class="hero-right">
+      <div class="hero-heading">Get Personalized Style</div>
+      <div class="hero-desc">
+        Get suggestions on Palette and Fit according to your <strong>skin tone</strong>, <strong>age</strong>, <strong>weight</strong>, and the latest <strong>trendy styles</strong>—all tailored for you.<br>
+        Discover fashion that truly fits <b>you</b>!
+      </div>
+      <button class="hero-btn" onclick="window.location.href='suggestionpage.html'">Get Suggestion</button>
+    </div>
+  </main>
+
+<script>
+(function () {
+  const $ = (s, r=document) => r.querySelector(s);
+
+  // ----- NAV + HAMBURGER -----
+  const nav    = $('header .nav');
+  const toggle = $('#navToggle') || $('#menu-toggle');
+
+  if (toggle && nav) {
+    // ensure 3-line markup exists (safe even if already there)
+    if (!toggle.querySelector('.hamburger-box')) {
+      toggle.innerHTML = '<span class="hamburger-box"><span class="hamburger-inner"></span></span>';
+    }
+    toggle.setAttribute('aria-controls', nav.id || 'site-nav');
+    toggle.setAttribute('aria-expanded', 'false');
+
+    const openMenu  = () => { nav.classList.add('open');  toggle.classList.add('is-active');  toggle.setAttribute('aria-expanded','true');  };
+    const closeMenu = () => { nav.classList.remove('open'); toggle.classList.remove('is-active'); toggle.setAttribute('aria-expanded','false'); };
+
+    toggle.addEventListener('click', () => nav.classList.contains('open') ? closeMenu() : openMenu());
+
+    // mobile: close when any nav link clicked
+    nav.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A' && nav.classList.contains('open')) closeMenu();
+    });
+
+    // click outside (mobile only)
+    document.addEventListener('click', (e) => {
+      const isMobile = window.matchMedia('(max-width: 1200px)').matches;
+      if (!isMobile) return;
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) closeMenu();
+    });
+
+    // Esc key to close
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+
+    // breakpoint reset
+    const mqDesk = window.matchMedia('(min-width: 1201px)');
+    const sync = () => { if (mqDesk.matches) closeMenu(); };
+    mqDesk.addEventListener ? mqDesk.addEventListener('change', sync) : window.addEventListener('resize', sync);
+    sync();
+  }
+
+  // ----- DARK MODE -----
+  const dmBtn = $('#darkModeToggle');
+  if (dmBtn) {
+    const setBtn = (dark) => {
+      dmBtn.innerHTML = dark
+        ? '<span style="font-size:1.18em;">☀️</span> Light Mode'
+        : '<span style="font-size:1.18em;">🌙</span> Dark Mode';
+      dmBtn.setAttribute('aria-pressed', String(dark));
+    };
+    const initialDark = localStorage.getItem('darkMode') === 'true';
+    document.body.classList.toggle('dark-mode', initialDark);
+    setBtn(initialDark);
+
+    dmBtn.addEventListener('click', () => {
+      const dark = !document.body.classList.contains('dark-mode');
+      document.body.classList.toggle('dark-mode', dark);
+      localStorage.setItem('darkMode', dark);
+      setBtn(dark);
+    });
+  }
+})();
+</script>
+
+
+
+</body>
+</html>

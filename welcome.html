@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to Palette and Fit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Style+Script&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta http-equiv="refresh" content="3;url=homepage1.html">
+  <style>
+    :root {
+      --accent: #ad00e2;
+      --accent-light: #c2a1ff;
+      --blob1: #f8e7ffcc;
+      --blob2: #c2a1ffb8;
+      --blob3: #ad00e26b;
+      --blob4: #fff9f5c2;
+      --glass-bg: rgba(255, 255, 255, 0.92);
+      --glass-border: rgba(195, 170, 255, 0.19);
+    }
+    html, body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f7f3fa;
+      overflow: hidden;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      object-fit: cover;
+      z-index: 0;
+      filter: blur(2px) brightness(1.04);
+      pointer-events: none;
+    }
+    .bg-animated-gradient {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(120deg, #fff9f7cc 27%, #f6eaff 65%, #c2a1ff44 100%);
+      z-index: 1;
+      pointer-events: none;
+      animation: gradientMove 9s ease-in-out infinite alternate;
+    }
+    @keyframes gradientMove {
+      from { background-position: 0% 40%; }
+      to { background-position: 100% 70%; }
+    }
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(32px);
+      opacity: 0.7;
+      z-index: 2;
+      pointer-events: none;
+      animation: blobMove 16s linear infinite alternate;
+    }
+    .blob1 { width: 350px; height: 290px; background: var(--blob1); top: 8%; left: -9%; animation-delay: 0s; }
+    .blob2 { width: 230px; height: 210px; background: var(--blob2); top: 63%; left: 76%; animation-delay: 4s; }
+    .blob3 { width: 320px; height: 180px; background: var(--blob3); top: 75%; left: -12%; animation-delay: 9s; }
+    .blob4 { width: 190px; height: 170px; background: var(--blob4); top: 18%; left: 78%; animation-delay: 6s; }
+    @keyframes blobMove {
+      0% { transform: scale(1) translateY(0); opacity: .76;}
+      20% { transform: scale(1.07) translateY(-13px);}
+      60% { transform: scale(.98) translateY(17px);}
+      100% { transform: scale(1.10) translateY(-8px); opacity: .92;}
+    }
+    .bg-dark-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(120deg, #fff9 45%, #e3d6ff69 100%);
+      z-index: 3;
+      pointer-events: none;
+      backdrop-filter: blur(1.5px);
+    }
+    .shimmer-line {
+      position: fixed;
+      left: -30vw;
+      width: 50vw;
+      height: 2.2px;
+      background: linear-gradient(90deg, #fff0 0%, #c2a1ff77 32%, #ad00e277 65%, #fff0 100%);
+      filter: blur(0.5px);
+      opacity: 0.34;
+      z-index: 4;
+      animation: shimmerMove 12s linear infinite;
+      border-radius: 4px;
+    }
+    .shimmer-line:nth-child(6) { top: 32vh; animation-delay: 0s; width: 60vw; left: -25vw; }
+    .shimmer-line:nth-child(7) { top: 57vh; animation-delay: 5.2s; width: 44vw; left: -18vw; }
+    @keyframes shimmerMove {
+      from { left: -40vw; }
+      to { left: 110vw; }
+    }
+    .splash-container {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+    }
+    .center-glass {
+      position: relative;
+      z-index: 11;
+      min-width: 340px;
+      max-width: 99vw;
+      width: 740px;
+      min-height: 340px;
+      height: 340px;
+      margin: auto;
+      border-radius: 2.9rem;
+      box-shadow: 0 10px 52px #ad00e229, 0 2px 22px #ad00e210;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(172%);
+      border: 1.8px solid var(--glass-border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4.5rem 4rem 3.3rem 4rem;
+      animation: splashIn 0.9s cubic-bezier(.55, .1, .35, 1.12);
+      box-sizing: border-box;
+      pointer-events: auto;
+      transition: box-shadow 0.24s, border-color 0.18s;
+    }
+    @keyframes splashIn {
+      from { opacity: 0; transform: scale(1.09) translateY(60px);}
+      to { opacity: 1; transform: scale(1) translateY(0);}
+    }
+    .main-heading {
+      font-family: 'Style Script', cursive;
+      font-size: clamp(2.4rem, 7vw, 4.15rem);
+      font-weight: 400;
+      color: var(--accent);
+      letter-spacing: 2.1px;
+      margin-bottom: 0.18em;
+      text-shadow: 
+        0 0 34px #fff,
+        0 8px 36px #c2a1ff85, 
+        0 2px 9px #fff9;
+      animation: dropIn 1.05s cubic-bezier(.7, .13, .18, .98);
+      user-select: none;
+      line-height: 1.08;
+      position: relative;
+      text-align: center;
+    }
+    .main-heading::before {
+      content: "";
+      position: absolute;
+      left: 50%; top: 54%;
+      transform: translate(-50%,-50%);
+      width: 90%;
+      height: 50%;
+      background: radial-gradient(ellipse at center, #fff5 45%, #fff0 100%);
+      border-radius: 40%;
+      z-index: -1;
+      opacity: 0.38;
+      filter: blur(10px);
+    }
+    @keyframes dropIn {
+      from { opacity: 0; transform: translateY(-70px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .tagline {
+      font-size: 1.24rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #644268;
+      opacity: 0.90;
+      margin-bottom: 0.6em;
+      margin-top: 0.45em;
+      text-shadow: 0 2px 15px #e2e0fd29, 0 0.5px 2px #fff6;
+      max-width: 92vw;
+      line-height: 1.52;
+      animation: fadeWords 1.7s;
+      text-align: center;
+    }
+    @keyframes fadeWords {
+      0% { opacity: 0; transform: translateY(25px);}
+      60% { opacity: 1; transform: translateY(0);}
+      100% { opacity: 1;}
+    }
+    .redirect-msg {
+      color: #ad00e2;
+      font-size: 1.18rem;
+      font-weight: 600;
+      margin-top: 1.6em;
+      opacity: .7;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      .center-glass {
+        width: 96vw;
+        height: auto;
+        padding: 2.2rem 1rem 1.4rem 1rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .center-glass {
+        min-width: 0;
+        width: 99vw;
+        height: auto;
+        padding: 1.1rem 0.5rem 1.1rem 0.5rem;
+        border-radius: 1.3rem;
+      }
+      .main-heading { font-size: 1.32rem; }
+      .tagline { font-size: 0.97rem; }
+      .blob1, .blob2, .blob3, .blob4 { width: 45vw !important; height: 40vw !important; }
+    }
+    
+  </style>
+  <script>
+    setTimeout(() => {
+      window.location.href = "homepage1.html";
+    }, 3000);
+  </script>
+</head>
+<body>
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="https://videocdn.cdnpk.net/videos/a480f4db-bd83-480e-8825-85a863031819/horizontal/previews/clear/small.mp4?token=exp=1753127362~hmac=45d10e65b6512b06a361bf4aea020663890e17c996f4766fd7e94470da615896" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="bg-animated-gradient"></div>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+  <div class="bg-dark-overlay"></div>
+  <div class="shimmer-line"></div>
+  <div class="shimmer-line"></div>
+  <div class="splash-container">
+    <div class="center-glass">
+      <div class="main-heading">Welcome to Palette and Fit</div>
+      <div class="tagline">
+        You’re in!<br>
+        <span style="font-size:1em; opacity:.86;">Your fashion journey starts here.</span>
+      </div>
+      <div class="redirect-msg">
+        Redirecting to homepage...
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Body Details – Palette and Fit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --bg-light: #f6f3fc;
+  --accent: #ad00e2;
+  --card-bg: #fff;
+  --text: #20144a;
+  --input-border: #d4c4ef;
+  --input-bg: #fff;
+  --shadow: 0 8px 36px #ad00e222, 0 1.5px 8px #ad00e208;
+  --shadow-dark: 0 6px 32px #0003, 0 1.5px 8px #0002;
+  --btn-purple: #ad00e2;
+  --btn-purple-dark: #7a2df6;
+}
+
+body.dark-mode {
+  background: linear-gradient(120deg, #191325 45%, #3a2262 100%);
+  color: #fff;
+  --input-bg: #201830;
+  --card-bg: #2a203d;
+  --text: #e7d6fa;
+  --input-border: #8852c9;
+  --accent: #ad00e2;
+  --btn-purple: #ad00e2;
+  --btn-purple-dark: #7a2df6;
+}
+body {
+  background: linear-gradient(125deg, #ece9fc 10%, #d3c5ee 95%);
+  color: var(--text);
+  /* font-family: 'Poppins', sans-serif; */
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, color 0.3s;
+}
+.container {
+  background: var(--card-bg);
+  border-radius: 2.2rem;
+  box-shadow: var(--shadow);
+  padding: 1rem 2.7rem;
+  max-width: 600px;
+  width: 98vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin: 1.5rem 0;
+  backdrop-filter: blur(2.5px);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+body.dark-mode .container {
+  background: #231e2f;
+  box-shadow: var(--shadow-dark);
+}
+
+/* Desktop dark toggle */
+.dark-toggle {
+  position: absolute;
+  top: 1.1rem;
+  right: 2.2rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 1.2rem;
+  font-size: 1.01rem;
+  font-weight: 700;
+  padding: 0.46rem 1.15rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px #ad00e225;
+  z-index: 9;
+  transition: background 0.18s, color 0.18s;
+}
+body.dark-mode .dark-toggle {
+  background: #fff;
+  color: var(--accent);
+}
+
+/* Mobile dark toggle, hidden on desktop */
+.dark-toggle-mobile {
+  display: none;
+  width: 100%;
+  margin-bottom: 1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 1.2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.45rem 1.15rem;
+  box-shadow: 0 2px 12px #ad00e225;
+  transition: background 0.18s, color 0.18s;
+}
+body.dark-mode .dark-toggle-mobile {
+  background: #fff;
+  color: var(--accent);
+}
+
+.progress-bar {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 2.2rem;
+  margin: 0.2rem 0 0.7rem;
+  width: 100%;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.04rem;
+  font-weight: 600;
+  color: #b3a5c7;
+  gap: 0.2rem;
+  transition: color 0.18s;
+}
+.step.active {
+  color: var(--accent);
+  font-weight: 900;
+}
+.step-circle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: #f5eaff;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border: 2.5px solid #e8d8fd;
+  box-shadow: 0 2px 10px #ad00e21c;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.step.active .step-circle {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px #ad00e246;
+}
+body.dark-mode .step-circle {
+  background: #3b1853;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+body.dark-mode .step.active .step-circle {
+  background: var(--accent);
+  color: #fff;
+  border-color: #fff;
+}
+
+h2 {
+  margin: 0.3rem 0 1rem;
+  color: var(--accent);
+  text-align: center;
+  font-weight: 800;
+  font-size: 2.18rem;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 8px #e8d8fd;
+}
+body.dark-mode h2 {
+  color: #fff;
+  text-shadow: 0 1px 12px #7a2df6;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+label {
+  font-size: 1.01rem;
+  font-weight: 600;
+  color: #7054ad;
+  margin-left: 2px;
+}
+body.dark-mode label {
+  color: #cbbcf3;
+}
+.input-group {
+  position: relative;
+}
+input {
+  width: 100%;
+  padding: 0.48rem 1.1rem;
+  border-radius: 1rem;
+  border: 1.5px solid var(--input-border);
+  background: var(--input-bg);
+  font-size: 1.06rem;
+  color: var(--text);
+  outline: none;
+  height: 2.02rem;
+  box-shadow: 0 0.5px 3px #b292d11c;
+  transition: border-color 0.18s, box-shadow 0.19s;
+}
+input:focus {
+  border-color: var(--accent);
+  background: #f7f0fd;
+  box-shadow: 0 2px 12px #c6a1e817;
+}
+body.dark-mode input {
+  background: #271a36;
+  border-color: #845acb;
+  color: #fff;
+}
+
+.btn {
+  margin-top: 0.17rem;
+  background: var(--btn-purple);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.11rem;
+  border: none;
+  padding: 0.71rem 0;
+  border-radius: 1rem;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 2.2px 14px #ad00e222;
+  transition: background 0.19s, transform 0.13s;
+}
+.btn:hover {
+  background: var(--btn-purple-dark);
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* Responsive tweaks */
+@media (max-width: 700px) {
+  .container {
+    padding: 1rem 0.6rem;
+    max-width: 99vw;
+    border-radius: 1.2rem;
+  }
+  .dark-toggle { display: none !important; }
+  .dark-toggle-mobile { display: block !important; }
+  .progress-bar { gap: 1rem; }
+  h2 { font-size: 1.25rem; }
+  .step-circle { width: 24px; height: 24px; font-size: 1rem; }
+  label, .step { font-size: 0.92rem; }
+  input { font-size: 0.95rem; height: 1.65rem; }
+  .btn { font-size: 1rem; padding: 0.62rem 0; }
+}
+@media (max-width: 400px) {
+  .container { padding: 0.5rem 0.15rem; }
+  h2 { font-size: 1.05rem; }
+  .step, label { font-size: 0.85rem; }
+  .step-circle { width: 18px; height: 18px; font-size: 0.83rem; }
+  .btn { font-size: 0.93rem; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Desktop toggle -->
+    <button class="dark-toggle" id="toggleDark">🌙 Dark Mode</button>
+    <!-- Mobile toggle -->
+    <button class="dark-toggle-mobile" id="toggleDarkMobile">🌙 Dark Mode</button>
+
+    <div class="progress-bar">
+      <div class="step"><div class="step-circle">1</div>Account</div>
+      <div class="step"><div class="step-circle">2</div>Profile</div>
+      <div class="step active"><div class="step-circle">3</div>Body</div>
+    </div>
+
+    <h2>Enter Your Body Details</h2>
+<form id="bodyForm" autocomplete="off">
+      <div>
+        <label for="weight">Weight (kg)</label>
+        <input type="number" id="weight" min="20" max="200" placeholder="Enter your weight" required>
+      </div>
+      <div>
+        <label for="bodyLength">Body Length (inches)</label>
+        <input type="number" id="bodyLength" min="40" max="90" placeholder="Length" required>
+      </div>
+      <div>
+        <label for="upperWidth">Upper Body Width (inches)</label>
+        <input type="number" id="upperWidth" min="10" max="40" placeholder="Width" required>
+      </div>
+      <div>
+        <label for="lowerWidth">Lower Body Width (inches)</label>
+        <input type="number" id="lowerWidth" min="10" max="40" placeholder="Width" required>
+      </div>
+      <button class="btn" type="submit">Continue</button>
+    </form>
+  </div>
+
+<script>
+// =============== Dark Mode ===============
+const btn = document.getElementById('toggleDark'),
+      btnMobile = document.getElementById('toggleDarkMobile'),
+      bodyEl = document.body;
+
+function updateText() {
+  const dark = bodyEl.classList.contains('dark-mode');
+  if (btn)       btn.textContent = dark ? '☀️ Light Mode' : '🌙 Dark Mode';
+  if (btnMobile) btnMobile.textContent = dark ? '☀️ Light Mode' : '🌙 Dark Mode';
+}
+function toggleDark() {
+  const isDark = bodyEl.classList.toggle('dark-mode');
+  localStorage.setItem('darkMode', isDark);
+  updateText();
+}
+if (localStorage.getItem('darkMode') === 'true') bodyEl.classList.add('dark-mode');
+updateText();
+if (btn) btn.addEventListener('click', toggleDark);
+if (btnMobile) btnMobile.addEventListener('click', toggleDark);
+
+// =============== Height badge: 62 -> 5'2  =================
+(function () {
+  const input = document.getElementById('bodyLength');
+  if (!input) return;
+
+  // inject tiny CSS for the badge
+  const style = document.createElement('style');
+  style.textContent = `
+    .height-tag{
+      margin-left:8px;padding:2px 10px;border-radius:999px;
+      background:#f5eaff;color:#7a2df6;font-weight:700;font-size:.95rem;
+      display:inline-block;vertical-align:middle
+    }
+    body.dark-mode .height-tag{background:#3b1853;color:#fff}
+  `;
+  document.head.appendChild(style);
+
+  // create badge right after the input
+  const badge = document.createElement('span');
+  badge.id = 'heightFi';
+  badge.className = 'height-tag';
+  input.insertAdjacentElement('afterend', badge);
+
+  function updateBadgeFromInches(val) {
+    const inches = parseFloat(val);
+    if (!isFinite(inches) || inches <= 0) { badge.textContent = ''; return; }
+    const ft  = Math.floor(inches / 12);
+    const ins = Math.round(inches - ft * 12);
+    badge.textContent = `${ft}'${ins}`;   // <-- yeh ' sign yahin add ho raha hai
+  }
+  input.addEventListener('input', () => updateBadgeFromInches(input.value));
+  updateBadgeFromInches(input.value || '');
+})();
+
+// =============== Remove restrictions on upper/lower widths ===============
+(function () {
+  const up  = document.getElementById('upperWidth');
+  const low = document.getElementById('lowerWidth');
+  [up, low].forEach(el => {
+    if (!el) return;
+    el.removeAttribute('min');
+    el.removeAttribute('max');
+  });
+})();
+
+// =============== Body form logic (inches + numbers safe) ===============
+document.getElementById("bodyForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const weight     = parseFloat(document.getElementById("weight").value);
+  const bodyLength = parseFloat(document.getElementById("bodyLength").value); // inches
+  const upperWidth = parseFloat(document.getElementById("upperWidth").value);
+  const lowerWidth = parseFloat(document.getElementById("lowerWidth").value);
+
+  const email = localStorage.getItem("signupEmail");
+  if (email) localStorage.setItem("user_email", email);
+  if (!email) {
+    alert("Signup session expired! Please signup again.");
+    window.location = "SIGNUP1.html";
+    return;
+  }
+
+  const res = await fetch("http://127.0.0.1:5001/api/body", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      email,
+      weight,
+      body_length: bodyLength,
+      upper_width: upperWidth,
+      lower_width: lowerWidth
+    })
+  });
+
+  const data = await res.json();
+  if (res.ok) {
+    window.location = "welcome.html";
+  } else {
+    alert("Error: " + (data.error || "Could not save body details."));
+  }
+});
+</script>
+
+
+</body>
+</html>

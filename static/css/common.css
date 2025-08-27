@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Style+Script&display=swap');
+
+/* ===== NAV BAR STYLING ===== */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: var(--nav-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background 0.3s;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--heading);
+  letter-spacing: 1px;
+  font-family: 'Style Script', cursive !important;
+  font-size: 2.1rem !important;
+  color: var(--heading) !important;
+  font-weight: 400 !important;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 16px #fff, 0 2px 10px #ad00e266;
+  line-height: 1.08;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.nav a {
+  color: #2a024d;
+  text-decoration: none;
+  padding: .5rem 0;
+  transition: color .2s, font-weight .2s;
+}
+/* .nav a.active,
+.nav a:hover {
+  color: var(--accent);
+  font-weight: 700;
+} */
+.nav a.wishlist:hover {
+  color: #e60023 !important;
+  font-weight: 700;
+}
+.wishlist {
+  cursor: pointer;
+  color: #2a024d;
+  font-size: 1.15rem;
+  transition: color .2s;
+}
+body.dark-mode .wishlist { color: #fff; }
+body.dark-mode .wishlist:hover { color: #e60023 !important; }
+/* Profile Icon */
+.profile-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#ad00e2 60%,#c2a1ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.8rem;
+  box-shadow: 0 3px 14px #a673fa22;
+  cursor: pointer;
+  border: 2px solid #fff;
+  padding: 0;
+  text-decoration: none;
+  min-width: 38px;
+  min-height: 38px;
+  max-width: 38px;
+  max-height: 38px;
+  box-sizing: border-box;
+}
+.profile-icon svg {
+  width: 23px;
+  height: 23px;
+  display: block;
+}
+/* Hamburger menu for responsive */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  margin-left: 1.2rem;
+}
+@media (max-width: 900px) {
+  .nav { flex-wrap: wrap; gap: 1rem; }
+}
+@media (max-width: 768px) {
+  header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 0.9rem;
+    position: relative;
+  }
+  .nav {
+    display: none;
+    flex-direction: column;
+    gap: 1.1rem;
+    margin-top: 0.2rem;
+    background: var(--nav-bg);
+    width: 100vw;
+    left: 0; right: 0; top: 65px;
+    position: absolute;
+    z-index: 200;
+    box-shadow: 0 8px 24px #0002;
+    padding-bottom: 1.3rem;
+    border-radius: 0 0 1.2rem 1.2rem;
+  }
+  .nav.open { display: flex; }
+  .hamburger {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    order: 2;
+  }
+  .logo {
+    font-size: 1.22rem;
+    order: 1;
+  }
+}
+@media (min-width: 769px) {
+  .hamburger { display: none; }
+  .nav { display: flex !important; flex-direction: row; position: static; background: none; box-shadow: none; }
+}
+body.dark-mode header { background: var(--bg-mid); }
+body.dark-mode .logo { color: var(--heading); }
+body.dark-mode .nav a,
+body.dark-mode .wishlist { color: #fff; }
+body.dark-mode .nav a.active,
+body.dark-mode .nav a:hover {
+  color: var(--accent);
+  font-weight: 700;
+}
+

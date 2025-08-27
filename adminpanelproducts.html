@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Products – Palette and Fit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+<  <style>
+    :root {
+      --sidebar-bg: #fff;
+      --sidebar-dark: #23242a;
+      --main-bg: #fff;
+      --main-dark: #18181b;
+      --accent: #ad00e2;
+      --accent2: #c2a1ff;
+      --text: #23242a;
+      --text-dark: #fff;
+      --card-bg: #fff;
+      --card-dark: #23223c;
+      --border-radius: 1.25rem;
+      --shadow: 0 2px 16px #e5e5e5;
+      --shadow-dark: 0 6px 32px #0004, 0 1.5px 8px #0003;
+      --sidebar-width: 235px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--main-bg);
+      color: var(--text);
+      /* font-family: 'Segoe UI', Arial, sans-serif; */
+      transition: background 0.3s, color 0.3s;
+    }
+    .admin-root {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      background: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      gap: 2.4rem;
+      padding: 2.2rem 1.2rem 1.2rem 1.2rem;
+      border-right: 2px solid #ececec;
+      z-index: 100;
+      transition: background 0.3s;
+    }
+    .sidebar .logo {
+      font-family: 'Style Script', cursive !important;
+      font-size: 2.4rem !important;
+      color: #ad00e2 !important;
+      font-weight: 400 !important;
+      letter-spacing: 2px;
+      line-height: 1.08;
+      margin: 0 0 2.2rem 0;
+      padding: 0 0.2rem;
+      user-select: none;
+      white-space: nowrap;
+      text-align: left;
+      text-shadow: none !important;
+    }
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .sidebar-nav a {
+      color: var(--accent);
+      background: none;
+      text-decoration: none;
+      font-size: 1.13rem;
+      font-weight: 600;
+      padding: 0.62rem 1.2rem;
+      border-radius: 0.75rem;
+      transition: background .18s, color .18s;
+      letter-spacing: 0.2px;
+    }
+    .sidebar-nav a.active,
+    .sidebar-nav a:hover {
+      background: linear-gradient(90deg, #ad00e2 55%, #c2a1ff 100%);
+      color: #fff !important;
+      font-weight: 700;
+      box-shadow: 0 6px 24px #a673fa29;
+    }
+    .sidebar-bottom {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      align-items: stretch;
+    }
+    .darkmode-btn, .logout-btn {
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: 0.85rem 0;
+      font-size: 1.09rem;
+      font-weight: 700;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(90deg, #ad00e2 75%, #c2a1ff 100%);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 2px 12px #ad00e229;
+      transition: background .18s, color .18s;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6em;
+    }
+    .darkmode-btn:hover, .logout-btn:hover {
+      background: linear-gradient(90deg, #c2a1ff 10%, #ad00e2 90%);
+      color: #fff;
+    }
+    .main-panel {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 2.5rem 2.2rem 1.5rem 2.2rem;
+      background: var(--main-bg);
+      transition: background 0.3s;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .products-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .products-header h2 {
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: .04em;
+      margin: 0;
+    }
+    .add-btn {
+      background: linear-gradient(90deg, #ad00e2 70%, #c2a1ff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      padding: 0.67rem 1.5rem;
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: .4px;
+      cursor: pointer;
+      box-shadow: 0 2px 12px #a673fa2a;
+      transition: background .18s;
+    }
+    .add-btn:hover,
+    .add-btn:focus {
+      background: linear-gradient(90deg, #c2a1ff 10%, #ad00e2 90%);
+      color: #fff;
+      outline: none;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.2rem;
+      margin-bottom: 2.2rem;
+    }
+    .product-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 1.3rem 1rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.3s, color 0.3s, box-shadow 0.2s;
+      border: 2.5px solid #ececec;
+      min-width: 180px;
+      position: relative;
+    }
+    .product-card img {
+      width: 80%;
+      max-width: 155px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 18px;
+      margin-bottom: 1rem;
+      background: #e8e0ff;
+      box-shadow: 0 2px 16px #ad00e227;
+    }
+    .product-title {
+      font-weight: 700;
+      font-size: 1.13rem;
+      color: #432188;
+      margin-bottom: 0.18em;
+      text-align: center;
+    }
+    .product-desc {
+      font-size: 0.98rem;
+      color: #595986;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+    /* BUTTONS - Modern, Gradient, Cute */
+    .action-btn,
+    .remove-btn,
+    .edit-btn,
+    .submit-btn,
+    .cancel-btn {
+      font-size: 1.09em;
+      padding: 0.49em 2.1em;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 2px 18px #ad00e233;
+      outline: none;
+      margin: 0.38em 0.6em 0 0;
+      display: inline-block;
+      letter-spacing: 0.04em;
+      transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.18s;
+    }
+    /* Remove Button */
+    .remove-btn {
+      background: #fff;
+      color: #e60023;
+      border: 2px solid #e60023;
+      margin-top: 0.8em;
+      box-shadow: 0 1px 12px #e6002321;
+    }
+    .remove-btn:hover, .remove-btn:focus {
+      background: #e60023;
+      color: #fff;
+      border: 2px solid #e60023;
+      transform: translateY(-2px) scale(1.04);
+    }
+    /* Edit Button */
+    .edit-btn {
+      background: linear-gradient(90deg, #ad00e2 80%, #c2a1ff 100%);
+      color: #fff;
+      border: 2px solid #ad00e2;
+    }
+    .edit-btn:hover, .edit-btn:focus {
+      background: linear-gradient(90deg, #c2a1ff 30%, #ad00e2 90%);
+      color: #fff;
+      border: 2px solid #ad00e2;
+      transform: translateY(-2px) scale(1.04);
+    }
+    /* Submit (Add/Update) Button */
+    .submit-btn {
+      background: linear-gradient(90deg, #ad00e2 70%, #c2a1ff 100%);
+      color: #fff;
+      border: none;
+      margin: 0;
+      box-shadow: 0 1px 18px #ad00e246;
+    }
+    .submit-btn:hover, .submit-btn:focus {
+      background: linear-gradient(90deg, #c2a1ff 25%, #ad00e2 80%);
+      color: #fff;
+      transform: translateY(-2px) scale(1.06);
+    }
+    /* Cancel Button */
+    .cancel-btn {
+      background: #bbb;
+      color: #fff;
+      border: none;
+      margin: 0;
+      box-shadow: 0 1px 10px #bbb5;
+    }
+    .cancel-btn:hover, .cancel-btn:focus {
+      background: #ad00e2;
+      color: #fff;
+      transform: translateY(-2px) scale(1.06);
+    }
+    /* MODALS */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(24,24,27,0.89);
+      z-index: 5000;
+      justify-content: center;
+      align-items: center;
+      overflow: auto;
+    }
+    .modal-bg.active { display: flex !important; }
+    .modal-box {
+      background: #fff;
+      padding: 2.3rem 2.1rem 2rem 2.1rem;
+      border-radius: 1.2rem;
+      max-width: 340px;
+      min-width: 240px;
+      box-shadow: 0 0 60px 5px #ad00e299, 0 12px 56px #ad00e244, 0 2px 8px #ad00e21a;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 1.1rem;
+      justify-content: center;
+      margin-top: 1.2em;
+    }
+    @media (max-width: 800px) {
+      .main-panel { padding: 1.2rem 0.5rem 1rem 0.5rem;}
+      .products-grid { gap: 1rem; }
+    }
+    @media (max-width: 700px) {
+      .sidebar {
+        flex-direction: row;
+        width: 100vw;
+        border-right: none;
+        border-bottom: 2px solid #ececec;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.8rem;
+        padding: 0.7rem 0.7rem 0.7rem 1rem;
+        position: static;
+        height: auto;
+      }
+      .sidebar .logo { font-size: 1.25rem;}
+      .main-panel {
+        margin-left: 0;
+        padding: 1.3rem 0.5rem 1rem 0.5rem;
+      }
+    }
+    /* -------------- DARK MODE --------------- */
+    body.dark-mode {
+      --sidebar-bg: #23242a;
+      --main-bg: #18181b;
+      --card-bg: #23223c;
+      --text: #fff;
+      --text-dark: #fff;
+    }
+    body.dark-mode .sidebar { background: var(--sidebar-dark); border-right: 2px solid #3d3750; }
+    body.dark-mode .sidebar-nav a { color: #fff; }
+    body.dark-mode .sidebar-nav a.active, body.dark-mode .sidebar-nav a:hover {
+      background: linear-gradient(90deg, #ad00e2 55%, #c2a1ff 100%);
+      color: #fff !important;
+    }
+    body.dark-mode .product-card {
+      background: var(--card-dark);
+      color: #fff;
+      border-color: #2e2b40;
+      box-shadow: var(--shadow-dark);
+    }
+    body.dark-mode .modal-box { background: #23223c; color: #fff; }
+    body.dark-mode .modal-box input, body.dark-mode .modal-box textarea, body.dark-mode .modal-box select {
+      background: #18181b;
+      color: #fff;
+      border: 2px solid #ad00e244;
+    }
+    body.dark-mode .modal-box input:focus,
+    body.dark-mode .modal-box textarea:focus,
+    body.dark-mode .modal-box select:focus {
+      border: 2px solid #c2a1ff;
+      background: #2a193b;
+      color: #fff;
+    }
+    body.dark-mode .modal-box label { color: #c2a1ff; }
+    body.dark-mode .modal-box option { color: #23223c; }
+    body.dark-mode .submit-btn {
+      background: linear-gradient(90deg, #ad00e2 70%, #c2a1ff 100%);
+      color: #fff;
+      border: none;
+    }
+    body.dark-mode .submit-btn:hover, body.dark-mode .submit-btn:focus {
+      background: linear-gradient(90deg, #c2a1ff 25%, #ad00e2 80%);
+    }
+    body.dark-mode .cancel-btn {
+      background: #7a2df6 !important;
+      color: #fff !important;
+      border: none;
+    }
+    body.dark-mode .cancel-btn:hover, body.dark-mode .cancel-btn:focus {
+      background: #ad00e2 !important;
+    }
+    body.dark-mode .edit-btn {
+      background: linear-gradient(90deg, #7a2df6 80%, #c2a1ff 100%);
+      color: #fff;
+      border: 2px solid #ad00e2;
+      box-shadow: 0 2px 10px #ad00e222;
+    }
+    body.dark-mode .edit-btn:hover, body.dark-mode .edit-btn:focus {
+      background: linear-gradient(90deg, #c2a1ff 30%, #ad00e2 90%);
+      color: #fff;
+    }
+    body.dark-mode .remove-btn {
+      background: #2a0012;
+      color: #ff6077;
+      border: 2px solid #ff6077;
+      box-shadow: 0 1px 8px #e600233a;
+    }
+    body.dark-mode .remove-btn:hover, body.dark-mode .remove-btn:focus {
+      background: #ff6077;
+      color: #fff;
+    }
+    .sidebar {
+  position: fixed;      /* Sidebar stays fixed */
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  z-index: 100;
+  /* ...rest of your sidebar styles */
+}
+
+.main-panel {
+  margin-left: var(--sidebar-width);   /* This pushes main content to the right */
+  flex: 1;
+  padding: 2.5rem 2.2rem 1.5rem 2.2rem;
+  background: var(--main-bg);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s;
+}
+:root {
+  --sidebar-bg: #fff;
+  --main-bg: #fff;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --text: #23242a;
+  --card-bg: #fff;
+  --border-radius: 1.25rem;
+  --shadow: 0 2px 16px #e5e5e5;
+  --sidebar-width: 235px;
+}
+
+/* ===== Light/Dark Mode Variables ===== */
+body.dark-mode {
+  --sidebar-bg: #23242a;
+  --main-bg: #18181b;
+  --card-bg: #23223c;
+  --text: #fff;
+  --shadow: 0 6px 32px #0002, 0 1.5px 8px #0001;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 0.7rem 1.2rem 0.7rem;
+  border-right: 2px solid #ececec;
+  z-index: 100;
+  justify-content: flex-start;
+  transition: background 0.3s;
+}
+
+.sidebar .logo {
+  font-family: 'Style Script', cursive !important;
+  font-size: 2.4rem !important;
+  color: #ad00e2 !important;
+  font-weight: 400 !important;
+  letter-spacing: 2px;
+  line-height: 1.08;
+  margin: 0 0 1.8rem 0;
+  padding: 0 0.2rem;
+  user-select: none;
+  white-space: nowrap;
+  text-align: left;
+  text-shadow: none !important;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.sidebar-nav a {
+  color: var(--accent);
+  background: none;
+  text-decoration: none;
+  font-size: 1.13rem;
+  font-weight: 600;
+  padding: 0.62rem 1.2rem;
+  border-radius: 0.75rem;
+  transition: background 0.18s, color 0.18s;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+}
+.sidebar-nav a.active,
+.sidebar-nav a:hover {
+  background: linear-gradient(90deg, #ad00e2 55%, #c2a1ff 100%);
+  color: #fff !important;
+  font-weight: 700;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: stretch;
+}
+
+.darkmode-btn, .logout-btn {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0.85rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(90deg, #ad00e2 75%, #c2a1ff 100%);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 12px #ad00e229;
+  transition: background .18s, color .18s;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.darkmode-btn:hover, .logout-btn:hover {
+  background: linear-gradient(90deg, #c2a1ff 10%, #ad00e2 90%);
+  color: #fff;
+}
+
+/* ===== Main Panel (fixes overlap) ===== */
+.main-panel {
+  margin-left: var(--sidebar-width);
+  flex: 1;
+  padding: 2.5rem 2.2rem 1.5rem 2.2rem;
+  background: var(--main-bg);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s, margin-left 0.3s;
+}
+
+/* ===== Responsive: sidebar becomes top bar on mobile ===== */
+@media (max-width: 700px) {
+  .sidebar {
+    flex-direction: row;
+    width: 100vw;
+    height: auto;
+    position: static;
+    border-right: none;
+    border-bottom: 2px solid #ececec;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    padding: 0.7rem 0.7rem 0.7rem 1rem;
+  }
+  .sidebar .logo {
+    font-size: 1.25rem !important;
+    margin: 0;
+  }
+  .main-panel {
+    margin-left: 0 !important;
+    padding: 1.3rem 0.5rem 1rem 0.5rem;
+  }
+}
+
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 0.7rem 2.5rem 0.7rem;  /* ← increased bottom padding */
+  border-right: 2px solid #ececec;
+  z-index: 100;
+  justify-content: flex-start;
+  transition: background 0.3s;
+}
+/* Logout Modal Styles */
+.logout-modal-bg {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(36, 0, 42, 0.24);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+.logout-modal-bg.active { display: flex !important; }
+.logout-modal-box {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 42px #ad00e299, 0 0 0 2px #ad00e241;
+  min-width: 320px;
+  max-width: 94vw;
+  padding: 2.2rem 2.1rem 1.3rem 2.1rem;
+  text-align: center;
+  animation: popin 0.28s;
+}
+@keyframes popin {
+  from { transform: translateY(30px) scale(0.97); opacity: 0.1;}
+  to { transform: none; opacity: 1;}
+}
+.logout-title {
+  font-size: 1.53rem;
+  font-weight: 700;
+  color: #ad00e2;
+  margin-bottom: 0.4em;
+}
+.logout-desc {
+  font-size: 1.07rem;
+  color: #6d217c;
+  margin-bottom: 2.2em;
+}
+.logout-modal-btn {
+  background: linear-gradient(90deg, #ad00e2 75%, #c2a1ff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  padding: 0.68em 2.8em;
+  box-shadow: 0 2px 18px #ad00e233;
+  cursor: pointer;
+  transition: background 0.17s;
+}
+.logout-modal-btn:hover, .logout-modal-btn:focus {
+  background: linear-gradient(90deg, #c2a1ff 15%, #ad00e2 90%);
+  outline: none;
+}
+@media (max-width: 430px) {
+  .logout-modal-box { min-width: 0; padding: 1.1rem 0.3rem 1rem 0.3rem;}
+}
+/* ---- CUTE PRODUCT FORM STYLES ---- */
+.pretty-modal h3 {
+  color: #ad00e2;
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: .03em;
+  margin-bottom: 1.2em;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1.2em;
+}
+
+.form-group label {
+  font-weight: 700;
+  color: #ad00e2;
+  font-size: 1.08em;
+  margin-bottom: 0.34em;
+  letter-spacing: .02em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="url"],
+.form-group input[type="file"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid #c2a1ff;
+  font-size: 1.03em;
+  font-family: inherit;
+  padding: 0.65em 0.9em;
+  background: #f9f6ff;
+  color: #6c348c;
+  margin-bottom: 0.2em;
+  outline: none;
+  box-shadow: 0 2px 8px #c2a1ff19;
+  transition: border 0.18s, box-shadow 0.18s, background 0.18s;
+}
+
+.form-group input[type="file"] {
+  padding: 0.45em 0.1em;
+  background: none;
+  border: none;
+  color: #ad00e2;
+  margin-bottom: 0.4em;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="url"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border: 2px solid #ad00e2;
+  background: #f4ebff;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 2.4em;
+  max-height: 120px;
+}
+
+/* --- Filter Dropdowns --- */
+.products-header label,
+.products-header select {
+  font-size: 1.08em;
+  font-weight: 700;
+  color: #ad00e2;
+}
+
+#genderFilter,
+#categoryFilter {
+  background: #f9f6ff;
+  border: 2px solid #c2a1ff;
+  border-radius: 8px;
+  color: #ad00e2;
+  padding: 0.5em 1.2em 0.5em 0.8em;
+  margin-right: 0.7em;
+  font-weight: 600;
+  font-size: 1.06em;
+  transition: border 0.18s, box-shadow 0.18s;
+  box-shadow: 0 2px 12px #ad00e214;
+}
+
+#genderFilter:focus,
+#categoryFilter:focus {
+  border: 2px solid #ad00e2;
+  outline: none;
+  box-shadow: 0 2px 16px #ad00e233;
+}
+
+/* --- Add Product Button --- */
+.add-btn {
+  background: linear-gradient(90deg, #ad00e2 65%, #c2a1ff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7em 1.7em;
+  font-size: 1.11em;
+  font-weight: 700;
+  letter-spacing: .04em;
+  box-shadow: 0 2px 14px #ad00e222;
+  transition: background .18s, box-shadow .18s;
+  cursor: pointer;
+}
+.add-btn:hover,
+.add-btn:focus {
+  background: linear-gradient(90deg, #c2a1ff 15%, #ad00e2 95%);
+  box-shadow: 0 6px 26px #ad00e247;
+  color: #fff;
+  outline: none;
+}
+
+/* --- Modal Actions (centered, spaced) --- */
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.1rem;
+  margin-top: 1.5em;
+}
+
+.cancel-btn {
+  background: #bbb;
+  color: #fff;
+  border: none;
+  margin: 0;
+  box-shadow: 0 1px 10px #bbb5;
+}
+.cancel-btn:hover, .cancel-btn:focus {
+  background: #ad00e2;
+  color: #fff;
+  transform: translateY(-2px) scale(1.06);
+}
+.submit-btn {
+  background: linear-gradient(90deg, #ad00e2 70%, #c2a1ff 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 1px 18px #ad00e246;
+}
+.submit-btn:hover, .submit-btn:focus {
+  background: linear-gradient(90deg, #c2a1ff 25%, #ad00e2 80%);
+  color: #fff;
+  transform: translateY(-2px) scale(1.06);
+}
+/* --- Make Add/Edit Modal Box Smaller & Centered --- */
+.modal-box.pretty-modal,
+#editProductForm.modal-box.pretty-modal {
+  max-width: 355px !important;  /* reduce width */
+  min-width: 0 !important;      /* allow smaller size */
+  width: 98vw;
+  padding: 1.4rem 1.4rem 1.1rem 1.4rem !important;  /* smaller padding */
+  border-radius: 1.2rem !important;
+  box-shadow: 0 6px 48px #ad00e269, 0 0 0 2px #ad00e222;
+}
+
+/* Reduce vertical gap between form fields */
+.form-group {
+  margin-bottom: 0.7em !important;
+}
+
+/* Make form inputs slightly more compact */
+.form-group input[type="text"],
+.form-group input[type="url"],
+.form-group select,
+.form-group textarea {
+  font-size: 1em;
+  padding: 0.48em 0.8em;
+}
+
+/* Make modal header smaller */
+.pretty-modal h3 {
+  font-size: 1.16rem !important;
+  margin-bottom: 0.5em !important;
+}
+
+/* Reduce modal button size (optional, can keep bold if you like) */
+.modal-actions .submit-btn,
+.modal-actions .cancel-btn {
+  font-size: 1em !important;
+  padding: 0.44em 1.5em !important;
+}
+
+/* On mobile, allow modal to fit screen nicely */
+@media (max-width: 450px) {
+  .modal-box.pretty-modal {
+    min-width: 0 !important;
+    max-width: 99vw !important;
+    padding: 1.1rem 0.2rem 1rem 0.2rem !important;
+  }
+}
+/* --- Minimal and Stylish Modal (Form) --- */
+.modal-box.pretty-modal,
+#editProductForm.modal-box.pretty-modal {
+  max-width: 325px !important;   /* even smaller width */
+  min-width: 0 !important;
+  width: 92vw !important;
+  box-sizing: border-box;
+  padding: 1.3rem 1rem 1rem 1rem !important;
+  border-radius: 1.1rem !important;
+  box-shadow: 0 6px 36px #ad00e269, 0 0 0 1.5px #ad00e211;
+  margin: 0 auto;
+}
+
+/* Make all input/select/textarea fit inside */
+.modal-box.pretty-modal input[type="text"],
+.modal-box.pretty-modal input[type="url"],
+.modal-box.pretty-modal input[type="file"],
+.modal-box.pretty-modal select,
+.modal-box.pretty-modal textarea {
+  width: 100% !important;
+  margin: 0.26em 0 0.74em 0 !important;
+  border: 2px solid #e5d6ff;
+  border-radius: 9px;
+  font-size: 1em;
+  padding: 0.5em 0.8em;
+  box-sizing: border-box;
+  outline: none;
+  background: #faf8ff;
+  transition: border 0.16s, box-shadow 0.18s;
+}
+.modal-box.pretty-modal input[type="file"] {
+  border: none;
+  background: transparent;
+  padding-left: 0;
+}
+
+/* On focus: cute highlight */
+.modal-box.pretty-modal input:focus,
+.modal-box.pretty-modal textarea:focus,
+.modal-box.pretty-modal select:focus {
+  border: 2px solid #ad00e2;
+  background: #fffafd;
+  box-shadow: 0 0 8px #e5d6ff66;
+}
+
+/* Form Labels */
+.modal-box.pretty-modal label {
+  color: #ad00e2;
+  font-weight: 700;
+  font-size: 1.03em;
+  margin-bottom: 0.18em;
+  letter-spacing: .2px;
+}
+
+/* Make modal header even cuter */
+.pretty-modal h3 {
+  font-size: 1.19rem !important;
+  font-weight: 800;
+  color: #ad00e2;
+  margin-bottom: 0.85em !important;
+  text-align: center;
+  letter-spacing: .5px;
+}
+
+/* Smaller modal buttons with a shadow */
+.modal-actions .submit-btn,
+.modal-actions .cancel-btn {
+  font-size: 1em !important;
+  padding: 0.42em 1.6em !important;
+  margin-top: 0.2em;
+  border-radius: 12px !important;
+  box-shadow: 0 1.5px 8px #ad00e225;
+}
+.modal-actions .submit-btn {
+  background: linear-gradient(90deg, #ad00e2 80%, #c2a1ff 100%) !important;
+  color: #fff;
+  border: none;
+}
+.modal-actions .cancel-btn {
+  background: #bbb !important;
+  color: #fff !important;
+}
+
+/* File upload text align */
+.form-group input[type="file"] {
+  font-size: .95em;
+  margin-top: 0.16em;
+}
+
+/* Responsive on small screens */
+@media (max-width: 500px) {
+  .modal-box.pretty-modal {
+    max-width: 97vw !important;
+    padding: 1rem 0.1rem 0.7rem 0.1rem !important;
+  }
+}
+.modal-box.pretty-modal,
+#editProductForm.modal-box.pretty-modal {
+  max-width: 270px !important;
+  min-width: 0 !important;
+  width: 95vw !important;
+  box-sizing: border-box;
+  padding: 0.8rem 0.7rem 0.7rem 0.7rem !important; /* Less padding top & bottom */
+  border-radius: 1.1rem !important;
+}
+
+.modal-box.pretty-modal h3 {
+  font-size: 1.11rem !important;
+  margin-bottom: 0.7em !important;
+  margin-top: 0.3em !important;
+}
+
+.modal-box.pretty-modal .form-group {
+  margin-bottom: 0.65em !important;  /* Less vertical space between fields */
+}
+
+.modal-box.pretty-modal textarea {
+  min-height: 40px !important;   /* Shorter textarea */
+  max-height: 55px !important;
+  resize: vertical;
+}
+
+.modal-box.pretty-modal input[type="text"],
+.modal-box.pretty-modal input[type="url"],
+.modal-box.pretty-modal input[type="file"],
+.modal-box.pretty-modal select,
+.modal-box.pretty-modal textarea {
+  font-size: 0.97em !important;
+  padding: 0.38em 0.55em !important;
+  margin-bottom: 0.22em !important;
+}
+.modal-box.pretty-modal,
+#editProductForm.modal-box.pretty-modal {
+  max-width: 390px !important;    /* Was 270px, now wider */
+  min-width: 280px !important;
+  width: 98vw !important;
+  box-sizing: border-box;
+  padding: 1.2rem 1.4rem 1.1rem 1.4rem !important; /* a little more padding horizontally */
+  border-radius: 1.1rem !important;
+}
+
+  </style>>
+</head>
+<body>
+  <div class="admin-root">
+    <aside class="sidebar">
+      <div class="logo">Palette and Fit</div>
+      <nav class="sidebar-nav">
+        <a href="adminpanel.html">Dashboard</a>
+        <a href="adminpanelproducts.html" class="active">Products</a>
+        <a href="adminpaneluser.html">Users</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="darkmode-btn" id="darkModeToggle">
+          <span style="font-size:1.18em;">🌙</span> Dark Mode
+        </button>
+        <button class="logout-btn" id="logoutBtn">Logout</button>
+      </div>
+    </aside>
+    <main class="main-panel">
+      <div class="products-header">
+        <h2>Products</h2>
+        <button class="add-btn" id="addProductBtn">+ Add Product</button>
+      </div>
+      <div style="margin-bottom:2rem;">
+        <label for="genderFilter"><b>Filter by Gender:</b></label>
+        <select id="genderFilter" style="margin-left:10px;">
+          <option value="">All</option>
+          <option value="women">Women</option>
+          <option value="men">Men</option>
+        </select>
+        <label for="categoryFilter" style="margin-left:30px;"><b>Category:</b></label>
+        <select id="categoryFilter" style="margin-left:10px;">
+          <option value="">All</option>
+          <option value="summer">Summer</option>
+          <option value="winter">Winter</option>
+          <option value="wedding">Wedding</option>
+          <option value="vacation">Vacation</option>
+        </select>
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+    </main>
+  </div>
+
+  <!-- ADD PRODUCT MODAL -->
+  <div class="modal-bg" id="modalBg">
+    <form class="modal-box pretty-modal" id="addProductForm" autocomplete="off" enctype="multipart/form-data">
+      <h3>Add New Product</h3>
+      <div class="form-group">
+        <label for="productImage">Image URL:</label>
+        <input type="url" id="productImage" name="image" placeholder="Paste image link...">
+        <div style="font-size:0.97em;color:#969;">OR upload from computer</div>
+        <input type="file" id="productImageFile" name="image_files" accept="image/*" multiple>
+      </div>
+      <div class="form-group">
+        <label for="productTitle">Title:</label>
+        <input type="text" id="productTitle" name="title" required maxlength="35">
+      </div>
+      <div class="form-group">
+        <label for="productDesc">Description:</label>
+        <textarea id="productDesc" name="desc" rows="3" required maxlength="120"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="productGender">Gender:</label>
+        <select id="productGender" name="gender" required>
+          <option value="">Select</option>
+          <option value="women">Women</option>
+          <option value="men">Men</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="productCategory">Category:</label>
+        <select id="productCategory" name="category" required>
+          <option value="summer">Summer</option>
+          <option value="winter">Winter</option>
+          <option value="wedding">Wedding</option>
+          <option value="vacation">Vacation</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="cancel-btn" id="cancelModalBtn">Cancel</button>
+        <button type="submit" class="submit-btn">Add</button>
+      </div>
+    </form>
+  </div>
+  <!-- EDIT PRODUCT MODAL -->
+  <div id="editModalBg" class="modal-bg">
+    <form id="editProductForm" class="modal-box pretty-modal" autocomplete="off">
+      <h3>Edit Product</h3>
+      <div class="form-group">
+        <label for="editTitle">Title:</label>
+        <input type="text" id="editTitle" name="title" required>
+      </div>
+      <div class="form-group">
+        <label for="editDesc">Description:</label>
+        <textarea id="editDesc" name="desc" rows="3" required maxlength="120"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="editImage">Image URL:</label>
+        <input type="url" id="editImage" name="image_url" placeholder="Paste image link...">
+        <div style="font-size:0.97em;color:#969;">OR upload from computer</div>
+        <input type="file" id="editImageFile" accept="image/*">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="cancel-btn" id="cancelEditBtn">Cancel</button>
+        <button type="submit" class="submit-btn">Update</button>
+      </div>
+    </form>
+  </div>
+  <!-- REMOVE CONFIRM MODAL -->
+  <div class="modal-bg" id="removeConfirmModal">
+    <div class="modal-box pretty-modal" style="max-width:340px;">
+      <h3>Remove Product?</h3>
+      <div style="color:#ad00e2;margin-bottom:1.2em;">Are you sure you want to remove this product?</div>
+      <div class="modal-actions">
+        <button class="cancel-btn" id="removeCancelBtn">Cancel</button>
+        <button class="submit-btn" id="removeConfirmBtn">Yes, Remove</button>
+      </div>
+    </div>
+  </div>
+  <!-- Custom Logout Modal -->
+<div id="logoutModal" class="logout-modal-bg">
+  <div class="logout-modal-box">
+    <div class="logout-title">Logged out!</div>
+    <div class="logout-desc">You have been successfully logged out.</div>
+    <button class="logout-modal-btn" id="logoutModalOk">OK</button>
+  </div>
+</div>
+
+  <script>
+    // ---- Dark Mode ----
+    const darkBtn = document.getElementById('darkModeToggle');
+    const bodyEl = document.body;
+    function setDarkBtn(isDark) {
+      darkBtn.innerHTML = isDark
+        ? '<span style="font-size:1.18em;">☀️</span> Light Mode'
+        : '<span style="font-size:1.18em;">🌙</span> Dark Mode';
+    }
+    if (localStorage.getItem('darkMode') === 'true') {
+      bodyEl.classList.add('dark-mode');
+      setDarkBtn(true);
+    } else {
+      setDarkBtn(false);
+    }
+    darkBtn.addEventListener('click', () => {
+      const isDark = bodyEl.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', isDark);
+      setDarkBtn(isDark);
+    });
+    document.getElementById('logoutBtn').onclick = () => {
+      alert('Logged out!');
+      window.location.href = 'login.html';
+    };
+// With this:
+function showLogoutModal() {
+  document.getElementById('logoutModal').classList.add('active');
+}
+document.getElementById('logoutBtn').onclick = showLogoutModal;
+document.getElementById('logoutModalOk').onclick = function() {
+  document.getElementById('logoutModal').classList.remove('active');
+  window.location.href = 'login.html'; // or your desired redirect
+};
+    // ---- Product Data & Logic ----
+    let allProducts = [];
+    let productToDeleteId = null;
+    let editingProductId = null;
+
+    // Fetch All Products
+    function loadProducts() {
+      fetch('http://127.0.0.1:5001/api/products')
+        .then(res => res.json())
+        .then(products => {
+          allProducts = products;
+          displayProducts();
+        });
+    }
+
+    // Show Products
+    function displayProducts() {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+      const gender = document.getElementById('genderFilter').value;
+      const category = document.getElementById('categoryFilter').value;
+      let filtered = allProducts;
+      if (gender) filtered = filtered.filter(p => p.gender === gender);
+      if (category) filtered = filtered.filter(p => p.category === category);
+      if (filtered.length === 0) {
+        grid.innerHTML = "<div style='color:#ad00e2; font-weight:600; text-align:center;'>No products found!</div>";
+        return;
+      }
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <img src="${p.image_url}" alt="${p.title}">
+          <div class="product-title">${p.title}</div>
+          <div class="product-desc">${p.description}</div>
+          <div style="font-size: 0.95em; color: #ad00e2; margin: .4em 0;">
+            <b>Gender:</b> ${p.gender} <b>Category:</b> ${p.category}
+          </div>
+          <button class="action-btn remove-btn" onclick="showRemoveModal(${p.id})">Remove</button>
+          <button class="action-btn edit-btn" onclick="openEditModal(${p.id}, '${p.title.replace(/'/g, "\\'")}', '${p.description.replace(/'/g, "\\'")}', '${p.image_url.replace(/'/g, "\\'")}')">Edit</button>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Filters
+    document.getElementById('genderFilter').addEventListener('change', displayProducts);
+    document.getElementById('categoryFilter').addEventListener('change', displayProducts);
+
+    // ADD PRODUCT LOGIC
+    document.getElementById('addProductBtn').onclick = () => {
+      document.getElementById('modalBg').classList.add('active');
+    };
+    document.getElementById('cancelModalBtn').onclick = () => {
+      document.getElementById('modalBg').classList.remove('active');
+    };
+    document.getElementById('modalBg').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('modalBg'))
+        document.getElementById('modalBg').classList.remove('active');
+    });
+
+    document.getElementById('addProductForm').onsubmit = function(e) {
+      e.preventDefault();
+      const fileInput = document.getElementById('productImageFile');
+      const imageUrl = document.getElementById('productImage').value.trim();
+      const title = document.getElementById('productTitle').value.trim();
+      const description = document.getElementById('productDesc').value.trim();
+      const gender = document.getElementById('productGender').value;
+      const category = document.getElementById('productCategory').value;
+
+      if (!gender) return alert("Please select gender.");
+
+      if (fileInput.files.length > 0) {
+        let uploads = [];
+        for (let i = 0; i < fileInput.files.length; i++) {
+          const formData = new FormData();
+          formData.append('image_file', fileInput.files[i]);
+          formData.append('title', title);
+          formData.append('description', description);
+          formData.append('gender', gender);
+          formData.append('category', category);
+          uploads.push(
+            fetch('http://127.0.0.1:5001/api/products', {
+              method: 'POST',
+              body: formData
+            }).then(res => res.json())
+          );
+        }
+        Promise.all(uploads)
+          .then(results => {
+            let success = results.filter(r => r.id).length;
+            if (success > 0) {
+              loadProducts();
+              document.getElementById('modalBg').classList.remove('active');
+              e.target.reset();
+            } else {
+              alert("Error adding products");
+            }
+          });
+      } else if (imageUrl) {
+        fetch('http://127.0.0.1:5001/api/products', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({title, description, image_url: imageUrl, gender, category})
+        })
+        .then(res => res.json())
+        .then(r => {
+          if (r.id) {
+            loadProducts();
+            document.getElementById('modalBg').classList.remove('active');
+            e.target.reset();
+          } else {
+            alert("Error adding product");
+          }
+        });
+      } else {
+        alert("Please provide an image URL or upload a file.");
+      }
+    };
+
+    // REMOVE MODAL LOGIC
+    function showRemoveModal(id) {
+      productToDeleteId = id;
+      document.getElementById('removeConfirmModal').classList.add('active');
+    }
+    window.showRemoveModal = showRemoveModal;
+
+    document.getElementById('removeCancelBtn').onclick = () => {
+      document.getElementById('removeConfirmModal').classList.remove('active');
+      productToDeleteId = null;
+    };
+    document.getElementById('removeConfirmBtn').onclick = () => {
+      if (!productToDeleteId) return;
+      fetch(`http://127.0.0.1:5001/api/products/${productToDeleteId}`, { method: 'DELETE' })
+        .then(res => res.json())
+        .then(r => {
+          if (r.success) loadProducts();
+          document.getElementById('removeConfirmModal').classList.remove('active');
+          productToDeleteId = null;
+        });
+    };
+    document.getElementById('removeConfirmModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('removeConfirmModal')) {
+        document.getElementById('removeConfirmModal').classList.remove('active');
+        productToDeleteId = null;
+      }
+    });
+
+    // EDIT PRODUCT LOGIC
+    function openEditModal(id, title, desc, image_url) {
+      editingProductId = id;
+      document.getElementById('editTitle').value = title;
+      document.getElementById('editDesc').value = desc;
+      document.getElementById('editImage').value = image_url;
+      document.getElementById('editModalBg').classList.add('active');
+    }
+    window.openEditModal = openEditModal;
+
+    document.getElementById('cancelEditBtn').onclick = () => {
+      document.getElementById('editModalBg').classList.remove('active');
+    };
+    document.getElementById('editModalBg').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('editModalBg'))
+        document.getElementById('editModalBg').classList.remove('active');
+    });
+
+    document.getElementById('editProductForm').onsubmit = function(e) {
+      e.preventDefault();
+      const title = document.getElementById('editTitle').value.trim();
+      const description = document.getElementById('editDesc').value.trim();
+      const image_url = document.getElementById('editImage').value.trim();
+      const fileInput = document.getElementById('editImageFile');
+
+      if (fileInput.files.length > 0) {
+        const formData = new FormData();
+        formData.append('image_file', fileInput.files[0]);
+        formData.append('title', title);
+        formData.append('description', description);
+
+        fetch(`http://127.0.0.1:5001/api/products/${editingProductId}`, {
+          method: 'PUT',
+          body: formData
+        })
+        .then(res => res.json())
+        .then(r => {
+          if (r.success) {
+            document.getElementById('editModalBg').classList.remove('active');
+            loadProducts();
+          } else {
+            alert("Error updating product.");
+          }
+        });
+      } else {
+        fetch(`http://127.0.0.1:5001/api/products/${editingProductId}`, {
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({title, description, image_url})
+        })
+        .then(res => res.json())
+        .then(r => {
+          if (r.success) {
+            document.getElementById('editModalBg').classList.remove('active');
+            loadProducts();
+          } else {
+            alert("Error updating product.");
+          }
+        });
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', loadProducts);
+  </script>
+</body>
+</html>

@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>  Men – Palette and Fit</title>
+     <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bg-light: #f2f2f2;
+      --bg-mid: #e0e0e0;
+      --bg-dark: #c2c2c2;
+      --accent: #ad00e2;
+      --text: #000;
+      --button-bg: #000;
+      --button-text: #fff;
+    }
+    body {
+      margin:0;
+      padding:0;
+      background: var(--bg-light);
+      color: var(--text);
+      /* font-family: 'Poppins', sans-serif; */
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode {
+      --bg-light: #1b1c1f;
+      --bg-mid: #23242a;
+      --bg-dark: #121214;
+      --text: #eee;
+      --button-bg: #5f5cff;
+      --button-text: #fff;
+      background: var(--bg-light);
+      color: var(--text);
+    }
+    /* ===== HEADER & NAV ===== */
+    /* header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.3rem 2rem;
+      background: var(--bg-mid);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background 0.3s;
+      font-weight: 600;
+    } */
+     header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.0rem 2.0rem;  /* Top/bottom and left/right padding increased */
+  background: var(--bg-mid);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background 0.3s;
+}
+
+.logo {
+  font-family: 'Style Script', cursive !important;
+  font-size: 2.3rem !important;  /* Thoda bara bhi kar sakte hain for impact */
+  color: #ad00e2 !important;     /* Direct exact purple */
+  font-weight: 400 !important;
+  letter-spacing: 2px;
+  text-shadow: none !important;
+  background: none !important;
+  filter: none !important;
+  line-height: 1.08;
+  margin: 0;
+  padding: 0 0.2rem;  /* Thoda side space for breathing */
+  display: inline-block;
+  user-select: none; 
+}
+    header .logo:hover {
+      text-shadow: 2px 2px 6px rgba(122,45,246,0.26);
+    }
+    .nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      font-weight: 400;
+    }
+    .nav a, .dropbtn {
+      color: #2a024d;
+      background: none;
+      border: none;
+      text-decoration: none;
+      font: inherit;
+      font-weight: 400;
+      padding: .5rem 0;
+      cursor: pointer;
+      transition: color .18s, font-weight .2s;
+      position: relative;
+    }
+    .nav a:hover, .nav a.active, .dropbtn.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .wishlist-link {
+      color: #222;
+      font-size: 1.15rem;
+      font-weight: 400;
+      transition: color .2s, font-weight .18s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .wishlist-link:hover { color: #e60023 !important; }
+    body.dark-mode .wishlist-link:hover { color: #e60023 !important; }
+    .btn {
+      padding: .5rem 1rem;
+      border: none;
+      cursor: pointer;
+      background: var(--button-bg);
+      color: var(--button-text);
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 400;
+      transition: transform .18s, font-weight .18s, background .2s;
+    }
+    .btn:hover { transform: scale(1.05); font-weight: 700; }
+    .btn.secondary {
+      background: none;
+      border: 1px solid var(--text);
+      color: var(--text);
+    }
+    .btn.secondary:hover {
+      background: var(--bg-mid);
+      color: #000;
+      border-color: #000;
+    }
+    .darkmode-btn {
+      background: #7a2df6;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 0.5rem 0.95rem 0.5rem 0.8rem;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-left: 1.2rem;
+      box-shadow: 0 2px 12px #a673fa29;
+      transition: background .2s, color .2s, box-shadow .18s, font-weight .18s;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      cursor: pointer;
+      outline: none;
+    }
+    .darkmode-btn:hover,
+    .darkmode-btn:focus {
+      background: #ad00e2;
+      color: #fff;
+      box-shadow: 0 6px 24px #a673fa49;
+      font-weight: 700;
+    }
+    body.dark-mode .darkmode-btn {
+      background: #2a024d;
+      color: #fff;
+    }
+    body.dark-mode .darkmode-btn:hover,
+    body.dark-mode .darkmode-btn:focus {
+      background: #7a2df6;
+      font-weight: 700;
+    }
+.profile-icon {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.8rem;
+  background: linear-gradient(135deg, #ad00e2 60%, #c2a1ff 100%) !important;
+  border: 2.2px solid #fff !important;
+  box-shadow: none !important;
+  overflow: hidden;
+  padding: 0 !important;
+}
+.profile-icon svg {
+  width: 23px;
+  height: 23px;
+  display: block;
+}
+    /* Hamburger (for mobile) */
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text);
+      margin-left: 1.2rem;
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.8rem 0.9rem;
+        position: relative;
+      }
+      .nav {
+        display: none;
+        flex-direction: column;
+        gap: 1.2rem;
+        margin-top: 0.3rem;
+        background: var(--bg-mid);
+        width: 100vw;
+        left: 0; right: 0; top: 62px;
+        position: absolute;
+        z-index: 999;
+        box-shadow: 0 8px 24px #0002;
+        padding-bottom: 1.2rem;
+        border-radius: 0 0 1.2rem 1.2rem;
+      }
+      .nav.open { display: flex; }
+      .hamburger {
+        display: block;
+        margin-left: auto;
+        margin-right: 0;
+        order: 2;
+      }
+      .logo {
+        font-size: 1.22rem;
+        order: 1;
+      }
+    }
+
+    
+    @media (min-width: 769px) {
+      .hamburger { display: none; }
+      .nav { display: flex !important; flex-direction: row; position: static; background: none; box-shadow: none; }
+    }
+    body.dark-mode .nav { background: var(--bg-mid); }
+    body.dark-mode .nav a,
+    body.dark-mode .dropbtn,
+    body.dark-mode .wishlist-link {
+      color: #fff;
+    }
+    body.dark-mode .nav a.active,
+    body.dark-mode .nav a:hover,
+    body.dark-mode .dropbtn.active,
+    body.dark-mode .dropbtn:hover {
+      color: var(--accent) !important;
+    }
+
+    /* ===== MAIN SECTION ===== */
+    .section {
+      max-width: 980px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .section-header {
+      text-align: center;
+      margin: 2rem 0 1rem 0;
+    }
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      color: var(--accent) !important;
+    }
+    .collection-desc {
+      text-align: center;
+      color: #181825;
+      font-size: 1.09rem;
+      margin-bottom: 1.9rem;
+      font-weight: 600;
+    }
+    body.dark-mode .collection-desc { color: #fff; }
+    .cards-row {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 1.1rem;
+      width: 100%;
+      margin-top: 2.5rem;
+    }
+    .season-card {
+      background: #fff;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(122, 45, 246, 0.10);
+      transition: box-shadow 0.2s, transform 0.2s;
+      min-height: 270px;
+      max-width: 220px;
+      min-width: 180px;
+      width: 100%;
+      position: relative;
+      padding: 1rem 0.6rem 1.5rem 0.6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 1.03rem;
+      flex: 0 0 22%;
+      margin-bottom: 1.2rem;
+      text-align: center;
+      font-weight: 500;
+    }
+    .season-card:hover {
+      box-shadow: 0 8px 32px rgba(122, 45, 246, 0.22), 0 2px 16px #7a2df622;
+      transform: translateY(-7px) scale(1.04);
+      z-index: 2;
+      background: #f7f2ff;
+    }
+    .season-card img {
+      width: 100%;
+      max-width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 1.0rem;
+      display: block;
+      box-shadow: 0 2px 10px #dacaf7a1;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .season-card h2 {
+      margin: 0 0 0.4rem 0;
+      font-size: 1.13rem;
+      font-weight: 700;
+      color: #25125c;
+      letter-spacing: 0.6px;
+      text-align: center;
+    }
+    .season-card .desc {
+      color: #7d7d7d;
+      font-size: 0.96rem;
+      font-weight: 500;
+      margin-top: 0;
+      text-align: center;
+    }
+    body.dark-mode .season-card {
+      background: #222 !important;
+      color: #fafafa !important;
+      border: none;
+      box-shadow: 0 4px 16px rgba(80,45,150,0.11);
+    }
+    body.dark-mode .season-card:hover {
+      border: 2.7px solid #7a2df6;
+      background: #2c223b;
+      box-shadow: 0 8px 32px #5f5cff21;
+    }
+    body.dark-mode .season-card h2 { color: #fff; }
+    body.dark-mode .season-card .desc { color: #ccc; }
+    /* ===== FOOTER ===== */
+    footer {
+      background: #444b4b;
+      color: #eee;
+      padding: 2.5rem 0;
+      margin-top: 2rem;
+      font-weight: 500;
+    }
+    footer a { color: #fff; text-decoration: none; }
+    footer strong { color: #fff; }
+    body.dark-mode footer { background: #18181b; color: #ccc; }
+    body.dark-mode footer a { color: #aaa; }
+    .footer-row {
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:1.5rem;
+    }
+    .footer-col { flex:1 1 200px; min-width:180px;}
+    .footer-col div {margin-bottom:0.4rem;}
+    .footer-col strong {font-weight:700;}
+    .footer-copy {text-align:center; margin-top:2.5rem; font-size:1.15rem;}
+    .footer-copy span {font-size:0.93rem; color:#bbb;}
+    @media (max-width: 1100px) {
+      .section { max-width: 98vw; }
+      .cards-row { flex-wrap: wrap; }
+      .season-card { flex: 1 1 40vw; max-width: 300px; }
+    }
+    @media (max-width: 700px) {
+      .section { padding: 0 0.2rem; }
+      .cards-row { flex-direction: column; align-items: center; gap: 1.3rem; }
+      .footer-row { flex-direction: column !important; gap: 0.7rem !important; }
+      .season-card { width: 90vw; max-width: 98vw;}
+      .season-card img { width: 80vw; max-width: 340px; height: 190px;}
+    }
+    .wishlist-link { font-size: 1.15rem; cursor: pointer; }
+
+    .season-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+.season-card-link:hover .season-card {
+  box-shadow: 0 6px 32px #ad00e233, 0 1.5px 8px #ad00e208;
+  transform: translateY(-6px) scale(1.04);
+}
+.season-card {
+  cursor: pointer;
+}
+
+:root {
+  --bg-light: #f7f4ee;
+  --bg-mid: #ece5db;
+  --bg-dark: #23242a;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --heading: #ad00e2;
+  --nav-bg: #ece5db;
+  --text: #23242a;
+  --button-bg: #ad00e2;
+  --button-text: #fff;
+}
+
+/* === BODY COLOUR + TRANSITION === */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-light);
+  color: var(--text);
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark-mode {
+  --bg-light: #18181b;
+  --bg-mid: #23242a;
+  --bg-dark: #121214;
+  --nav-bg: #23242a;
+  --text: #fff;
+  --heading: #ad00e2;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --button-bg: #5f5cff;
+  --button-text: #fff;
+  background: var(--bg-light);
+  color: var(--text);
+}
+
+/* === HEADER & NAV BAR === */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2.4rem;
+  background: var(--nav-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-weight: 600;
+  box-shadow: 0 2px 14px #0001;
+}
+.logo {
+  font-family: 'Style Script', cursive !important;
+  font-size: 2.4rem !important;
+  color: #ad00e2 !important;
+  font-weight: 400 !important;
+  letter-spacing: 2px;
+  line-height: 1.08;
+  margin: 0;
+  padding: 0 0.2rem;
+  user-select: none;
+}
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-weight: 400;
+}
+.nav a {
+  color: #2a024d;
+  background: none;
+  border: none;
+  text-decoration: none;
+  font: inherit;
+  font-weight: 400;
+  padding: .5rem 0;
+  cursor: pointer;
+  transition: color .18s, font-weight .2s;
+  position: relative;
+}
+.nav a:hover, .nav a.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+.wishlist {
+  cursor: pointer;
+  color: #2a024d;
+  font-size: 1.15rem;
+  font-weight: 400;
+  transition: color .2s, font-weight .18s;
+}
+.nav .wishlist:hover, .nav .wishlist:focus {
+  color: #e60023 !important;
+}
+.profile-icon {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.8rem;
+  background: linear-gradient(135deg, #ad00e2 60%, #c2a1ff 100%) !important;
+  border: 2.2px solid #fff !important;
+  overflow: hidden;
+  padding: 0 !important;
+}
+.profile-icon svg {
+  width: 23px;
+  height: 23px;
+}
+.darkmode-btn {
+  background: #7a2df6;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1.2rem;
+  box-shadow: 0 2px 12px #a673fa29;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.darkmode-btn:hover { background: #ad00e2; color: #fff; }
+.darkmode-btn:focus, .darkmode-btn:active {
+  outline: none !important;
+  background: #ad00e2 !important;
+  color: #fff !important;
+  box-shadow: 0 6px 24px #a673fa49;
+  font-weight: 700;
+}
+/* Dark mode nav styling */
+body.dark-mode .darkmode-btn { background: #2a024d; color: #fff; }
+body.dark-mode .darkmode-btn:hover, body.dark-mode .darkmode-btn:focus, body.dark-mode .darkmode-btn:active {
+  background: #7a2df6 !important; color: #fff !important; outline: none !important;
+  box-shadow: 0 6px 24px #a673fa49;
+  font-weight: 700;
+}
+body.dark-mode .nav a, body.dark-mode .wishlist { color: #fff; }
+body.dark-mode .nav a.active, body.dark-mode .nav a:hover { color: var(--accent) !important; }
+body.dark-mode .nav { background: var(--nav-bg); }
+
+/* Hamburger menu */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  margin-left: 1.2rem;
+}
+@media (max-width: 768px) {
+  header { flex-direction: row; align-items: center; justify-content: space-between; padding: 0.8rem 0.9rem; position: relative; }
+  .nav { display: none; flex-direction: column; gap: 1.1rem; margin-top: 0.2rem; background: var(--nav-bg, var(--bg-mid)); width: 100vw; left: 0; right: 0; top: 65px; position: absolute; z-index: 200; box-shadow: 0 8px 24px #0002; padding-bottom: 1.3rem; border-radius: 0 0 1.2rem 1.2rem; }
+  .nav.open { display: flex; }
+  .hamburger { display: block; margin-left: auto; margin-right: 0; order: 2; }
+  .logo { font-size: 1.22rem; order: 1; }
+}
+@media (min-width: 769px) {
+  .hamburger { display: none; }
+  .nav { display: flex !important; flex-direction: row; position: static; background: none; box-shadow: none; }
+}
+.nav a {
+  font-size: 1.08rem; /* ya jitna chaho */
+}
+
+
+/* ===== SAME PURPLE HAMBURGER + MOBILE DROPDOWN (OVERRIDES) ===== */
+
+/* Pretty purple hamburger (animated to X) */
+.hamburger{
+  --hb-size:26px; --hb-thickness:3px; --hb-radius:3px;
+  --hb-a:#7a2df6; --hb-b:#ad00e2;
+  width:44px;height:38px;border-radius:12px;border:2px solid rgba(173,0,226,.25);
+  background:linear-gradient(135deg,rgba(173,0,226,.12),rgba(122,45,246,.12));
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 6px 20px rgba(173,0,226,.18);
+  transition:transform .2s,box-shadow .2s,background .2s;
+}
+.hamburger:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(173,0,226,.28);
+  background:linear-gradient(135deg,rgba(173,0,226,.16),rgba(122,45,246,.20));}
+.hamburger:focus-visible{outline:2px solid var(--hb-b);outline-offset:2px}
+.hamburger-box{position:relative;width:var(--hb-size);height:var(--hb-thickness)}
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after{
+  content:"";position:absolute;left:0;right:0;height:var(--hb-thickness);
+  border-radius:var(--hb-radius);
+  background:linear-gradient(90deg,var(--hb-a),var(--hb-b));
+  box-shadow:0 1px 6px rgba(122,45,246,.45);
+  transition:transform .28s cubic-bezier(.55,.06,.68,.19),top .2s,opacity .2s;
+}
+.hamburger-inner{top:0}
+.hamburger-inner::before{top:calc(-8px - var(--hb-thickness)/2)}
+.hamburger-inner::after{top:calc(8px + var(--hb-thickness)/2)}
+.hamburger.is-active .hamburger-inner{transform:rotate(45deg)}
+.hamburger.is-active .hamburger-inner::before{top:0;transform:rotate(-90deg)}
+.hamburger.is-active .hamburger-inner::after{top:0;opacity:0}
+body.dark-mode .hamburger{border-color:rgba(194,161,255,.35);box-shadow:0 6px 20px rgba(194,161,255,.18)}
+
+/* ----- Visibility & dropdown behavior ----- */
+
+/* desktop ≥1201px: hamburger hidden, nav inline */
+@media (min-width: 1201px){
+  .hamburger{ display:none !important; }
+  .nav{
+    display:flex !important; position:static !important; background:transparent !important;
+    box-shadow:none !important; border-radius:0 !important; gap:2rem;
+  }
+}
+
+/* mobile/tablet ≤1200px: hamburger shown, nav drops under header */
+@media (max-width: 1200px){
+  header{ position: sticky !important; top:0; z-index:100 !important; }
+  .hamburger{
+    display:flex !important;
+    position:absolute !important; right:1rem !important; top:50% !important;
+    transform:translateY(-50%) !important; z-index:5 !important;
+  }
+  .hamburger.is-active{ transform:translateY(-50%) !important; } /* don’t move when toggled */
+
+  .nav{
+    display:none !important; flex-direction:column !important; gap:1rem !important;
+    position:absolute !important; left:0 !important; right:0 !important;
+    top:calc(100% - 1px) !important;          /* flush to header bottom (no gap) */
+    margin:0 !important; padding:.75rem 1rem 1rem !important;
+    background:var(--nav-bg) !important; box-shadow:0 8px 24px #0002 !important;
+    border-radius:0 0 12px 12px !important; z-index:4 !important;
+  }
+  .nav::before{ content:""; position:absolute; left:0; right:0; top:-1px; height:1px;
+    background:var(--nav-bg); }              /* kills 1px seam on some DPRs */
+  .nav.open{ display:flex !important; }
+}
+
+  </style>
+</head>
+<body>
+  <!-- HEADER (responsive with hamburger menu) -->
+  <header>
+  <div class="logo">Palette and Fit</div>
+<button class="hamburger" id="navToggle" aria-label="Toggle menu" aria-controls="site-nav" aria-expanded="false">
+  <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+</button>
+
+<nav class="nav" id="site-nav">
+
+    <a href="homepage1.html" >Home</a>
+    <a href="men.html" class="active">Men</a>
+    <a href="women.html">Women</a>
+    <a href="aboutus.html">About us</a>
+    <a href="contactus.html">Contact us</a>
+    <a href="wishlist.html" class="wishlist">♡ Wishlist</a>
+    <a href="profile.html" class="profile-icon" title="Profile">
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="8.5" r="4.2" fill="#fff" fill-opacity=".95"/>
+        <ellipse cx="12" cy="18" rx="7" ry="3.2" fill="#fff" fill-opacity=".38"/>
+      </svg>
+    </a>
+    <button class="btn darkmode-btn" id="darkModeToggle">
+      <span style="font-size:1.25em;">🌙</span> Dark Mode
+    </button>
+  </nav>
+</header>
+
+<!-- WOMEN'S COLLECTION SECTION -->
+  <!-- MEN’S COLLECTION SECTION -->
+  <section class="section">
+  <div class="section-header">
+    <h2>Men’s Collection</h2>
+    <p class="collection-desc">
+      Explore men’s styles by season and occasion
+    </p>
+  </div>
+  <div class="cards-row">
+    <a href="summermen.html" class="season-card-link">
+      <div class="season-card">
+        <img src="https://images.pexels.com/photos/32935728/pexels-photo-32935728.jpeg?auto=compress&w=600&h=600&fit=crop" alt="Summer" />
+        <h2>Summer</h2>
+        <div class="desc">Breezy, comfortable, and cool styles perfect for hot weather.</div>
+      </div>
+    </a>
+    <a href="wintermen.html" class="season-card-link">
+      <div class="season-card">
+        <img src="https://images.pexels.com/photos/25745269/pexels-photo-25745269.jpeg?auto=compress&w=600&h=600&fit=crop" alt="Winter" />
+        <h2>Winter</h2>
+        <div class="desc">Layer up with warm, stylish winter essentials and outerwear.</div>
+      </div>
+    </a>
+    <a href="weddingmen.html" class="season-card-link">
+      <div class="season-card">
+        <img src="https://images.pexels.com/photos/32878560/pexels-photo-32878560.jpeg?auto=compress&w=600&h=600&fit=crop" alt="Wedding Season" />
+        <h2>Wedding Season</h2>
+        <div class="desc">Dressed to impress for celebrations, parties, and festive events.</div>
+      </div>
+    </a>
+    <a href="vacationmen.html" class="season-card-link">
+      <div class="season-card">
+        <img src="https://images.pexels.com/photos/1121796/pexels-photo-1121796.jpeg?auto=compress&w=600&h=600&fit=crop" alt="Vacation Season" />
+        <h2>Vacation Season</h2>
+        <div class="desc">Relaxed and versatile styles for travel and holidays.</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-row">
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Need Help ?</div>
+        <div style="margin-bottom:0.4rem;"><a href="contactus.html">Contact us</a></div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">More Info</div>
+        <div style="margin-bottom:0.4rem;"><a href="aboutus.html">About us</a></div>
+        <div style="margin-bottom:0.4rem;"><a href="#">Terms &amp; Conditions</a></div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Location</div>
+        <div style="margin-bottom:0.4rem;">support@PaletteandFit.com</div>
+        <div style="margin-bottom:0.4rem;">4162 Wayback Lane, Farmingdale</div>
+        <div style="margin-bottom:0.4rem;">New York, 11735, USA</div>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <strong>Palette and Fit</strong><br>
+      <span>© 2025 Palette and Fit. All rights reserved.</span>
+    </div>
+  </footer>
+  <script>
+
+    // Dark Mode Toggle
+    const darkBtn = document.getElementById('darkModeToggle'),
+          bodyEl  = document.body;
+    if (localStorage.getItem('darkMode')==='true') {
+      bodyEl.classList.add('dark-mode');
+      darkBtn.textContent = '☀️ Light Mode';
+    }
+    darkBtn.addEventListener('click', () => {
+      const isDark = bodyEl.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', isDark);
+      darkBtn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+    });
+  </script>
+  <script>
+  (function(){
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.querySelector('header .nav');
+    if (navToggle && nav){
+      // open/close
+      navToggle.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        navToggle.classList.toggle('is-active', open);
+        navToggle.setAttribute('aria-expanded', String(open));
+      });
+      // close after clicking a link
+      nav.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A' && nav.classList.contains('open')){
+          nav.classList.remove('open');
+          navToggle.classList.remove('is-active');
+          navToggle.setAttribute('aria-expanded','false');
+        }
+      });
+      // reset when going back to desktop
+      const mq = window.matchMedia('(min-width: 1201px)');
+      const sync = () => {
+        if (mq.matches){
+          nav.classList.remove('open');
+          navToggle.classList.remove('is-active');
+          navToggle.setAttribute('aria-expanded','false');
+        }
+      };
+      mq.addEventListener ? mq.addEventListener('change', sync) : window.addEventListener('resize', sync);
+      sync();
+    }
+  })();
+</script>
+
+</body>
+</html>

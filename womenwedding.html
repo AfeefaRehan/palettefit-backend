@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Women Wedding Collection – Palette and Fit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+:root {
+  --bg-light: #f7f4ee;
+  --bg-mid: #ece5db;
+  --bg-dark: #23242a;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --heading: #ad00e2;
+  --nav-bg: #ece5db;
+  --text: #23242a;
+  --button-bg: #ad00e2;
+  --button-text: #fff;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-light);
+  color: var(--text);
+  /* font-family: 'Poppins', Arial, sans-serif; */
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark-mode {
+  --bg-light: #18181b;
+  --bg-mid: #23242a;
+  --bg-dark: #121214;
+  --nav-bg: #23242a;
+  --text: #fff;
+  --heading: #ad00e2;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --button-bg: #5f5cff;
+  --button-text: #fff;
+  background: var(--bg-light);
+  color: var(--text);
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2.4rem;
+  background: var(--nav-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-weight: 600;
+  box-shadow: 0 2px 14px #0001;
+}
+.logo {
+  font-family: 'Style Script', cursive !important;
+  font-size: 2.4rem !important;
+  color: #ad00e2 !important;
+  font-weight: 400 !important;
+  letter-spacing: 2px;
+  line-height: 1.08;
+  margin: 0;
+  padding: 0 0.2rem;
+  user-select: none;
+}
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-weight: 400;
+}
+.nav a {
+  color: #2a024d;
+  background: none;
+  border: none;
+  text-decoration: none;
+  font: inherit;
+  font-weight: 400;
+  padding: .5rem 0;
+  cursor: pointer;
+  transition: color .18s, font-weight .2s;
+  position: relative;
+}
+.nav a:hover, .nav a.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+.wishlist {
+  cursor: pointer;
+  color: #2a024d;
+  font-size: 1.15rem;
+  font-weight: 400;
+  transition: color .2s, font-weight .18s;
+}
+.nav .wishlist:hover, .nav .wishlist:focus {
+  color: #e60023 !important;
+}
+.profile-icon {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.8rem;
+  background: linear-gradient(135deg, #ad00e2 60%, #c2a1ff 100%) !important;
+  border: 2.2px solid #fff !important;
+  overflow: hidden;
+  padding: 0 !important;
+}
+.profile-icon svg {
+  width: 23px;
+  height: 23px;
+}
+.darkmode-btn {
+  background: #7a2df6;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1.2rem;
+  box-shadow: 0 2px 12px #a673fa29;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.darkmode-btn:hover { background: #ad00e2; color: #fff; }
+.darkmode-btn:focus, .darkmode-btn:active {
+  outline: none !important;
+  background: #ad00e2 !important;
+  color: #fff !important;
+  box-shadow: 0 6px 24px #a673fa49;
+  font-weight: 700;
+}
+body.dark-mode .darkmode-btn { background: #2a024d; color: #fff; }
+body.dark-mode .darkmode-btn:hover, body.dark-mode .darkmode-btn:focus, body.dark-mode .darkmode-btn:active {
+  background: #7a2df6 !important; color: #fff !important; outline: none !important;
+  box-shadow: 0 6px 24px #a673fa49;
+  font-weight: 700;
+}
+body.dark-mode .nav a, body.dark-mode .wishlist { color: #fff; }
+body.dark-mode .nav a.active, body.dark-mode .nav a:hover { color: var(--accent) !important; }
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  margin-left: 1.2rem;
+}
+@media (max-width: 768px) {
+  header { flex-direction: row; align-items: center; justify-content: space-between; padding: 0.8rem 0.9rem; position: relative; }
+  .nav { display: none; flex-direction: column; gap: 1.1rem; margin-top: 0.2rem; background: var(--nav-bg, var(--bg-mid)); width: 100vw; left: 0; right: 0; top: 65px; position: absolute; z-index: 200; box-shadow: 0 8px 24px #0002; padding-bottom: 1.3rem; border-radius: 0 0 1.2rem 1.2rem; }
+  .nav.open { display: flex; }
+  .hamburger { display: block; margin-left: auto; margin-right: 0; order: 2; }
+  .logo { font-size: 1.22rem; order: 1; }
+}
+@media (min-width: 769px) {
+  .hamburger { display: none; }
+  .nav { display: flex !important; flex-direction: row; position: static; background: none; box-shadow: none; }
+}
+body.dark-mode .nav { background: var(--nav-bg); }
+/* Hero Section */
+.hero-section {
+  background: var(--bg-mid);
+  padding: 3.5rem 0 2.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+}
+.hero-content {
+  max-width: 530px;
+  padding-left: 3.5rem;    /* <-- Yeh add kar dein */
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+.hero-content h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1.12;
+  margin: 0 0 1.1rem 0;
+  letter-spacing: 0.4px;
+  color: #2d1046;
+}
+.hero-content p {
+  font-size: 1.18rem;
+  color: #5e5451;
+  margin-bottom: 1.6rem;
+}
+@media (max-width: 900px) {
+  .hero-content { padding-left: 1rem; }
+}
+
+.cta-btn {
+  background: linear-gradient(90deg, #ad00e2 65%, #c2a1ff 100%);
+  color: #fff;
+  padding: 0.92rem 2.5rem;
+  border-radius: 50px;
+  border: none;
+  font-size: 1.11rem;
+  font-weight: 700;
+  box-shadow: 0 4px 24px #ad00e21a;
+  cursor: pointer;
+  transition: background .18s;
+}
+.cta-btn:hover { background: linear-gradient(90deg, #c2a1ff 15%, #ad00e2 85%); }
+.hero-img {
+  flex: 1 1 330px;
+  min-width: 250px;
+  text-align: right;
+}
+.hero-img img {
+  width: 320px;
+  max-width: 95vw;
+  border-radius: 26px;
+  box-shadow: 0 4px 48px #bfa6d944;
+}
+@media (max-width: 800px) {
+  .hero-section { flex-direction: column-reverse; padding: 2rem 0 1rem 0; }
+  .hero-content, .hero-img { text-align: center; max-width: 100%; }
+  .hero-img img { width: 80vw; }
+}
+/* Products/Carousel */
+.carousel-section {
+  padding: 2.2rem 0 0 0;
+  max-width: 1200px;
+  margin: auto;
+}
+.carousel-section h2 {
+  color: var(--accent);
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 2.2rem;
+  letter-spacing: 0.3px;
+}
+.products-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 2.2rem;
+  padding: 0 1.2rem 2rem 1.2rem;
+}
+.product-card {
+  background: #fff;
+  border-radius: 21px;
+  box-shadow: 0 2px 14px #ad00e220;
+  padding: 1.4rem 1.2rem 1.1rem 1.2rem;
+  text-align: center;
+  transition: box-shadow .2s, transform .18s;
+  cursor: pointer;
+}
+.product-card:hover {
+  transform: translateY(-7px) scale(1.03);
+  box-shadow: 0 8px 28px #ad00e232;
+}
+.product-card img {
+  width: 120px; height: 130px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 10px #dacaf7a1;
+  background: #eee;
+}
+.product-card .title {
+  font-size: 1.11rem; font-weight: 700; color: #2d1046; margin-bottom: 0.4em;
+}
+.product-card .desc {
+  color: #666;
+  font-size: .99rem;
+  margin-bottom: 1.1em;
+}
+/* Footer */
+footer {
+  background: #444b4b;
+  color: #eee;
+  padding: 2.5rem 0 1.2rem 0;
+}
+footer a { color: #fff; text-decoration: none; }
+footer strong { color: #fff; }
+.footer-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.footer-col {
+  flex: 1 1 200px;
+  min-width: 180px;
+}
+body.dark-mode footer { background: #18181b; color: #ccc; }
+body.dark-mode footer a { color: #aaa; }
+.footer-copy { text-align:center; margin-top:2.5rem; font-size:1.15rem;}
+.footer-copy span {font-size:0.93rem; color:#bbb;}
+@media (max-width: 800px) {
+  .footer-main {
+    flex-direction: column !important;
+    gap: 0.7rem !important;
+    align-items: flex-start !important;
+  }
+  .footer-col { min-width: 0; width: 100%; }
+}
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 360px;
+  background: #f5eee6;
+  padding: 1.5rem 0 0 0;
+  gap: 1.5rem;
+}
+.hero-content {
+  max-width: 440px;
+  padding-left: 3.7rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+.hero-btn {
+  margin-top: 1.3rem;
+  padding: 0.85em 2.1em;
+  font-size: 1.12rem;
+  border-radius: 28px;
+  border: none;
+  background: linear-gradient(92deg, #ad00e2 60%, #c2a1ff 100%);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 3px 16px #ad00e220;
+  cursor: pointer;
+  transition: background .2s, box-shadow .2s, transform .13s;
+}
+.hero-btn:hover { background: #ad00e2; transform: translateY(-2px) scale(1.06); }
+.hero-carousel-3d {
+  flex: 0 0 295px;  /* bigger for larger images */
+  height: 255px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+  z-index: 1;
+  margin-right: 50px;   /* <--- shifts carousel left (closer to center) */
+}
+.carousel-3d-track {
+  position: relative;
+  width: 195px;
+  height: 235px;
+  transform-style: preserve-3d;
+  transition: transform 1.18s cubic-bezier(.8,.06,.23,1.07);
+  will-change: transform;
+}
+.carousel-3d-track img {
+  position: absolute;
+  width: 180px;    /* bigger */
+  height: 230px;   /* bigger */
+  object-fit: cover;
+  border-radius: 22px;
+  left: 0; top: 0;
+  box-shadow: 0 8px 24px #ad00e230, 0 2px 4px #bbb8;
+  background: #fff;
+  border: 2.5px solid #f5eee6;
+  filter: grayscale(12%) brightness(1.08) blur(0px);
+  opacity: 0.85;
+  transition: 
+    transform 1.1s cubic-bezier(.88,.14,.16,.96),
+    filter 0.42s,
+    box-shadow 0.39s,
+    opacity 1.0s;
+  will-change: transform, filter, box-shadow, opacity;
+}
+.carousel-3d-track img.focused {
+  filter: none;
+  opacity: 1;
+  box-shadow: 0 10px 38px #ad00e295, 0 2px 14px #c2a1ff80;
+  border-color: #c2a1ff;
+  z-index: 10;
+}
+.carousel-3d-track img.side {
+  filter: grayscale(45%) blur(1.5px);
+  opacity: 0.68;
+}
+.carousel-3d-track img.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+@media (max-width: 1050px) {
+  .hero-section { flex-direction: column; }
+  .hero-carousel-3d { margin: 2rem 0 0 0; }
+  .hero-content { padding-left: 1.2rem; text-align: center; }
+}
+
+.wishlist-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.45em;
+  position: absolute;
+  top: 14px; right: 15px;
+  z-index: 2;
+  color: #ad00e2;
+  transition: color .17s;
+}
+.wishlist-btn .wishlist-heart { pointer-events: none; }
+.wishlist-btn.active .wishlist-heart { color: #e60023; }
+.wishlist-btn {
+  z-index: 10;
+  position: relative;
+}
+:root {
+  --bg-light: #f7f4ee;
+  --bg-mid: #ece5db;
+  --bg-dark: #23242a;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --heading: #ad00e2;
+  --nav-bg: #ece5db;
+  --text: #23242a;
+  --button-bg: #ad00e2;
+  --button-text: #fff;
+}
+
+/* === BODY COLOUR + TRANSITION === */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-light);
+  color: var(--text);
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark-mode {
+  --bg-light: #18181b;
+  --bg-mid: #23242a;
+  --bg-dark: #121214;
+  --nav-bg: #23242a;
+  --text: #fff;
+  --heading: #ad00e2;
+  --accent: #ad00e2;
+  --accent2: #c2a1ff;
+  --button-bg: #5f5cff;
+  --button-text: #fff;
+  background: var(--bg-light);
+  color: var(--text);
+}
+
+/* === HEADER & NAV BAR === */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2.4rem;
+  background: var(--nav-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-weight: 600;
+  box-shadow: 0 2px 14px #0001;
+}
+.logo {
+  font-family: 'Style Script', cursive !important;
+  font-size: 2.4rem !important;
+  color: #ad00e2 !important;
+  font-weight: 400 !important;
+  letter-spacing: 2px;
+  line-height: 1.08;
+  margin: 0;
+  padding: 0 0.2rem;
+  user-select: none;
+}
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-weight: 400;
+}
+.nav a {
+  color: #2a024d;
+  background: none;
+  border: none;
+  text-decoration: none;
+  font: inherit;
+  font-weight: 400;
+  padding: .5rem 0;
+  cursor: pointer;
+  transition: color .18s, font-weight .2s;
+  position: relative;
+}
+.nav a:hover, .nav a.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+.wishlist {
+  cursor: pointer;
+  color: #2a024d;
+  font-size: 1.15rem;
+  font-weight: 400;
+  transition: color .2s, font-weight .18s;
+}
+.nav .wishlist:hover, .nav .wishlist:focus {
+  color: #e60023 !important;
+}
+.profile-icon {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.8rem;
+  background: linear-gradient(135deg, #ad00e2 60%, #c2a1ff 100%) !important;
+  border: 2.2px solid #fff !important;
+  overflow: hidden;
+  padding: 0 !important;
+}
+.profile-icon svg {
+  width: 23px;
+  height: 23px;
+}
+.darkmode-btn {
+  background: #7a2df6;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1.2rem;
+  box-shadow: 0 2px 12px #a673fa29;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.darkmode-btn:hover { background: #ad00e2; color: #fff; }
+.darkmode-btn:focus, .darkmode-btn:active {
+  outline: none !important;
+  background: #ad00e2 !important;
+  color: #fff !important;
+  box-shadow: 0 6px 24px #a673fa49;
+  font-weight: 700;
+}
+/* Dark mode nav styling */
+body.dark-mode .darkmode-btn { background: #2a024d; color: #fff; }
+body.dark-mode .darkmode-btn:hover, body.dark-mode .darkmode-btn:focus, body.dark-mode .darkmode-btn:active {
+  background: #7a2df6 !important; color: #fff !important; outline: none !important;
+  box-shadow: 0 6px 24px #a673fa49;
+  font-weight: 700;
+}
+body.dark-mode .nav a, body.dark-mode .wishlist { color: #fff; }
+body.dark-mode .nav a.active, body.dark-mode .nav a:hover { color: var(--accent) !important; }
+body.dark-mode .nav { background: var(--nav-bg); }
+
+/* Hamburger menu */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  margin-left: 1.2rem;
+}
+@media (max-width: 768px) {
+  header { flex-direction: row; align-items: center; justify-content: space-between; padding: 0.8rem 0.9rem; position: relative; }
+  .nav { display: none; flex-direction: column; gap: 1.1rem; margin-top: 0.2rem; background: var(--nav-bg, var(--bg-mid)); width: 100vw; left: 0; right: 0; top: 65px; position: absolute; z-index: 200; box-shadow: 0 8px 24px #0002; padding-bottom: 1.3rem; border-radius: 0 0 1.2rem 1.2rem; }
+  .nav.open { display: flex; }
+  .hamburger { display: block; margin-left: auto; margin-right: 0; order: 2; }
+  .logo { font-size: 1.22rem; order: 1; }
+}
+@media (min-width: 769px) {
+  .hamburger { display: none; }
+  .nav { display: flex !important; flex-direction: row; position: static; background: none; box-shadow: none; }
+}
+.nav a {
+  font-size: 1.08rem; /* ya jitna chaho */
+}
+
+/* —— Glossy hamburger + morph to X —— */
+.hamburger{
+  --hb-size:26px; --hb-thick:3px; --hb-r:3px;
+  width:44px; height:38px; border-radius:12px;
+  border:2px solid rgba(173,0,226,.25);
+  background:linear-gradient(135deg,rgba(173,0,226,.12),rgba(122,45,246,.12));
+  box-shadow:0 6px 20px rgba(173,0,226,.18);
+  display:none; align-items:center; justify-content:center; cursor:pointer;
+}
+.hamburger-box{ position:relative; width:var(--hb-size); height:var(--hb-thick); }
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after{
+  content:""; position:absolute; left:0; right:0; height:var(--hb-thick);
+  border-radius:var(--hb-r);
+  background:linear-gradient(90deg,#7a2df6,#ad00e2);
+  box-shadow:0 1px 6px rgba(122,45,246,.45);
+  transition:transform .28s cubic-bezier(.55,.06,.68,.19), top .2s, opacity .2s;
+}
+.hamburger-inner{ top:0; }
+.hamburger-inner::before{ top:-9px; }
+.hamburger-inner::after{  top: 9px; }
+.hamburger.is-active .hamburger-inner{ transform:rotate(45deg); }
+.hamburger.is-active .hamburger-inner::before{ top:0; transform:rotate(-90deg); }
+.hamburger.is-active .hamburger-inner::after{ top:0; opacity:0; }
+
+/* Desktop ≥1201px */
+@media (min-width:1201px){
+  .hamburger{ display:none !important; }
+  header .nav#site-nav{
+    display:flex !important; position:static !important; background:transparent !important;
+    box-shadow:none !important; border-radius:0 !important;
+  }
+}
+
+/* Mobile/Tablet ≤1200px */
+@media (max-width:1200px){
+  /* pin button top-right (slightly lower) */
+  #navToggle.hamburger{
+    display:flex !important;
+    position:absolute !important;
+    right:12px !important;
+    top:20px !important;     /* yahan se neeche/upar adjust karo */
+    transform:none !important;
+    z-index:201 !important;
+  }
+  .logo{ padding-right:62px !important; }  /* overlap na ho */
+
+  /* dropdown: clean, hidden by default */
+  header .nav#site-nav{
+    display:none !important;
+    flex-direction:column !important; gap:1rem !important;
+    position:absolute !important; left:0; right:0; top:calc(100% - 1px) !important;
+    margin:0; padding:.75rem 1rem 1rem;
+    background:var(--bg-light) !important;
+    box-shadow:none !important; border:none !important;
+    border-radius:0 0 12px 12px !important;
+    z-index:200 !important;
+  }
+  header .nav#site-nav.open{ display:flex !important; }
+
+  /* dark mode dropdown link colours */
+  body.dark-mode #site-nav a, body.dark-mode #site-nav .wishlist{ color:#fff !important; }
+  body.dark-mode #site-nav a:hover, body.dark-mode #site-nav a.active{ color:var(--accent) !important; }
+}
+
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">Palette and Fit</div>
+<!-- replace this button -->
+<button class="hamburger" id="navToggle"
+        aria-label="Toggle menu"
+        aria-controls="site-nav"
+        aria-expanded="false">
+  <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+</button>
+
+<!-- give nav an id -->
+<nav class="nav" id="site-nav">
+
+
+      <a href="homepage1.html">Home</a>
+      <a href="men.html">Men</a>
+      <a href="women.html" class="active">Women</a>
+      <a href="aboutus.html">About us</a>
+      <a href="contactus.html">Contact us</a>
+      <a href="wishlist.html" class="wishlist">♡ Wishlist</a>
+      <a href="profile.html" class="profile-icon" title="Profile">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="8.5" r="4.2" fill="#fff" fill-opacity=".95"/>
+          <ellipse cx="12" cy="18" rx="7" ry="3.2" fill="#fff" fill-opacity=".38"/>
+        </svg>
+      </a>
+      <button class="btn darkmode-btn" id="darkModeToggle">
+        <span style="font-size:1.25em;">🌙</span> Dark Mode
+      </button>
+    </nav>
+  </header>
+  
+  <!-- HERO SECTION -->
+<section class="hero-section">
+  <div class="hero-content">
+   <h1>Discover Your <br>Dream Wedding Collection</h1>
+<p>Exquisite styles handpicked for every bride and guest.<br>
+Let Palette and Fit recommend the perfect wedding look for you!</p>
+
+    <button class="hero-btn"
+      onclick="window.location.href='suggestionpage.html?prompt=Recommend%20me%20summer%20clothes%20for%20my%20skin%20tone%20and%20body%20type'">
+      Get Suggestions
+    </button>
+  </div>
+  <div class="hero-carousel-3d">
+
+  <div class="carousel-3d-track" id="carousel3d">
+    <img src="https://images.pexels.com/photos/19221331/pexels-photo-19221331.jpeg" alt="Western dress shoot by Dhanno" />
+    <img src="https://images.pexels.com/photos/19011600/pexels-photo-19011600.jpeg" alt="Western dresses shoot by Dhanno" />
+    <img src="https://images.pexels.com/photos/18977035/pexels-photo-18977035.jpeg" alt="Western dresses shoot by Dhanno" />
+    <img src="https://images.pexels.com/photos/27817076/pexels-photo-27817076.jpeg" alt="Velvet dresses" />
+  </div>
+</div>
+
+</section>
+
+
+
+  <!-- PRODUCTS GRID -->
+  <section class="carousel-section">
+    <h2>Trending Women's Wedding Fashion 2025 in Pakistan</h2>
+    <div class="products-grid" id="products-root"></div>
+  </section>
+
+  <!-- Product Preview Modal -->
+<div id="previewModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:#18181bcc;backdrop-filter:blur(2px);align-items:center;justify-content:center;">
+  <div id="modalContent" style="background:#fff;max-width:410px;width:95vw;border-radius:28px;padding:2.3rem 1.7rem 1.7rem 1.7rem;box-shadow:0 12px 44px #ad00e295;position:relative;">
+    <button id="closeModalBtn" style="position:absolute;top:1.1em;right:1.5em;font-size:1.7em;background:none;border:none;cursor:pointer;color:#ad00e2;">×</button>
+    <img id="modalImg" src="" alt="Product" style="width:200px;height:190px;object-fit:cover;border-radius:16px;display:block;margin:auto  auto 1.3em auto;box-shadow:0 6px 24px #ad00e235;">
+    <h3 id="modalTitle" style="text-align:center;color:#ad00e2;margin-bottom:0.7em;font-size:1.35em;font-weight:900;letter-spacing:0.2px;"></h3>
+    <div id="modalDesc" style="text-align:center;color:#4c3557;font-size:1.13em;margin-bottom:1.1em;"></div>
+    <button id="modalSuggestBtn" class="cta-btn" style="width:100%;margin-top:0.6em;font-size:1.08em;">Get suggestion for yourself about <span id="modalProductType"></span></button>
+  </div>
+</div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-main">
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Need Help?</div>
+        <div style="margin-bottom:0.4rem;"><a href="contactus.html">Contact us</a></div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">More Info</div>
+        <div style="margin-bottom:0.4rem;"><a href="aboutus.html">About us</a></div>
+        <div style="margin-bottom:0.4rem;"><a href="terms.html">Terms &amp; Conditions</a></div>
+      </div>
+      <div class="footer-col">
+        <div style="font-weight:700; margin-bottom:0.7rem;">Contact</div>
+        <div style="margin-bottom:0.4rem;">support@PaletteandFit.com</div>
+        <div style="margin-bottom:0.4rem;">4162 Wayback Lane, Farmingdale</div>
+        <div style="margin-bottom:0.4rem;">New York, 11735, USA</div>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <strong>Palette and Fit</strong><br>
+      <span>© 2025 Palette and Fit. All rights reserved.</span>
+    </div>
+  </footer>
+<script>
+(function () {
+  var btn = document.getElementById('navToggle');
+  var nav = document.getElementById('site-nav') || document.querySelector('header .nav');
+  if (!btn || !nav) return;
+
+  if (!nav.id) nav.id = 'site-nav';
+  btn.setAttribute('aria-controls', nav.id);
+
+  function setOpen(open){
+    nav.classList.toggle('open', open);
+    btn.classList.toggle('is-active', open);
+    btn.setAttribute('aria-expanded', String(open));
+  }
+  setOpen(false); // start closed
+
+  btn.addEventListener('click', function(){ setOpen(!nav.classList.contains('open')); });
+  nav.addEventListener('click', function(e){
+    if (e.target.tagName === 'A' && nav.classList.contains('open')) setOpen(false);
+  });
+  window.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && nav.classList.contains('open')) setOpen(false);
+  });
+
+  var mq = window.matchMedia('(min-width:1201px)');
+  function sync(){ if (mq.matches) setOpen(false); }
+  (mq.addEventListener ? mq.addEventListener('change', sync) : window.addEventListener('resize', sync));
+  sync();
+})();
+</script>
+
+ <script>
+    // // Hamburger menu toggle
+    // document.getElementById("menu-toggle").onclick = function() {
+    //   document.querySelector("header .nav").classList.toggle("open");
+    // };
+
+    // Dark mode logic
+    const darkBtn = document.getElementById("darkModeToggle");
+    const bodyEl = document.body;
+    function updateDarkModeButton(isDark) {
+      darkBtn.innerHTML = isDark
+        ? '<span style="font-size:1.18em;">☀️</span> Light Mode'
+        : '<span style="font-size:1.18em;">🌙</span> Dark Mode';
+    }
+    if (localStorage.getItem("darkMode") === "true") {
+      bodyEl.classList.add("dark-mode"); updateDarkModeButton(true);
+    }
+    darkBtn.onclick = function() {
+      const isDark = bodyEl.classList.toggle("dark-mode");
+      localStorage.setItem("darkMode", isDark);
+      updateDarkModeButton(isDark);
+    };
+
+    // Carousel logic
+    const carouselImages = document.querySelectorAll("#carousel3d img");
+    let idx = 0, n = carouselImages.length;
+    function updateCarousel() {
+      const z = 210;
+      carouselImages.forEach((img, i) => {
+        let pos = (i - idx + n) % n;
+        if (pos === 0) {
+          img.style.transform = `rotateY(0deg) translateZ(${z}px) scale(1.09)`;
+          img.className = "focused";
+        } else if (pos === 1) {
+          img.style.transform = `rotateY(45deg) translateZ(110px) scale(0.93)`;
+          img.className = "side";
+        } else if (pos === n - 1) {
+          img.style.transform = `rotateY(-45deg) translateZ(110px) scale(0.93)`;
+          img.className = "side";
+        } else {
+          img.style.transform = `rotateY(${pos * 60}deg) translateZ(0px) scale(0.84)`;
+          img.className = "hide";
+        }
+      });
+    }
+    updateCarousel();
+    setInterval(() => { idx = (idx + 1) % n; updateCarousel(); }, 2150);
+
+    // Modal close logic
+    const modal = document.getElementById("previewModal");
+    document.getElementById("closeModalBtn").onclick = () => { modal.style.display = "none"; };
+    modal.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+
+    // User email from localStorage (set after login)
+    window.userEmail = window.userEmail || localStorage.getItem('user_email') || "";
+
+    // Load products and attach all events
+    async function loadProducts() {
+      const root = document.getElementById("products-root");
+      root.innerHTML = '<div style="text-align:center;font-size:1.2rem;">Loading products...</div>';
+      try {
+        const res = await fetch("http://127.0.0.1:5001/api/products/category/wedding?gender=women");
+        const products = await res.json();
+        if (!products.length) {
+          root.innerHTML = "<div style='color:#ad00e2; font-weight:600; text-align:center;'>No products found!<br>Add products using your admin panel.<br>(Use category: <b>summer</b>)</div>";
+          return;
+        }
+        const html = products.map(product => `
+          <div class="product-card" data-product-id="${product.id}">
+            <img src="${product.image_url}" alt="${product.title}" />
+            <div class="title">${product.title}</div>
+            <div class="desc">${product.description || ""}</div>
+            <button class="wishlist-btn" title="Add to Wishlist">
+              <span class="wishlist-heart">♡</span>
+            </button>
+          </div>
+        `).join("");
+        root.innerHTML = html;
+        attachCardClicks();
+        await markWishlistActive();
+      } catch (err) {
+        root.innerHTML = `<div style='color:red'>Error loading products! ${err}</div>`;
+      }
+    }
+
+    // Mark wishlist hearts based on user's wishlist
+    async function markWishlistActive() {
+      if (!window.userEmail) return;
+      try {
+        const res = await fetch(`http://127.0.0.1:5001/api/wishlist?email=${encodeURIComponent(window.userEmail)}`);
+        const data = await res.json();
+        const wishlistIds = (data.wishlist || []).map(item => item.id);
+        document.querySelectorAll(".product-card").forEach(card => {
+          const btn = card.querySelector(".wishlist-btn");
+          const pid = parseInt(card.dataset.productId);
+          if (wishlistIds.includes(pid)) {
+            btn.classList.add("active");
+            btn.querySelector(".wishlist-heart").textContent = "❤️";
+          } else {
+            btn.classList.remove("active");
+            btn.querySelector(".wishlist-heart").textContent = "♡";
+          }
+        });
+      } catch (err) {
+        console.log("Error marking wishlist:", err);
+      }
+    }
+
+    // Attach wishlist & modal logic
+    function attachCardClicks() {
+      document.querySelectorAll(".product-card").forEach(card => {
+        // Modal open (card click, except wishlist)
+        card.onclick = (e) => {
+          if (
+            e.target.classList.contains("wishlist-btn") ||
+            e.target.classList.contains("wishlist-heart")
+          ) return;
+          const img = card.querySelector("img").src;
+          const title = card.querySelector(".title").innerText;
+          const desc = card.querySelector(".desc").innerText || "";
+          document.getElementById("modalImg").src = img;
+          document.getElementById("modalTitle").innerText = title;
+          document.getElementById("modalDesc").innerText = desc;
+          document.getElementById("modalProductType").innerText = title;
+          document.getElementById("modalSuggestBtn").onclick = () => {
+            window.location.href = "Suggestionpage.html?prompt=" + encodeURIComponent(`Tell me, does my body shape suit the ${title}?`);
+          };
+          modal.style.display = "flex";
+        };
+        // Wishlist button
+        const wishlistBtn = card.querySelector(".wishlist-btn");
+        if (wishlistBtn) {
+          wishlistBtn.onclick = async (e) => {
+            e.stopPropagation(); // Stop modal from opening
+              console.log("wishlistBtn clicked"); // Check if this prints!
+            const productId = card.dataset.productId;
+            const email = window.userEmail;
+            if (!email) {
+              alert("Please login to add items to wishlist.");
+              return;
+            }
+            const isActive = wishlistBtn.classList.contains("active");
+            try {
+              if (isActive) {
+                await fetch("http://127.0.0.1:5001/api/wishlist", {
+                  method: "DELETE",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ email, product_id: productId }),
+                });
+              } else {
+                await fetch("http://127.0.0.1:5001/api/wishlist", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ email, product_id: productId }),
+                });
+              }
+              await markWishlistActive();
+            } catch (err) {
+              alert("Wishlist update failed. Please login.");
+            }
+          };
+        }
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", loadProducts);
+  </script>
+</body>
+</html>
